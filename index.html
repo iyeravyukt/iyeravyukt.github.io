@@ -15,7 +15,7 @@
    <div class="project-media"><img src="images/FILE.jpg" alt="what it shows"></div>
    Headshot: replace the .hero-photo placeholder div with <img class="hero-photo" src="images/headshot.jpg" alt="Avyukt Iyer">. */
 :root {
-  --navy: #003057; --gold: #b3a369; --gold-ink: #7a6a35;
+  --navy: #003057; --gold: #4d9be0; --gold-ink: #1f6fbf;
   --ink: #172b3e; --muted: #56697b; --line: #d7e0e9; --canvas: #f2f6fa; --surface: #ffffff; --link: #075ea8;
   --paper: #f7f6f3; --h-ink: #1f2328; --h-ink-2: #5f656e; --rule: #e3e1dc; --ph: #e7edf3;
   --head: "Hanken Grotesk", "Helvetica Neue", Arial, sans-serif;
@@ -46,13 +46,13 @@ h1, h2, h3, h4, p, ul { margin: 0; }
 .hero { max-width: 1180px; margin: auto; padding: 48px 40px 56px; display: grid; gap: 22px; }
 .hero-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 24px 40px; flex-wrap: wrap; }
 .hero-id { display: flex; align-items: center; gap: 26px; flex: 1 1 520px; min-width: 0; flex-wrap: wrap; }
-.hero-photo { width: 148px; height: 148px; border-radius: 50%; object-fit: cover; flex: none; }
+.hero-photo { width: 148px; height: 148px; border-radius: 50%; object-fit: cover; object-position: center 20%; flex: none; }
 .hero-text { display: grid; gap: 12px; min-width: 0; flex: 1 1 320px; }
 .hero h1 { font: 600 clamp(2.5rem, 6.5vw, 4.25rem)/1.05 var(--head); letter-spacing: -.02em; color: var(--h-ink); }
 .hero-credentials { padding-left: 1.1em; display: grid; gap: 3px; max-width: 720px; font-size: 1.02rem; color: var(--h-ink-2); font-family: var(--body); }
 .hero-credentials b { color: var(--h-ink); font-weight: 600; }
 .hero-affil { flex: none; }
-.hero-affil .placeholder { width: 150px; height: 56px; border-radius: 6px; }
+.hero-affil img { height: 120px; width: auto; mix-blend-mode: multiply; }
 .hero-oneliner { max-width: 940px; font-size: clamp(1.15rem, 2vw, 1.4rem); font-weight: 500; line-height: 1.45; }
 .hero-links { display: flex; flex-wrap: wrap; gap: 8px 10px; font-family: var(--body); }
 .hero-links a, .hero-links span { font-size: .93rem; font-weight: 500; color: var(--h-ink); background: #fdfcfa; border: 1px solid var(--rule); border-radius: 999px; padding: 6px 16px; }
@@ -158,7 +158,7 @@ section { padding: 52px 0 12px; }
   <div class="hero">
     <div class="hero-top">
       <div class="hero-id">
-        <div class="hero-photo placeholder" role="img" aria-label="Placeholder: headshot"><span>Headshot</span></div>
+        <img class="hero-photo" src="images/headshot.jpg" alt="Avyukt Iyer" width="148" height="148">
         <div class="hero-text">
           <h1>Avyukt Iyer</h1>
           <ul class="hero-credentials">
@@ -168,13 +168,14 @@ section { padding: 52px 0 12px; }
           </ul>
         </div>
       </div>
-      <div class="hero-affil"><div class="placeholder" role="img" aria-label="Placeholder: Georgia Tech logo"><span>Georgia Tech logo</span></div></div>
+      <a class="hero-affil" href="https://www.gatech.edu/" target="_blank" rel="noopener"><img src="images/georgia-tech.png" alt="Georgia Tech"></a>
     </div>
     <p class="hero-oneliner">Mechanical Engineering undergraduate building assistive robotics and automation through research and entrepreneurship, from wearable exoskeletons to autonomous logistics systems.</p>
     <div class="hero-links">
       <a href="mailto:aiyer410@gatech.edu">Email</a>
       <a href="https://github.com/iyeravyukt" target="_blank" rel="noopener">GitHub</a>
       <a href="https://www.linkedin.com/in/avyukt-iyer/" target="_blank" rel="noopener">LinkedIn</a>
+      <a href="assets/Avyukt_Iyer_Resume.pdf" target="_blank" rel="noopener">Resume</a>
       <span>412-709-1723</span>
     </div>
     <p class="hero-count">Six selected projects</p>
@@ -461,6 +462,7 @@ section { padding: 52px 0 12px; }
       <a href="mailto:aiyer410@gatech.edu">Email</a>
       <a href="https://github.com/iyeravyukt" target="_blank" rel="noopener">GitHub</a>
       <a href="https://www.linkedin.com/in/avyukt-iyer/" target="_blank" rel="noopener">LinkedIn</a>
+      <a href="assets/Avyukt_Iyer_Resume.pdf" target="_blank" rel="noopener">Resume</a>
       <span>412-709-1723</span>
     </div>
     <small>© 2026 Avyukt Iyer</small>
