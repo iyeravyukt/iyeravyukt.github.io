@@ -10,6 +10,7 @@
   --body: Inter, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
 }
 * { box-sizing: border-box; }
+[hidden] { display: none !important; }
 html { scroll-behavior: smooth; }
 html, body { margin: 0; }
 body { background: var(--canvas); color: var(--ink); font-family: var(--body); font-size: 16px; line-height: 1.6; }
@@ -31,13 +32,13 @@ h1, h2, h3, h4, p, ul { margin: 0; }
 
 /* Hero */
 .hero-band { background: #fff; border-bottom: 1px solid var(--rule); font-family: var(--head); color: var(--h-ink); }
-.hero { max-width: 1180px; margin: auto; padding: 48px 40px 56px; display: grid; gap: 22px; }
+.hero { max-width: 1180px; margin: auto; padding: 48px 40px 56px; display: grid; gap: 20px; justify-items: center; text-align: center; }
 .hero-top { display: flex; justify-content: space-between; align-items: center; gap: 24px 40px; flex-wrap: wrap; }
 .hero-id { display: flex; align-items: center; gap: 26px; flex: 1 1 520px; min-width: 0; flex-wrap: wrap; }
 .hero-photo { width: 156px; height: 156px; border-radius: 50%; object-fit: cover; flex: none; border: 3px solid var(--navy); background: #fff; }
 .hero-text { display: grid; gap: 12px; min-width: 0; flex: 1 1 320px; }
 .hero h1 { font: 600 clamp(2.5rem, 6.5vw, 4.25rem)/1.05 var(--head); letter-spacing: -.02em; color: var(--h-ink); }
-.hero-credentials { padding-left: 1.1em; display: grid; gap: 3px; max-width: 720px; font-size: 1.02rem; color: var(--h-ink-2); font-family: var(--body); }
+.hero-credentials { list-style: none; padding: 0; display: grid; gap: 3px; font-size: 1.02rem; color: var(--h-ink-2); font-family: var(--body); }
 .hero-credentials b { color: var(--h-ink); font-weight: 600; }
 .hero-affil { flex: none; }
 .hero-affil img { height: 156px; width: auto; mix-blend-mode: multiply; }
@@ -139,3 +140,6 @@ section { padding: 52px 0 12px; }
 .detail-season { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 18px 20px; display: grid; gap: 6px; }
 .detail-season h3 { font: 600 1.15rem var(--head); color: var(--navy); }
 @media (max-width: 760px) { .detail { padding: 28px 20px 0; } .gallery { grid-template-columns: minmax(0, 1fr); } }
+
+.hero-marks { display: flex; align-items: center; justify-content: center; gap: 36px; flex-wrap: wrap; }
+.hero-affil { display: block !important; }
