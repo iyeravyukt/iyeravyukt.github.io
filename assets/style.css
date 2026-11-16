@@ -143,3 +143,8 @@ section { padding: 52px 0 12px; }
 
 .hero-marks { display: flex; align-items: center; justify-content: center; gap: 36px; flex-wrap: wrap; }
 .hero-affil { display: block !important; }
+
+/* Under-construction note above Research (remove when the projects are finished) */
+.wip-note { margin-top: 40px; background: #e9eef3; border-left: 3px solid var(--navy); border-radius: 0 8px 8px 0; padding: 14px 20px; color: var(--ink); font-size: .97rem; }
+.wip-note b { color: var(--navy); }
+.wip-note + section { padding-top: 36px; }
