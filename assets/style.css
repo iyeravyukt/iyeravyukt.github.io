@@ -41,12 +41,12 @@ h1, h2, h3, h4, p, ul { margin: 0; }
 .hero-credentials b { color: var(--h-ink); font-weight: 600; }
 .hero-affil { flex: none; }
 .hero-affil img { height: 156px; width: auto; mix-blend-mode: multiply; }
-.hero-oneliner { max-width: 940px; font-size: clamp(1.15rem, 2vw, 1.4rem); font-weight: 500; line-height: 1.45; }
-.hero-links { display: flex; flex-wrap: wrap; gap: 8px 10px; font-family: var(--body); }
+.hero-oneliner { text-align: center; font-size: clamp(1.15rem, 2vw, 1.4rem); font-weight: 500; line-height: 1.45; }
+.hero-links { display: flex; justify-content: center; flex-wrap: wrap; gap: 8px 10px; font-family: var(--body); }
 .hero-links a, .hero-links span { font-size: .93rem; font-weight: 500; color: var(--h-ink); background: #fff; border: 1px solid var(--rule); border-radius: 999px; padding: 6px 16px; }
 .hero-links a:hover { border-color: var(--navy); text-decoration: none; }
 .hero-links span { user-select: all; }
-.hero-count { font-family: var(--body); font-size: .9rem; color: var(--h-ink-2); }
+.hero-count { text-align: center; font-family: var(--body); font-size: .9rem; color: var(--h-ink-2); }
 
 /* Sections */
 .home-main { max-width: 1180px; margin: auto; padding: 0 40px; }
