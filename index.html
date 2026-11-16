@@ -3,148 +3,20 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Avyukt Iyer</title>
-<meta name="description" content="Avyukt Iyer: Mechanical Engineering at Georgia Tech. Assistive robotics and automation.">
+<title>Avyukt P. Iyer</title>
+<meta name="description" content="Avyukt P. Iyer: Mechanical Engineering at Georgia Tech. Assistive robotics and automation.">
 <meta name="theme-color" content="#f7f6f3">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&display=swap">
-<style>
-/* IMAGES: every grey square is a placeholder. To swap one for a real image or GIF, replace the whole
-   <div class="project-media placeholder" ...>...</div> with
-   <div class="project-media"><img src="images/FILE.jpg" alt="what it shows"></div>
-   Headshot: replace the .hero-photo placeholder div with <img class="hero-photo" src="images/headshot.jpg" alt="Avyukt Iyer">. */
-:root {
-  --navy: #003057; --gold: #4d9be0; --gold-ink: #1f6fbf;
-  --ink: #172b3e; --muted: #56697b; --line: #d7e0e9; --canvas: #f2f6fa; --surface: #ffffff; --link: #075ea8;
-  --paper: #f7f6f3; --h-ink: #1f2328; --h-ink-2: #5f656e; --rule: #e3e1dc; --ph: #e7edf3;
-  --head: "Hanken Grotesk", "Helvetica Neue", Arial, sans-serif;
-  --body: Inter, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-}
-* { box-sizing: border-box; }
-html { scroll-behavior: smooth; }
-html, body { margin: 0; }
-body { background: var(--canvas); color: var(--ink); font-family: var(--body); font-size: 16px; line-height: 1.6; }
-img { max-width: 100%; display: block; }
-a { color: var(--link); text-decoration: none; }
-a:hover { text-decoration: underline; }
-a:focus-visible, summary:focus-visible { outline: 2px solid var(--link); outline-offset: 2px; border-radius: 3px; }
-h1, h2, h3, h4, p, ul { margin: 0; }
-.skip { position: absolute; left: -999px; }
-.skip:focus { left: 12px; top: 12px; background: #fff; padding: 8px 12px; z-index: 5; }
-
-/* Header bar */
-.main-header { background: var(--navy); border-bottom: 3px solid var(--gold); }
-.header-inner { max-width: 1180px; margin: auto; padding: 14px 40px; display: flex; justify-content: space-between; align-items: center; gap: 12px 28px; flex-wrap: wrap; }
-.site-title { font-family: var(--head); font-weight: 600; font-size: 1.15rem; color: #fff; }
-.site-nav { display: flex; gap: 6px 24px; flex-wrap: wrap; }
-.site-nav a { color: #dfe7ef; font-size: .95rem; font-weight: 500; }
-.site-nav a:hover, .site-title:hover { color: #fff; }
-
-/* Hero */
-.hero-band { background: var(--paper); border-bottom: 1px solid var(--rule); font-family: var(--head); color: var(--h-ink); }
-.hero { max-width: 1180px; margin: auto; padding: 48px 40px 56px; display: grid; gap: 22px; }
-.hero-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 24px 40px; flex-wrap: wrap; }
-.hero-id { display: flex; align-items: center; gap: 26px; flex: 1 1 520px; min-width: 0; flex-wrap: wrap; }
-.hero-photo { width: 148px; height: 148px; border-radius: 50%; object-fit: cover; object-position: center 20%; flex: none; }
-.hero-text { display: grid; gap: 12px; min-width: 0; flex: 1 1 320px; }
-.hero h1 { font: 600 clamp(2.5rem, 6.5vw, 4.25rem)/1.05 var(--head); letter-spacing: -.02em; color: var(--h-ink); }
-.hero-credentials { padding-left: 1.1em; display: grid; gap: 3px; max-width: 720px; font-size: 1.02rem; color: var(--h-ink-2); font-family: var(--body); }
-.hero-credentials b { color: var(--h-ink); font-weight: 600; }
-.hero-affil { flex: none; }
-.hero-affil img { height: 120px; width: auto; mix-blend-mode: multiply; }
-.hero-oneliner { max-width: 940px; font-size: clamp(1.15rem, 2vw, 1.4rem); font-weight: 500; line-height: 1.45; }
-.hero-links { display: flex; flex-wrap: wrap; gap: 8px 10px; font-family: var(--body); }
-.hero-links a, .hero-links span { font-size: .93rem; font-weight: 500; color: var(--h-ink); background: #fdfcfa; border: 1px solid var(--rule); border-radius: 999px; padding: 6px 16px; }
-.hero-links a:hover { border-color: var(--navy); text-decoration: none; }
-.hero-links span { user-select: all; }
-.hero-count { font-family: var(--body); font-size: .9rem; color: var(--h-ink-2); }
-
-/* Sections */
-.home-main { max-width: 1180px; margin: auto; padding: 0 40px; }
-section { padding: 52px 0 12px; }
-.section-heading { margin-bottom: 26px; display: grid; gap: 4px; }
-.eyebrow { font-size: .76rem; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: var(--gold-ink); }
-.section-heading h2 { font: 600 clamp(1.6rem, 3vw, 2.1rem)/1.2 var(--head); color: var(--navy); }
-.section-heading p { color: var(--muted); }
-
-/* Cards */
-.work-row { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 26px; align-items: start; }
-.work-card { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; overflow: clip; display: grid; grid-template-columns: minmax(0, 1fr); }
-.work-card:has(details[open]) { border-top: 3px solid var(--gold); }
-.work-card.wide { grid-column: 1 / -1; }
-.project-media-strip { display: grid; gap: 2px; grid-template-columns: repeat(2, minmax(0, 1fr)); }
-.project-media-strip.n1 { grid-template-columns: minmax(0, 1fr); }
-.project-media { position: relative; min-width: 0; aspect-ratio: 16 / 9; overflow: hidden; background: var(--ph); }
-.project-media-strip.n1 .project-media { aspect-ratio: 32 / 9; }
-.project-media > img { width: 100%; height: 100%; object-fit: cover; }
-.placeholder { background: var(--ph); display: grid; place-items: center; text-align: center; padding: 10px; }
-.placeholder span { font-size: .74rem; font-weight: 500; color: #7c8d9d; letter-spacing: .02em; line-height: 1.3; }
-.work-body { padding: 20px 22px 22px; display: grid; gap: 10px; }
-.work-body h3 { font: 600 1.3rem/1.25 var(--head); color: var(--navy); }
-.project-focus { font-size: .88rem; font-weight: 600; color: var(--gold-ink); margin-top: -6px; }
-.project-meta { display: flex; flex-wrap: wrap; gap: 2px 16px; font-size: .88rem; color: var(--muted); margin-top: -4px; }
-.project-role { font-size: .93rem; }
-.project-role b, .project-details h4, .label { font-size: .74rem; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); margin-right: 8px; }
-.project-summary { font-weight: 500; line-height: 1.5; }
-.project-details { background: #f5f8fb; border-left: 3px solid var(--gold); border-radius: 0 6px 6px 0; }
-.project-details > summary { cursor: pointer; padding: 9px 14px; font-size: .88rem; font-weight: 600; color: var(--navy); list-style: none; }
-.project-details > summary::-webkit-details-marker { display: none; }
-.project-details > summary::after { content: " +"; }
-.project-details[open] > summary::after { content: " −"; }
-.details-body { padding: 0 14px 14px; display: grid; gap: 6px; font-size: .94rem; }
-.details-body h4 { margin-top: 6px; }
-.skill-tags { display: flex; flex-wrap: wrap; gap: 5px; list-style: none; padding: 0; }
-.skill-tags li { font-size: .78rem; font-weight: 500; color: var(--navy); background: var(--canvas); border-radius: 999px; padding: 3px 10px; }
-.project-links { display: flex; flex-wrap: wrap; gap: 4px 16px; font-size: .9rem; font-weight: 600; }
-
-/* Competition card */
-.highlights { padding-left: 1.1em; display: grid; gap: 2px; font-size: .95rem; }
-.seasons { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 18px 22px; margin-top: 8px; }
-.season { display: grid; gap: 6px; align-content: start; min-width: 0; }
-.season .project-media { border-radius: 8px; }
-.season h4 { font: 600 1rem/1.3 var(--head); color: var(--navy); }
-.season .team { font-size: .8rem; color: var(--muted); margin-top: -4px; }
-.season ul { padding-left: 1.05em; font-size: .86rem; line-height: 1.45; display: grid; gap: 2px; }
-.season a { font-size: .84rem; font-weight: 600; }
-.sub-label { margin-top: 14px; }
-
-/* Outputs and honors */
-.publications { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 8px 24px; }
-.pub-year { font: 600 1rem var(--head); color: var(--navy); padding: 16px 0 4px; }
-.publication { padding: 12px 0; border-top: 1px solid var(--line); display: grid; gap: 3px; }
-.publication:first-of-type { border-top: 0; }
-.publication:target { background: #fffae8; box-shadow: 0 0 0 12px #fffae8; }
-.pub-venue { font-size: .8rem; font-weight: 600; letter-spacing: .04em; text-transform: uppercase; color: var(--gold-ink); }
-.pub-title { font-weight: 600; }
-.pub-authors { font-size: .9rem; color: var(--muted); }
-.honors { list-style: none; padding: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 40px; }
-.honors li { padding: 10px 0; border-top: 1px solid var(--line); line-height: 1.4; }
-.honors span { display: block; font-size: .85rem; color: var(--muted); }
-
-/* Footer */
-.site-footer { margin-top: 64px; background: var(--navy); border-top: 3px solid var(--gold); color: #dfe7ef; }
-.footer-inner { max-width: 1180px; margin: auto; padding: 32px 40px 40px; display: grid; gap: 10px; }
-.footer-name { font: 600 1.2rem var(--head); color: #fff; }
-.footer-links { display: flex; flex-wrap: wrap; gap: 4px 20px; }
-.footer-links a, .footer-links span { color: #fff; font-size: .93rem; }
-.site-footer small { color: #a9b9c9; }
-
-@media (max-width: 1000px) { .seasons { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
-@media (max-width: 760px) {
-  .work-row, .honors { grid-template-columns: minmax(0, 1fr); }
-  .header-inner, .hero, .home-main, .footer-inner { padding-left: 20px; padding-right: 20px; }
-  .hero-affil { display: none; }
-}
-@media (max-width: 460px) { .seasons { grid-template-columns: minmax(0, 1fr); } }
-</style>
+<link rel="stylesheet" href="assets/style.css">
 </head>
 <body>
 <a class="skip" href="#main-content">Skip to content</a>
 
 <header class="main-header">
   <div class="header-inner">
-    <a class="site-title" href="#">Avyukt Iyer</a>
+    <a class="site-title" href="#">Avyukt P. Iyer</a>
     <nav class="site-nav" aria-label="Sections">
       <a href="#research">Research</a>
       <a href="#engineering">Projects</a>
@@ -158,9 +30,9 @@ section { padding: 52px 0 12px; }
   <div class="hero">
     <div class="hero-top">
       <div class="hero-id">
-        <img class="hero-photo" src="images/headshot.jpg" alt="Avyukt Iyer" width="148" height="148">
+        <img class="hero-photo" src="images/headshot.jpg" alt="Avyukt P. Iyer" width="148" height="148">
         <div class="hero-text">
-          <h1>Avyukt Iyer</h1>
+          <h1>Avyukt P. Iyer</h1>
           <ul class="hero-credentials">
             <li><b>B.S. in Mechanical Engineering</b>, Georgia Institute of Technology (expected 2029)</li>
             <li>Advised by Prof. Ye Zhao and PhD mentor Jaehwi Jang (<b>LIDAR Lab</b>)</li>
@@ -198,7 +70,7 @@ section { padding: 52px 0 12px; }
         <p class="project-meta"><span>Aug 2024–present · U.S. patent pending</span><span>Independent research</span></p>
         <p class="project-role"><b>My role</b>Independent Researcher and Inventor</p>
         <p class="project-summary">A low-cost upper-body exoskeleton cut perceived exertion by 77% across 300+ lifting trials.</p>
-        <details class="project-details"><summary>Problem, contribution, result</summary><div class="details-body"><h4>Problem</h4><p>Workers in healthcare, manufacturing, and logistics face high rates of musculoskeletal disorders from repetitive lifting, and existing supports are rigid and do not adapt to the load.</p><h4>My contribution</h4><p>Designed and fabricated the exoskeleton with two 13 N·m powered joints, a bearing-supported passive shoulder, and 25 laser-cut components. Integrated EMG, load-cell, pulse-oximeter, and encoder feedback with PID control.</p><h4>Result</h4><p>EMG voltage down 13%, pulse rate down 53.9%, and perceived exertion down 77% across 300+ trials. Regeneron ISEF Biomedical Engineering Finalist and 8 awards in total.</p></div></details>
+        <div class="card-actions"><button class="btn toggle" type="button" aria-expanded="false">Expand +</button><a class="btn primary" href="projects/arise.html">Project details →</a></div><div class="details-body" hidden><h4>Problem</h4><p>Workers in healthcare, manufacturing, and logistics face high rates of musculoskeletal disorders from repetitive lifting, and existing supports are rigid and do not adapt to the load.</p><h4>My contribution</h4><p>Designed and fabricated the exoskeleton with two 13 N·m powered joints, a bearing-supported passive shoulder, and 25 laser-cut components. Integrated EMG, load-cell, pulse-oximeter, and encoder feedback with PID control.</p><h4>Result</h4><p>EMG voltage down 13%, pulse rate down 53.9%, and perceived exertion down 77% across 300+ trials. Regeneron ISEF Biomedical Engineering Finalist and 8 awards in total.</p></div>
         <ul class="skill-tags"><li>Exoskeleton design</li><li>EMG and load sensing</li><li>PID control</li></ul>
         <p class="project-links"><a href="https://isef.net/project/enbm078-arise-an-adaptive-robotic-exoskeleton" target="_blank" rel="noopener">ISEF page</a><a href="https://docs.google.com/document/d/1xyHUsAp6KkeqoEVT6nTCZJP4tsja6vPYfCROa_qjb2U/edit?usp=sharing" target="_blank" rel="noopener">Paper</a><a href="https://drive.google.com/open?id=1wWZmz-IxhlOZqwA3lHyPlOf8lIgv5CCcjB3EhogUOlU" target="_blank" rel="noopener">Poster</a><a href="https://docs.google.com/presentation/d/1VOVaKxMNi3HJiR3QQLCM0-_-YleLwQR4J6rQDIo4_8A/edit?usp=sharing" target="_blank" rel="noopener">Slides</a></p>
       </div>
@@ -211,7 +83,7 @@ section { padding: 52px 0 12px; }
         <p class="project-meta"><span>Oct 2026–present</span><span>LIDAR Lab, Georgia Tech</span></p>
         <p class="project-role"><b>My role</b>Undergraduate Student Researcher</p>
         <p class="project-summary">Researching humanoid whole-body tactile navigation under PhD mentor Jaehwi Jang in Prof. Ye Zhao's lab.</p>
-        
+        <div class="card-actions"><a class="btn primary" href="projects/lidar.html">Project details →</a></div>
         <ul class="skill-tags"><li>Humanoid robots</li><li>Tactile hardware</li></ul>
         
       </div>
@@ -224,7 +96,7 @@ section { padding: 52px 0 12px; }
         <p class="project-meta"><span>Sep 2023–Sep 2024</span><span>Independent research</span></p>
         <p class="project-role"><b>My role</b>Independent Researcher and Inventor</p>
         <p class="project-summary">A mobile robot that finds, collects, and puts away materials on its own with over 75% accuracy.</p>
-        <details class="project-details"><summary>Problem, contribution, result</summary><div class="details-body"><h4>Problem</h4><p>Putting materials away inside warehouses is a bottleneck, and human error accounts for over 80% of inbound logistics failures (Wrobel, 2021). Most existing automation is fixed in place and expensive.</p><h4>My contribution</h4><p>Designed, built, and programmed a robot that drives to AprilTag-marked locations, collects the designated materials with a 4-bar linkage pivot arm, and unloads them in a target zone, using Java and OpenCV.</p><h4>Result</h4><p>Over 75% task accuracy. 12 awards, including U.S. Office of Naval Research STEM Honoree and National STEM Festival Finalist.</p></div></details>
+        <div class="card-actions"><button class="btn toggle" type="button" aria-expanded="false">Expand +</button><a class="btn primary" href="projects/logistibot.html">Project details →</a></div><div class="details-body" hidden><h4>Problem</h4><p>Putting materials away inside warehouses is a bottleneck, and human error accounts for over 80% of inbound logistics failures (Wrobel, 2021). Most existing automation is fixed in place and expensive.</p><h4>My contribution</h4><p>Designed, built, and programmed a robot that drives to AprilTag-marked locations, collects the designated materials with a 4-bar linkage pivot arm, and unloads them in a target zone, using Java and OpenCV.</p><h4>Result</h4><p>Over 75% task accuracy. 12 awards, including U.S. Office of Naval Research STEM Honoree and National STEM Festival Finalist.</p></div>
         <ul class="skill-tags"><li>Java</li><li>OpenCV and AprilTags</li><li>4-bar linkage</li></ul>
         <p class="project-links"><a href="https://docs.google.com/document/d/1Ef5n0V0yLf7MRdfeFp-bagVx9WpQ2v4ctk1V71kG1Ws/edit?usp=sharing" target="_blank" rel="noopener">Paper</a><a href="https://docs.google.com/drawings/d/1te7v4LCYHko0H4kADdbZO6lEB2AuntYPKO52PJnLa2I/edit?usp=sharing" target="_blank" rel="noopener">Poster</a><a href="https://docs.google.com/presentation/d/1CMXsDq4uoN5Ggxb71DdzqL8MI3phHDI7eostKzPmH7I/edit?usp=sharing" target="_blank" rel="noopener">Slides</a></p>
       </div>
@@ -237,7 +109,7 @@ section { padding: 52px 0 12px; }
         <p class="project-meta"><span>Jun–Aug 2025</span><span>MIT Beaver Works Summer Institute</span></p>
         <p class="project-role"><b>My role</b>Perception model training & pose estimation</p>
         <p class="project-summary">A YOLOv8 detector and geometric pose estimator ran in real time on a Raspberry Pi with 95% accuracy.</p>
-        <details class="project-details"><summary>Problem, contribution, result</summary><div class="details-body"><h4>Problem</h4><p>The final challenge was autonomous light tag between underwater robots, which needs reliable detection and relative pose in changing lighting, turbidity, and occlusion.</p><h4>My contribution</h4><p>Trained a YOLOv8 detector on 3,000+ labeled frames from the ROV camera. Developed a geometry-based estimator that computes depth, distance, and bearing from the bounding box and known camera parameters, and integrated both into the ROS control system.</p><h4>Result</h4><p>95% classification accuracy with real-time inference on a Raspberry Pi, and real-time relative pose during pool tests. Selected for the program at under 9% acceptance.</p></div></details>
+        <div class="card-actions"><button class="btn toggle" type="button" aria-expanded="false">Expand +</button><a class="btn primary" href="projects/rov.html">Project details →</a></div><div class="details-body" hidden><h4>Problem</h4><p>The final challenge was autonomous light tag between underwater robots, which needs reliable detection and relative pose in changing lighting, turbidity, and occlusion.</p><h4>My contribution</h4><p>Trained a YOLOv8 detector on 3,000+ labeled frames from the ROV camera. Developed a geometry-based estimator that computes depth, distance, and bearing from the bounding box and known camera parameters, and integrated both into the ROS control system.</p><h4>Result</h4><p>95% classification accuracy with real-time inference on a Raspberry Pi, and real-time relative pose during pool tests. Selected for the program at under 9% acceptance.</p></div>
         <ul class="skill-tags"><li>YOLOv8</li><li>Python and ROS</li><li>Pose estimation</li></ul>
         
       </div>
@@ -250,7 +122,7 @@ section { padding: 52px 0 12px; }
         <p class="project-meta"><span>Independent research</span><span>Pittsburgh, PA</span></p>
         <p class="project-role"><b>My role</b>Independent Researcher and Inventor</p>
         <p class="project-summary">Three 3D-printed rover wheel designs, traction-tested in MMS-1 Mars simulant.</p>
-        <details class="project-details"><summary>Problem, contribution, result</summary><div class="details-body"><h4>Problem</h4><p>Mars rovers lose mobility to fine regolith and uneven ground. Wheels on Curiosity and Perseverance have suffered punctures, slippage, and sand buildup.</p><h4>My contribution</h4><p>Designed, 3D-printed in PLA+, and tested three wheel prototypes in MMS-1 Mars simulant, iterating after each round.</p><h4>Result</h4><p>The third prototype achieved the best traction, with sand-filtering boxes and V-shaped multidirectional tread beams, while balancing weight.</p></div></details>
+        <div class="card-actions"><button class="btn toggle" type="button" aria-expanded="false">Expand +</button><a class="btn primary" href="projects/mars.html">Project details →</a></div><div class="details-body" hidden><h4>Problem</h4><p>Mars rovers lose mobility to fine regolith and uneven ground. Wheels on Curiosity and Perseverance have suffered punctures, slippage, and sand buildup.</p><h4>My contribution</h4><p>Designed, 3D-printed in PLA+, and tested three wheel prototypes in MMS-1 Mars simulant, iterating after each round.</p><h4>Result</h4><p>The third prototype achieved the best traction, with sand-filtering boxes and V-shaped multidirectional tread beams, while balancing weight.</p></div>
         <ul class="skill-tags"><li>CAD</li><li>3D printing</li><li>Traction testing</li></ul>
         <p class="project-links"><a href="https://docs.google.com/document/u/0/d/1MSJUa2tuMcYaqj4idmtxP7bA6uV7rdl5NQwjCzvdy4w/edit" target="_blank" rel="noopener">Paper</a><a href="https://docs.google.com/presentation/d/1XvIHftYt77UQKjRKEGW-iMWa36xovOC5ugGTvEwwLpE/edit?usp=sharing" target="_blank" rel="noopener">Slides</a></p>
       </div>
@@ -263,7 +135,7 @@ section { padding: 52px 0 12px; }
         <p class="project-meta"><span>Jun–Aug 2025</span><span>MIT Beaver Works Summer Institute</span></p>
         <p class="project-role"><b>My role</b>Launcher design & testing</p>
         <p class="project-summary">A pin-actuated compressed-air launcher reached 86% launch success in submerged trials.</p>
-        <details class="project-details"><summary>Problem, contribution, result</summary><div class="details-body"><h4>Problem</h4><p>The launcher had to fire consistently at varying depths while staying waterproof and protecting the vehicle's electronics.</p><h4>My contribution</h4><p>Designed and built the launcher with a pressure-regulated air reservoir, magnetic pin, and reinforced barrel. A magnetic switch drives a needle, nested in a 3D-printed housing, that punctures the air canister.</p><h4>Result</h4><p>86% launch success in submerged trials and reliable performance at up to 15 ft of depth.</p></div></details>
+        <div class="card-actions"><button class="btn toggle" type="button" aria-expanded="false">Expand +</button><a class="btn primary" href="projects/torpedo.html">Project details →</a></div><div class="details-body" hidden><h4>Problem</h4><p>The launcher had to fire consistently at varying depths while staying waterproof and protecting the vehicle's electronics.</p><h4>My contribution</h4><p>Designed and built the launcher with a pressure-regulated air reservoir, magnetic pin, and reinforced barrel. A magnetic switch drives a needle, nested in a 3D-printed housing, that punctures the air canister.</p><h4>Result</h4><p>86% launch success in submerged trials and reliable performance at up to 15 ft of depth.</p></div>
         <ul class="skill-tags"><li>Onshape</li><li>3D printing</li><li>Waterproofing</li></ul>
         
       </div>
@@ -286,7 +158,7 @@ section { padding: 52px 0 12px; }
         <p class="project-meta"><span>Sep 2026 · 3rd of 268 teams</span><span>HackGT 13, Georgia Tech</span></p>
         <p class="project-role"><b>My role</b>Product Designer and Co-Inventor</p>
         <p class="project-summary">Drone-guided smart glasses for blind and low-vision users, built in 36 hours.</p>
-        <details class="project-details"><summary>Problem, contribution, result</summary><div class="details-body"><h4>My contribution</h4><p>Designed and 3D-printed custom mounts that retrofit off-the-shelf glasses with an ESP32-CAM, dual time-of-flight sensors, and SG90 tactile servos. Routed power and signals for reliable haptic feedback on a moving user.</p><h4>Result</h4><p>3rd place overall of 268 teams at HackGT 13.</p></div></details>
+        <div class="card-actions"><button class="btn toggle" type="button" aria-expanded="false">Expand +</button><a class="btn primary" href="projects/vigil.html">Project details →</a></div><div class="details-body" hidden><h4>My contribution</h4><p>Designed and 3D-printed custom mounts that retrofit off-the-shelf glasses with an ESP32-CAM, dual time-of-flight sensors, and SG90 tactile servos. Routed power and signals for reliable haptic feedback on a moving user.</p><h4>Result</h4><p>3rd place overall of 268 teams at HackGT 13.</p></div>
         <ul class="skill-tags"><li>ESP32-CAM</li><li>ToF sensors</li><li>Rapid prototyping</li></ul>
         
       </div>
@@ -299,7 +171,7 @@ section { padding: 52px 0 12px; }
         <p class="project-meta"><span>Sep 2026–present</span><span>WEAR @ Georgia Tech</span></p>
         <p class="project-role"><b>My role</b>Human Factors Testing & Research Lead</p>
         <p class="project-summary">Leading a 15-member research subteam in the club's founding year.</p>
-        <details class="project-details"><summary>Problem, contribution, result</summary><div class="details-body"><h4>My contribution</h4><p>Organized the subteam into mechanical, software, and electrical research tracks. Designed a research training program with weekly presentations, preparing the team to set design requirements and test hardware in Spring 2027.</p></div></details>
+        <div class="card-actions"><button class="btn toggle" type="button" aria-expanded="false">Expand +</button><a class="btn primary" href="projects/wear.html">Project details →</a></div><div class="details-body" hidden><h4>My contribution</h4><p>Organized the subteam into mechanical, software, and electrical research tracks. Designed a research training program with weekly presentations, preparing the team to set design requirements and test hardware in Spring 2027.</p></div>
         <ul class="skill-tags"><li>Team leadership</li><li>Exoskeletons</li><li>Test planning</li></ul>
         
       </div>
@@ -312,7 +184,7 @@ section { padding: 52px 0 12px; }
         <p class="project-meta"><span>2024–25 season</span><span>FTC Team 8393</span></p>
         <p class="project-role"><b>My role</b>Mechanism design</p>
         <p class="project-summary">A 1:1 differential that controls pitch and roll from two servos inside a very tight footprint.</p>
-        <details class="project-details"><summary>Problem, contribution, result</summary><div class="details-body"><h4>Problem</h4><p>The scoring system needed two synchronized rotational axes in a space too small for a conventional spur-gear transmission.</p><h4>My contribution</h4><p>Designed a symmetric bevel-gear differential that splits torque between two Axon MAX servos, built from FR4 walls, a 3D-printed housing, custom printed bevel gears, and 32 mm flanged bearings.</p><h4>Result</h4><p>Cut housing mass through CAD iteration while holding torque under load. Ran on the 2024–25 V3 competition robot.</p></div></details>
+        <div class="card-actions"><button class="btn toggle" type="button" aria-expanded="false">Expand +</button><a class="btn primary" href="projects/gearbox.html">Project details →</a></div><div class="details-body" hidden><h4>Problem</h4><p>The scoring system needed two synchronized rotational axes in a space too small for a conventional spur-gear transmission.</p><h4>My contribution</h4><p>Designed a symmetric bevel-gear differential that splits torque between two Axon MAX servos, built from FR4 walls, a 3D-printed housing, custom printed bevel gears, and 32 mm flanged bearings.</p><h4>Result</h4><p>Cut housing mass through CAD iteration while holding torque under load. Ran on the 2024–25 V3 competition robot.</p></div>
         <ul class="skill-tags"><li>Bevel gears</li><li>CAD</li><li>3D printing</li></ul>
         <p class="project-links"><a href="https://drive.google.com/drive/folders/13qWMRRoNxITQT-6a_oIQtobeESSD03gO?usp=sharing" target="_blank" rel="noopener">Photos</a></p>
       </div>
@@ -325,7 +197,7 @@ section { padding: 52px 0 12px; }
         <p class="project-meta"><span>FTC subsystem</span><span>FTC Team 8393</span></p>
         <p class="project-role"><b>My role</b>Mechanism design</p>
         <p class="project-summary">A multi-stage extension that reaches full height in about one second and carries 10 lb at the end.</p>
-        <details class="project-details"><summary>Problem, contribution, result</summary><div class="details-body"><h4>Problem</h4><p>The robot needed rapid vertical reach that stayed rigid under load and was easy to service.</p><h4>My contribution</h4><p>Designed a threaded-rod first stage with a string-driven cascade on every stage after it. Used aluminum extrusion with nylon and carbon-fiber prints at high-stress points, modeled to ±0.25 mm clearances.</p><h4>Result</h4><p>Driven by a 3.7:1 goBILDA motor, it reaches full extension in about one second, carries up to 10 lb, and each stage swaps out with 4 screws.</p></div></details>
+        <div class="card-actions"><button class="btn toggle" type="button" aria-expanded="false">Expand +</button><a class="btn primary" href="projects/extension.html">Project details →</a></div><div class="details-body" hidden><h4>Problem</h4><p>The robot needed rapid vertical reach that stayed rigid under load and was easy to service.</p><h4>My contribution</h4><p>Designed a threaded-rod first stage with a string-driven cascade on every stage after it. Used aluminum extrusion with nylon and carbon-fiber prints at high-stress points, modeled to ±0.25 mm clearances.</p><h4>Result</h4><p>Driven by a 3.7:1 goBILDA motor, it reaches full extension in about one second, carries up to 10 lb, and each stage swaps out with 4 screws.</p></div>
         <ul class="skill-tags"><li>Cascade rigging</li><li>Tolerancing</li><li>Modular design</li></ul>
         
       </div>
@@ -344,6 +216,7 @@ section { padding: 52px 0 12px; }
           <li>FRC World Championship – 4x Qualifier; Impact Award Finalist (Top 8 Worldwide)</li>
           <li>Raised $12K+ for STEM outreach and presented to 2K+ students</li>
         </ul>
+        <div class="card-actions"><a class="btn primary" href="projects/first-robotics.html">Project details →</a></div>
         <p class="label sub-label">FTC seasons</p>
         <div class="seasons">
           <div class="season">
@@ -456,7 +329,7 @@ section { padding: 52px 0 12px; }
 
 <footer class="site-footer">
   <div class="footer-inner">
-    <a class="footer-name" href="#">Avyukt Iyer</a>
+    <a class="footer-name" href="#">Avyukt P. Iyer</a>
     <p>Assistive robotics · Mechanical design · Automation</p>
     <div class="footer-links">
       <a href="mailto:aiyer410@gatech.edu">Email</a>
@@ -465,8 +338,20 @@ section { padding: 52px 0 12px; }
       <a href="assets/Avyukt_Iyer_Resume.pdf" target="_blank" rel="noopener">Resume</a>
       <span>412-709-1723</span>
     </div>
-    <small>© 2026 Avyukt Iyer</small>
+    <small>© 2026 Avyukt P. Iyer</small>
   </div>
 </footer>
+<script>
+document.querySelectorAll('.btn.toggle').forEach(function (b) {
+  b.addEventListener('click', function () {
+    var body = b.closest('.work-body').querySelector('.details-body');
+    var open = body.hidden;
+    body.hidden = !open;
+    b.setAttribute('aria-expanded', open);
+    b.textContent = open ? 'Minimize −' : 'Expand +';
+    b.closest('.work-card').classList.toggle('is-open', open);
+  });
+});
+</script>
 </body>
 </html>
