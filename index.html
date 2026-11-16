@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Avyukt Iyer: Mechanical Engineering at Georgia Tech. Assistive robotics and automation portfolio.">
+<title>Avyukt Iyer Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Source+Sans+3:wght@400;600&display=swap">
+<style>
+html, body { margin: 0; }
+img { max-width: 100%; }
+/* Layout: full-width white page. Section titles sit in a left column, projects flow in columns to the right. No boxes or rules; whitespace and type do the separating. Single light theme on purpose. */
+:root {
+  --bg: #ffffff;
+  --ink: #14202e;
+  --muted: #5d6875;
+  --navy: #003057;
+  --gold: #857437;
+  --serif: "EB Garamond", Garamond, "Times New Roman", serif;
+  --sans: "Source Sans 3", "Segoe UI", system-ui, sans-serif;
+  color-scheme: light;
+}
+* { box-sizing: border-box; }
+body { background: var(--bg); color: var(--ink); font-family: var(--serif); font-size: 19px; line-height: 1.55; }
+.wrap {
+  max-width: 1500px; margin: 0 auto;
+  padding-left: max(clamp(20px, 5vw, 80px), env(safe-area-inset-left, 0px));
+  padding-right: max(clamp(20px, 5vw, 80px), env(safe-area-inset-right, 0px));
+  padding-block: 64px 96px;
+}
+a { color: var(--navy); text-decoration-color: var(--gold); text-underline-offset: 3px; }
+a:hover { color: var(--gold); }
+a:focus-visible { outline: 2px solid var(--navy); outline-offset: 2px; }
+h1, h2, h3, p, ul { margin: 0; }
+h1, h2, h3 { font-weight: 500; text-wrap: balance; color: var(--navy); }
+h1 { font-size: clamp(2.8rem, 8vw, 4rem); line-height: 1.05; letter-spacing: -.01em; }
+h2 { font-size: 1.9rem; line-height: 1.2; }
+h3 { font-size: 1.4rem; line-height: 1.25; font-weight: 600; }
+.small { font-family: var(--sans); font-size: 14px; color: var(--muted); line-height: 1.5; }
+.caps { font-family: var(--sans); font-size: 12.5px; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: var(--gold); }
+
+header { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr); gap: 24px 64px; align-items: end; }
+.head-right { display: grid; gap: 14px; }
+.intro { font-size: 1.3rem; line-height: 1.45; max-width: 34em; }
+.contact { display: flex; flex-wrap: wrap; gap: 4px 22px; font-family: var(--sans); font-size: 15px; color: var(--muted); }
+.contact .sel { color: var(--ink); user-select: all; }
+nav { display: flex; flex-wrap: wrap; gap: 6px 22px; font-family: var(--sans); font-size: 15px; margin-top: 10px; }
+
+.highlights { margin-top: 56px; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 18px 40px; }
+.highlights p { font-size: 1.15rem; line-height: 1.3; }
+.highlights .small { display: block; margin-top: 2px; }
+
+section { margin-top: 96px; display: grid; grid-template-columns: 260px minmax(0, 1fr); gap: 32px 64px; align-items: start; }
+.sec-head { position: sticky; top: 24px; }
+.sec-body { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(400px, 100%), 1fr)); gap: 52px 64px; align-items: start; min-width: 0; }
+.sec-body > .robots { grid-column: 1 / -1; }
+#research .project:first-child { grid-column: 1 / -1; }
+#research .project:first-child > p, #research .project:first-child > ul { max-width: 46em; }
+.sec-head { display: grid; gap: 4px; }
+.project { display: grid; gap: 12px; }
+.project > .small { margin-top: -8px; }
+.project ul { padding-left: 1.1em; display: grid; gap: 6px; }
+.project li::marker { color: var(--gold); }
+.results { display: flex; flex-wrap: wrap; gap: 8px 40px; margin-block: 6px; }
+.results div { display: grid; }
+.results b { font-size: 2rem; font-weight: 500; line-height: 1.1; color: var(--navy); font-variant-numeric: lining-nums tabular-nums; }
+.links { display: flex; flex-wrap: wrap; gap: 4px 20px; font-family: var(--sans); font-size: 15px; }
+
+.robot { display: grid; grid-template-columns: 130px minmax(0, 1fr); gap: 6px 24px; }
+.robot .when { font-family: var(--sans); font-size: 14px; color: var(--muted); line-height: 1.5; padding-top: 5px; }
+.robot .when b { display: block; color: var(--navy); font-size: 15px; }
+.robot .body { display: grid; gap: 6px; }
+.robot .body p { font-size: 1.05rem; }
+.robot .lbl { font-family: var(--sans); font-size: 12.5px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); margin-right: 6px; }
+.robots { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(460px, 100%), 1fr)); gap: 36px 64px; }
+
+.skills { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(240px, 100%), 1fr)); gap: 20px 48px; grid-column: 1 / -1; }
+footer { margin-top: 96px; display: grid; gap: 4px; }
+footer p:first-child { font-size: 1.3rem; color: var(--navy); }
+
+@media (max-width: 1000px) {
+  header { grid-template-columns: minmax(0, 1fr); }
+  section { grid-template-columns: minmax(0, 1fr); }
+  .sec-head { position: static; }
+  .highlights { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 600px) {
+  body { font-size: 18px; }
+  .highlights { grid-template-columns: minmax(0, 1fr); }
+  .robot { grid-template-columns: minmax(0, 1fr); }
+  .robot .when b { display: inline; margin-right: 8px; }
+  section { margin-top: 64px; }
+}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+<header>
+  <h1>Avyukt Iyer</h1>
+  <div class="head-right">
+  <p class="intro">Mechanical Engineering student at Georgia Tech building assistive robotics and automation, from wearable exoskeletons to autonomous logistics robots.</p>
+  <div class="contact">
+    <span>Georgia Tech, B.S. Mechanical Engineering, 2029</span>
+    <span class="sel">aiyer410@gatech.edu</span>
+    <span class="sel">412-709-1723</span>
+    <a href="https://www.linkedin.com/in/avyukt-iyer/" target="_blank" rel="noopener">LinkedIn</a>
+  </div>
+  <nav aria-label="Sections">
+    <a href="#now">Current work</a>
+    <a href="#research">Research</a>
+    <a href="#mit">MIT underwater robotics</a>
+    <a href="#mechanisms">Mechanisms</a>
+    <a href="#robots">Competition robots</a>
+    <a href="#skills">Skills</a>
+  </nav>
+  </div>
+</header>
+
+<div class="highlights">
+  <p>Regeneron ISEF Finalist<span class="small">Biomedical Engineering, for the ARISE exoskeleton</span></p>
+  <p>U.S. patent pending<span class="small">Provisional patent on ARISE</span></p>
+  <p>FTC World Championship, 4th Place<span class="small">Alliance Captain and Division Winner, 2022–23</span></p>
+  <p>HackGT 13, 3rd of 268 teams<span class="small">VIGIL smart glasses, built in 36 hours</span></p>
+</div>
+
+<section id="now">
+  <div class="sec-head"><span class="caps">2026 to present</span><h2>Current work at Georgia Tech</h2></div>
+  <div class="sec-body">
+
+  <div class="project">
+    <h3>Humanoid whole-body tactile navigation</h3>
+    <p class="small">Undergraduate Student Researcher · LIDAR Lab, Prof. Ye Zhao · Oct 2026 to present</p>
+    <p>Researching humanoid whole-body tactile navigation under PhD mentor Jaehwi Jang in the Laboratory for Intelligent Decision and Autonomous Robots.</p>
+  </div>
+
+  <div class="project">
+    <h3>WEAR: Wearable Exoskeletons and Assistive Robotics</h3>
+    <p class="small">Human Factors Testing &amp; Research Lead · Sep 2026 to present</p>
+    <ul>
+      <li>Leads a 15-member research subteam in the club's founding year, organized into mechanical, software, and electrical research tracks.</li>
+      <li>Designed a research training program with weekly presentations, preparing the team to set design requirements and test hardware in Spring 2027.</li>
+    </ul>
+  </div>
+
+  <div class="project">
+    <h3>VIGIL: drone-guided smart glasses for blind and low-vision users</h3>
+    <p class="small">Product Designer and Co-Inventor · HackGT 13, 3rd place of 268 teams · Sep 2026</p>
+    <ul>
+      <li>Designed and 3D-printed custom mounts that retrofit off-the-shelf glasses with an ESP32-CAM, dual time-of-flight sensors, and SG90 tactile servos in 36 hours.</li>
+      <li>Routed power and signals for reliable haptic feedback on a moving user.</li>
+    </ul>
+  </div>
+  </div>
+</section>
+
+<section id="research">
+  <div class="sec-head"><span class="caps">Self-directed and self-funded</span><h2>Independent research</h2></div>
+  <div class="sec-body">
+
+  <div class="project">
+    <h3>ARISE: Adaptive Robotic Intelligent Support Exoskeleton</h3>
+    <p class="small">Independent Researcher and Inventor · Aug 2024 to present · U.S. provisional patent pending</p>
+    <p>Workers in healthcare, manufacturing, and logistics face high rates of musculoskeletal disorders from repetitive lifting. About 2.6 million workplace injuries occur in these sectors each year, roughly 30% involve the upper body, and they cost employers about $171 billion a year. Existing supports are rigid and don't adapt to the load.</p>
+    <ul>
+      <li>Designed and fabricated a low-cost upper-body exoskeleton with two 13 N·m powered joints, a bearing-supported passive shoulder, and 25 laser-cut components.</li>
+      <li>Integrated EMG, load-cell, pulse-oximeter, and encoder feedback with PID control so assistance scales with the load in real time.</li>
+    </ul>
+    <div class="results">
+      <div><b>−13%</b><span class="small">EMG voltage</span></div>
+      <div><b>−53.9%</b><span class="small">Pulse rate</span></div>
+      <div><b>−77%</b><span class="small">Perceived exertion</span></div>
+      <div><b>300+</b><span class="small">Trials</span></div>
+    </div>
+    <p class="small">Regeneron ISEF Biomedical Engineering Finalist · PJAS 1st Place, State and Regional · Pittsburgh Regional Science &amp; Engineering Fair 2nd Place (Engineering/Robotics) · PA Science Talent Search Junior Award · Sponsor awards from Aerotech, Clinical Research Strategies, Vesuvius Pi, and Webb Law Firm</p>
+    <div class="links">
+      <a href="https://isef.net/project/enbm078-arise-an-adaptive-robotic-exoskeleton" target="_blank" rel="noopener">ISEF project page</a>
+      <a href="https://docs.google.com/document/d/1xyHUsAp6KkeqoEVT6nTCZJP4tsja6vPYfCROa_qjb2U/edit?usp=sharing" target="_blank" rel="noopener">Research paper</a>
+      <a href="https://drive.google.com/open?id=1wWZmz-IxhlOZqwA3lHyPlOf8lIgv5CCcjB3EhogUOlU" target="_blank" rel="noopener">Poster</a>
+      <a href="https://drive.google.com/open?id=1NmtNa5HXGG06eEqhju36makRCc2rVZGQGa-yg4kPp4g" target="_blank" rel="noopener">Quad chart</a>
+      <a href="https://docs.google.com/presentation/d/1VOVaKxMNi3HJiR3QQLCM0-_-YleLwQR4J6rQDIo4_8A/edit?usp=sharing" target="_blank" rel="noopener">Slides</a>
+      <a href="https://drive.google.com/drive/folders/19u2j5V_eVVFHYQSf6ETlhQIPvRjI1f6F?usp=drive_link" target="_blank" rel="noopener">Photos</a>
+    </div>
+  </div>
+
+  <div class="project">
+    <h3>LogistiBot: autonomous material handling and putaway robot</h3>
+    <p class="small">Independent Researcher and Inventor · Sep 2023 to Sep 2024 · Java, OpenCV, AprilTags</p>
+    <p>Moving and putting away materials inside warehouses is a bottleneck, and human error accounts for over 80% of inbound logistics failures (Wrobel, 2021). Most existing automation is fixed in place and expensive.</p>
+    <ul>
+      <li>Designed, built, and programmed a mobile robot that drives to AprilTag-marked locations, collects the designated materials with a 4-bar linkage pivot arm, and unloads them in a target zone.</li>
+      <li>Reached over 75% task accuracy.</li>
+    </ul>
+    <p class="small">12 awards, including U.S. Office of Naval Research STEM Honoree · National STEM Festival Finalist · Pittsburgh Regional Science &amp; Engineering Fair 1st Place (Engineering/Robotics) · PJAS 1st Place, State and Regional · PJAS Engineering Director's Award · TiE Young Entrepreneurs Pitch Competition 1st Place · PA House of Representatives Commendation</p>
+    <div class="links">
+      <a href="https://docs.google.com/document/d/1Ef5n0V0yLf7MRdfeFp-bagVx9WpQ2v4ctk1V71kG1Ws/edit?usp=sharing" target="_blank" rel="noopener">Research paper</a>
+      <a href="https://docs.google.com/drawings/d/1te7v4LCYHko0H4kADdbZO6lEB2AuntYPKO52PJnLa2I/edit?usp=sharing" target="_blank" rel="noopener">Poster</a>
+      <a href="https://docs.google.com/presentation/d/1CMXsDq4uoN5Ggxb71DdzqL8MI3phHDI7eostKzPmH7I/edit?usp=sharing" target="_blank" rel="noopener">Slides</a>
+      <a href="https://drive.google.com/drive/folders/11Pi5KBlWZ3hce12I6rDMflMj103Wj5Lr?usp=sharing" target="_blank" rel="noopener">Photos</a>
+    </div>
+  </div>
+
+  <div class="project">
+    <h3>Custom wheels for traction on Martian terrain</h3>
+    <p class="small">Independent Researcher and Inventor · 3D-printed PLA+, tested in MMS-1 Mars simulant</p>
+    <p>Mars rovers lose mobility to fine regolith and uneven ground. Wheels on Curiosity and Perseverance have suffered punctures, slippage, and sand buildup.</p>
+    <ul>
+      <li>Designed, 3D-printed, and traction-tested three wheel prototypes in MMS-1 Mars simulant, iterating after each round.</li>
+      <li>The third prototype performed best, with sand-filtering boxes for traction, V-shaped tread beams for side-to-side grip, and beam placement tuned to balance traction against weight.</li>
+    </ul>
+    <p class="small">Pittsburgh Regional Science &amp; Engineering Fair Outstanding Presentation Award · PJAS 2nd Place, Regional</p>
+    <div class="links">
+      <a href="https://docs.google.com/document/u/0/d/1MSJUa2tuMcYaqj4idmtxP7bA6uV7rdl5NQwjCzvdy4w/edit" target="_blank" rel="noopener">Research paper</a>
+      <a href="https://docs.google.com/presentation/d/1XvIHftYt77UQKjRKEGW-iMWa36xovOC5ugGTvEwwLpE/edit?usp=sharing" target="_blank" rel="noopener">Slides</a>
+      <a href="https://drive.google.com/drive/folders/1mc3BhUIzE-_YVEj310xgd6VfNRfnbKZw?usp=sharing" target="_blank" rel="noopener">Photos</a>
+    </div>
+  </div>
+  </div>
+</section>
+
+<section id="mit">
+  <div class="sec-head"><span class="caps">Summer 2025 · Cambridge, MA</span><h2>MIT Beaver Works: underwater robotics</h2></div>
+  <div class="sec-body">
+
+  <div class="project">
+    <h3>ROV perception: object detection and 3D pose estimation</h3>
+    <p class="small">BlueROV2 · Python, ROS, YOLOv8 · Raspberry Pi · Final challenge: autonomous light tag between robots</p>
+    <ul>
+      <li>Trained a YOLOv8 detector on 3,000+ labeled frames from the ROV camera across varied lighting, turbidity, and occlusion, with histogram equalization and Gaussian noise augmentation.</li>
+      <li>Reached 95% classification accuracy with real-time inference on a Raspberry Pi.</li>
+      <li>Developed a geometry-based pose estimator that computes the target's depth, distance, and bearing from bounding-box position and known camera parameters, with no second model or extra sensors.</li>
+      <li>Integrated both into the ROV's ROS control system for real-time trajectory correction, then tuned them on live pool data.</li>
+    </ul>
+  </div>
+
+  <div class="project">
+    <h3>AUV torpedo launcher</h3>
+    <p class="small">86% launch success in submerged trials · Tested to 15 ft depth</p>
+    <ul>
+      <li>Designed and built a pin-actuated launcher with a pressure-regulated air reservoir, magnetic pin, and reinforced barrel, kept waterproof to protect the vehicle's electronics.</li>
+      <li>A magnetic switch drives a needle, nested in a 3D-printed housing, that punctures the air canister to fire.</li>
+      <li>Refined torpedo geometry through iterative testing to reduce backflow turbulence and keep propulsion consistent across depths.</li>
+    </ul>
+  </div>
+  </div>
+</section>
+
+<section id="mechanisms">
+  <div class="sec-head"><span class="caps">Custom FTC subsystems</span><h2>Mechanism design</h2></div>
+  <div class="sec-body">
+
+  <div class="project">
+    <h3>Compact 1:1 bevel differential gearbox</h3>
+    <p class="small">FTC 2024–25, V3 scoring system · <a href="https://drive.google.com/drive/folders/13qWMRRoNxITQT-6a_oIQtobeESSD03gO?usp=sharing" target="_blank" rel="noopener">Photos</a></p>
+    <p>Symmetric bevel-gear differential that splits torque between two Axon MAX servos to control pitch and roll in a very tight footprint. Built from FR4 walls, a 3D-printed housing, custom printed bevel gears, 32 mm flanged bearings, and an 8 mm REX hub. Housing mass was cut through CAD iteration while holding torque under load.</p>
+  </div>
+
+  <div class="project">
+    <h3>Cascading telescoping extension</h3>
+    <p class="small">FTC vertical extension</p>
+    <p>Multi-stage extension with a threaded-rod first stage and a string-driven cascade on every stage after it. Aluminum extrusion stages with nylon and carbon-fiber prints at high-stress points, modeled to ±0.25 mm clearances. Each stage swaps out with 4 screws. Driven by a 3.7:1 goBILDA motor, it reaches full extension in about one second and carries up to 10 lb at the end.</p>
+  </div>
+
+  <div class="project">
+    <h3>Internally rotating transfer</h3>
+    <p class="small">FTC 2023–24, Centerstage</p>
+    <p>Moves game pieces from intake to scorer through an internal rotating interface instead of a bulky external transfer. A passive compliant roller mounted perpendicular to the powered rollers orients each 3-inch pixel within about three inches of space. Reached 100% transfer accuracy in testing.</p>
+  </div>
+  </div>
+</section>
+
+<section id="robots">
+  <div class="sec-head"><span class="caps">7 FTC robots · 3 FRC robots</span><h2>Competition robots</h2>
+    <p class="small" style="margin-top:6px">FIRST Tech Challenge Teams 22312 and 8393, FIRST Robotics Competition Team 8393. Mechanical Co-Lead on FTC 8393. 4x FRC World Championship qualifier (2023–2026). "Designed" lists the subsystems personally designed.</p>
+  </div>
+  <div class="sec-body">
+
+  <div class="robots">
+    <div class="robot">
+      <div class="when"><b>FTC 2025–26</b>Decode · 8393<br><a href="https://drive.google.com/drive/folders/1mCJFaa-6dG1PmMxZCybCncDizYzhL70E?usp=sharing" target="_blank" rel="noopener">Photos and video</a></div>
+      <div class="body">
+        <p><span class="lbl">Designed</span>Drivetrain and frame, intake, horizontal and vertical transfer, electronics, integration</p>
+        <p><span class="lbl">Robot</span>13 × 17 in mecanum chassis, dead-wheel localization with camera goal tracking, linear-actuator PTO shifter and hood, silicone-molded flywheel shooter, 180° turret</p>
+        <p><span class="lbl">Results</span>Regional Inspire Award, #1, #2, #3, and #7 state high scores, #20 world rank performance</p>
+      </div>
+    </div>
+    <div class="robot">
+      <div class="when"><b>FTC 2024–25</b>Into the Deep · 8393<br><a href="https://drive.google.com/drive/folders/1If-a_pGvh8kK9hPzqK_tRhK9H9ZsEDW5?usp=sharing" target="_blank" rel="noopener">Photos and video</a></div>
+      <div class="body">
+        <p><span class="lbl">Designed</span>Drivetrain, frame, and integration on three robot versions, plus the V3 arm, wrist, differential gearbox, PETG grabber, and depositor, and the V4 4-DoF intake</p>
+        <p><span class="lbl">Robot</span>Low 13 × 17 in mecanum chassis, silicone-molded collector, 4-DoF end effector, carbon-fiber rod depositor, countersprung hanging system</p>
+        <p><span class="lbl">Results</span>European Championship 1st Place and 3rd Place Inspire, PA State Finalist Alliance, PA State Control Award. Covered by <a href="https://triblive.com/local/local-team-wins-robotics-contest-in-netherlands/" target="_blank" rel="noopener">TribLive</a> and <a href="https://slbradio.org/catalog/collection/youth-express-brainstem-robotics-team/" target="_blank" rel="noopener">SLB Radio</a></p>
+      </div>
+    </div>
+    <div class="robot">
+      <div class="when"><b>FTC 2023–24</b>Centerstage · 22312<br><a href="https://drive.google.com/drive/folders/13CoCligZgDwki8PCoQPywBD-FsmsodKG?usp=sharing" target="_blank" rel="noopener">Photos and video</a></div>
+      <div class="body">
+        <p><span class="lbl">Designed</span>Drivetrain and frame, intake, transfer, end effector, grabber, electronics, and integration on two robot versions, as Team Captain and Lead Designer</p>
+        <p><span class="lbl">Robot</span>12.5 × 14 in mecanum chassis, custom dead-wheel localization, cam-gear collection, internal roller transfer, 3-motor 5 ft lift, asymmetric virtual 4-bar</p>
+        <p><span class="lbl">Results</span>PA State Qualifier, Regional Inspire Award 2nd Place</p>
+      </div>
+    </div>
+    <div class="robot">
+      <div class="when"><b>FTC 2022–23</b>Powerplay · 22312<br><a href="https://drive.google.com/drive/folders/1o74k2D7gUVt1yZpzJkmMW26WNyj_OWj_?usp=sharing" target="_blank" rel="noopener">Photos and video</a></div>
+      <div class="body">
+        <p><span class="lbl">Designed</span>Drivetrain and frame, linkage extension, lift, turret, cone flipper and pole aligner</p>
+        <p><span class="lbl">Robot</span>13 × 16 in mecanum chassis, three custom dead wheels, linkage extension, 2-motor 3 ft lift, 180° turret</p>
+        <p><span class="lbl">Results</span>World Championship 4th Place (Alliance Captain) and Division Winner, PA State Champion (Alliance Captain), Motivate Award. Covered by <a href="https://www.cbsnews.com/pittsburgh/news/team-of-local-students-top-4-world-robotics-championship/" target="_blank" rel="noopener">KDKA CBS</a></p>
+      </div>
+    </div>
+    <div class="robot">
+      <div class="when"><b>FRC 2025</b>Reefscape · 8393<br><a href="https://drive.google.com/drive/folders/18_mX2f2qA72rDy85aEkuGYjVwMEj3ahz?usp=sharing" target="_blank" rel="noopener">Photos and video</a></div>
+      <div class="body">
+        <p><span class="lbl">Designed</span>Transfer mechanism, lift, structure, depositor</p>
+        <p><span class="lbl">Robot</span>Swerve drive, 3-stage chain-driven cascading lift, combined algae and coral depositor, deep climb</p>
+        <p><span class="lbl">Results</span>World Championship qualifier, NCRC Winner, Regional FIRST Impact Award, Engineering Inspiration</p>
+      </div>
+    </div>
+    <div class="robot">
+      <div class="when"><b>FRC 2024</b>Crescendo · 8393<br><a href="https://drive.google.com/drive/folders/1TvE3MPlxRb2Qxr35gy3xHMhWJoz-NTdG?usp=sharing" target="_blank" rel="noopener">Photos and video</a></div>
+      <div class="body">
+        <p><span class="lbl">Designed</span>Central pivot, transfer mechanism, ground collector</p>
+        <p><span class="lbl">Robot</span>Swerve drive, ground intake, 3-stage chain-driven extension, flywheel shooter on a central pivot</p>
+        <p><span class="lbl">Results</span>World Championship qualifier, Regional FIRST Impact Award, Engineering Inspiration</p>
+      </div>
+    </div>
+    <div class="robot">
+      <div class="when"><b>FRC 2023</b>Charged Up · 8393<br><a href="https://drive.google.com/drive/folders/1Xp0dYkrBwHHfczemgOAIrlaU4TWHL4T4?usp=sharing" target="_blank" rel="noopener">Photos and video</a></div>
+      <div class="body">
+        <p><span class="lbl">Designed</span>Elevator power mechanism, camera mount</p>
+        <p><span class="lbl">Robot</span>Swerve drive, compliant-wheel dual intake, sprung telescoping extension, 4-motor carriage lift with tilt</p>
+        <p><span class="lbl">Results</span>World Championship qualifier, Rookie All-Star Award, Regional Finalist, Highest Rookie Seed</p>
+      </div>
+    </div>
+  </div>
+  </div>
+</section>
+
+<section id="skills">
+  <div class="sec-head"><h2>Skills</h2></div>
+  <div class="sec-body">
+  <div class="skills">
+    <p><span class="caps">Design</span><br>SolidWorks, Fusion 360, Onshape, mechanism design, subsystem integration</p>
+    <p><span class="caps">Fabrication</span><br>CNC milling, 3D printing (PLA+, PETG, nylon, carbon fiber), laser cutting, silicone molding</p>
+    <p><span class="caps">Software and controls</span><br>Python, Java, JavaScript, SQL, ROS / ROS 2, OpenCV, YOLOv8, PID control, sensor integration</p>
+  </div>
+  </div>
+</section>
+
+<footer>
+  <p>Avyukt Iyer</p>
+  <div class="contact"><span class="sel">aiyer410@gatech.edu</span><span class="sel">412-709-1723</span></div>
+</footer>
+</div>
+</body>
+</html>
