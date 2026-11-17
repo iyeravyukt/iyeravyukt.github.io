@@ -122,7 +122,7 @@
     pulses = pulses.filter(function (P) {
       var age = (now - P.t0) / 1000;
       var f = Math.min(1, age / 0.9); P.r = 0.42 * H * (1 - (1 - f) * (1 - f)); // ring stops at ~7/8 of the header height across
-      P.amp = Math.max(0, 1 - age / 1.1); P.core = Math.max(0, 1 - age / 0.45);
+      P.amp = Math.max(0, 1 - Math.pow(age / 1.1, 3)); // stays strong while expanding, fades at the end P.core = Math.max(0, 1 - age / 0.45);
       return age < 1.1;
     });
     for (var i = 0; i < nodes.length; i++) {
