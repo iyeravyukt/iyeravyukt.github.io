@@ -48,7 +48,7 @@
      A jittered triangular mesh (like an FEA mesh). Each node has a temperature; the cursor heats
      nearby nodes and every node cools a little each frame, so the trail fades out behind the cursor.
      Colors come from the --heat-0..3 tokens, so the scale always matches the current theme. */
-  var band = document.querySelector('.hero-band');
+  function heat(band, pre, glowSel) {
   var cv = band && band.querySelector('canvas.heat');
   if (!cv || !cv.getContext) return;
   var ctx = cv.getContext('2d');
@@ -64,9 +64,9 @@
   }
   function readColors() {
     var cs = getComputedStyle(root);
-    stops = [0, 1, 2, 3].map(function (i) { return hex(cs.getPropertyValue('--heat-' + i)); });
-    lineRGB = hex(cs.getPropertyValue('--heat-line')).join(',');
-    cap = parseFloat(cs.getPropertyValue('--heat-alpha')) || 0.4;
+    stops = [0, 1, 2, 3].map(function (i) { return hex(cs.getPropertyValue(pre + i)); });
+    lineRGB = hex(cs.getPropertyValue(pre + 'line')).join(',');
+    cap = parseFloat(cs.getPropertyValue(pre + 'alpha')) || 0.4;
   }
   function ramp(t) {
     t = Math.min(1, Math.max(0, t)) * 3;
@@ -84,7 +84,7 @@
     var cols = Math.ceil(W / s) + 2, rows = Math.ceil(H / h) + 2, seed = 7;
     function rnd() { seed = (seed * 16807) % 2147483647; return seed / 2147483647 - 0.5; }
     // Resting heat: a soft glow around the headshot, so the mesh reads as a thermal plot before any interaction.
-    var photo = band.querySelector('.hero-photo'), gx = W * 0.75, gy = H * 0.55;
+    var photo = band.querySelector(glowSel), gx = W * 0.75, gy = H * 0.55;
     if (photo) { var q = photo.getBoundingClientRect(); gx = q.left - r.left + q.width / 2; gy = q.top - r.top + q.height / 2; }
     nodes = []; tris = [];
     for (var y = 0; y < rows; y++) for (var x = 0; x < cols; x++) {
@@ -174,4 +174,7 @@
     timer = setTimeout(function () { var w = band.getBoundingClientRect().width; if (w !== lastW) { lastW = w; build(); draw(); } }, 120);
   });
   if (document.fonts && document.fonts.ready) document.fonts.ready.then(function () { build(); draw(); });
+  }
+  heat(document.querySelector('.hero-band'), '--heat-', '.hero-photo');
+  heat(document.querySelector('.site-footer'), '--fheat-', '.to-top');
 })();
