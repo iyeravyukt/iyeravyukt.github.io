@@ -41,6 +41,11 @@
       svg.setAttribute('class', 'arm'); svg.setAttribute('aria-hidden', 'true'); band.appendChild(svg);
       var meas = document.createElement('span'); meas.className = 'tw-measure'; meas.setAttribute('aria-hidden', 'true'); wordsEl.appendChild(meas);
       var caretEl = wordsEl.querySelector('.caret');
+      /* On/off switch that rides on the carriage. Off parks the arm and leaves the whole word showing. */
+      var sw = document.createElement('button'); sw.type = 'button'; sw.className = 'arm-switch';
+      sw.setAttribute('aria-label', 'Robot arm animation'); band.appendChild(sw);
+      var on = true; try { on = localStorage.getItem('arm') !== 'off'; } catch (e) {}
+      sw.setAttribute('aria-pressed', String(on));
       var OFF = 78, BY = 34, L1 = 54, L2 = 50, TOOL = 58, CH = 95;
       var x0 = 0, base = 0, railR = 0, bandW = 0, cx = [], word = '';
       var f2 = function (v) { return Math.round(v * 10) / 10; };
@@ -54,6 +59,7 @@
         list.forEach(function (w) { meas.textContent = w; maxW = Math.max(maxW, meas.getBoundingClientRect().width); });
         railR = Math.min(bandW - 6, x0 + maxW + OFF + 40);
         setWord(word || list[wi]);
+        if (!on) park();
       };
       var setWord = function (w) {
         word = w; cx = [];
@@ -64,6 +70,7 @@
       var joint = function (x, y, r) { return '<circle class="jt" cx="' + f2(x) + '" cy="' + f2(y) + '" r="' + r + '"/><circle class="jd" cx="' + f2(x) + '" cy="' + f2(y) + '" r="' + f2(r * 0.32) + '"/>'; };
       var draw = function (tx, ty, open) {
         var bx = Math.min(tx + OFF, railR - 26);
+        sw.style.transform = 'translate(' + f2(bx - 11) + 'px, 10px)';
         var ux = -0.34, uy = 0.94, nx = -uy, ny = ux;
         var P = function (s, n) { return [tx - ux * s + nx * n, ty - uy * s + ny * n]; };
         var pt = function (s, n) { var p = P(s, n); return f2(p[0]) + ',' + f2(p[1]); };
@@ -95,7 +102,14 @@
       var ease = function (f) { return f < 0.5 ? 2 * f * f : 1 - Math.pow(-2 * f + 2, 2) / 2; };
       var HOLD = 1300, ERASE = 560, RESET = 380;
       var phase = 'write', t = 0, last = 0, visible = true;
+      var park = function () { tw.textContent = word; draw(cx[word.length] + 10, base - 14, 0); };
+      sw.addEventListener('click', function () {
+        on = !on; sw.setAttribute('aria-pressed', String(on));
+        try { localStorage.setItem('arm', on ? 'on' : 'off'); } catch (e) {}
+        if (on) { phase = 'hold'; t = 300; last = 0; requestAnimationFrame(frame); } else park();
+      });
       var frame = function (now) {
+        if (!on) return;
         var dt = last ? Math.min(50, now - last) : 16; last = now; t += dt;
         var N = word.length, x, y = base, open = 0, n, f;
         if (phase === 'write') {
@@ -126,7 +140,7 @@
         requestAnimationFrame(frame);
       };
       if ('IntersectionObserver' in window) new IntersectionObserver(function (es) { visible = es[0].isIntersecting; }).observe(band);
-      var start = function () { measure(); requestAnimationFrame(frame); };
+      var start = function () { measure(); if (on) requestAnimationFrame(frame); };
       var rz; window.addEventListener('resize', function () { clearTimeout(rz); rz = setTimeout(measure, 120); });
       if (document.fonts && document.fonts.ready) document.fonts.ready.then(start); else start();
     }
