@@ -41,8 +41,8 @@
       svg.setAttribute('class', 'arm'); svg.setAttribute('aria-hidden', 'true'); band.appendChild(svg);
       var meas = document.createElement('span'); meas.className = 'tw-measure'; meas.setAttribute('aria-hidden', 'true'); wordsEl.appendChild(meas);
       var caretEl = wordsEl.querySelector('.caret');
-      /* On/off switch that rides on the carriage. Off parks the arm and leaves the whole word showing. */
-      var sw = document.createElement('button'); sw.type = 'button'; sw.className = 'arm-switch';
+      /* On/off lever fixed at the left end of the rail. Off parks the arm and leaves the whole word showing. */
+      var sw = document.createElement('button'); sw.type = 'button'; sw.className = 'arm-lever'; sw.innerHTML = '<span class="lv"></span>';
       sw.setAttribute('aria-label', 'Robot arm animation'); band.appendChild(sw);
       var on = true; try { on = localStorage.getItem('arm') !== 'off'; } catch (e) {}
       sw.setAttribute('aria-pressed', String(on));
@@ -58,6 +58,7 @@
         var maxW = 0;
         list.forEach(function (w) { meas.textContent = w; maxW = Math.max(maxW, meas.getBoundingClientRect().width); });
         railR = Math.min(bandW - 6, x0 + maxW + OFF + 40);
+        sw.style.transform = 'translate(' + f2(Math.max(2, x0 - 24)) + 'px, 3px)';
         setWord(word || list[wi]);
         if (!on) park();
       };
@@ -70,7 +71,6 @@
       var joint = function (x, y, r) { return '<circle class="jt" cx="' + f2(x) + '" cy="' + f2(y) + '" r="' + r + '"/><circle class="jd" cx="' + f2(x) + '" cy="' + f2(y) + '" r="' + f2(r * 0.32) + '"/>'; };
       var draw = function (tx, ty, open) {
         var bx = Math.min(tx + OFF, railR - 26);
-        sw.style.transform = 'translate(' + f2(bx - 11) + 'px, 10px)';
         var ux = -0.34, uy = 0.94, nx = -uy, ny = ux;
         var P = function (s, n) { return [tx - ux * s + nx * n, ty - uy * s + ny * n]; };
         var pt = function (s, n) { var p = P(s, n); return f2(p[0]) + ',' + f2(p[1]); };

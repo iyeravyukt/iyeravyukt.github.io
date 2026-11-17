@@ -207,12 +207,14 @@ section { padding: 52px 0 12px; }
 .arm .jd { fill: url(#armg); }
 .arm .jaw { fill: url(#armg); stroke: var(--intro-bg); stroke-width: 1; stroke-linejoin: round; }
 .arm .g0 { stop-color: var(--arm); }
-.arm-switch { position: absolute; left: 0; top: 0; z-index: 3; width: 22px; height: 12px; padding: 0; border: 2px solid var(--arm, var(--h-ink)); border-radius: 999px; background: var(--intro-bg); cursor: pointer; }
-.arm-switch::before { content: ""; position: absolute; inset: -9px -6px; }
-.arm-switch::after { content: ""; position: absolute; top: 1px; left: 1px; width: 6px; height: 6px; border-radius: 50%; background: var(--h-ink-2); transition: left .15s, background-color .15s; }
-.arm-switch[aria-pressed="true"] { background: var(--navy); border-color: var(--navy); }
-.arm-switch[aria-pressed="true"]::after { left: 11px; background: var(--intro-bg); }
-.arm-switch:focus-visible { outline: 2px solid var(--link); outline-offset: 3px; }
+.arm-lever { position: absolute; left: 0; top: 0; z-index: 3; width: 28px; height: 34px; padding: 0; border: 0; background: none; cursor: pointer; }
+.arm-lever::before { content: ""; position: absolute; left: 9px; top: 0; width: 10px; height: 7px; border-radius: 0 0 5px 5px; background: var(--h-ink); }
+.arm-lever .lv { position: absolute; left: 12.5px; top: 3px; width: 3px; height: 21px; border-radius: 2px; background: var(--h-ink); transform-origin: 50% 1.5px; transform: rotate(32deg); transition: transform .25s cubic-bezier(.3,1.4,.5,1); }
+.arm-lever .lv::after { content: ""; position: absolute; left: 50%; bottom: -5px; width: 11px; height: 11px; margin-left: -5.5px; border-radius: 50%; background: var(--h-ink-2); transition: background-color .2s; }
+.arm-lever[aria-pressed="true"] .lv { transform: rotate(-32deg); }
+.arm-lever[aria-pressed="true"] .lv::after { background: var(--navy); }
+.arm-lever:hover .lv::after { box-shadow: 0 0 0 3px color-mix(in srgb, var(--navy) 22%, transparent); }
+.arm-lever:focus-visible { outline: 2px solid var(--link); outline-offset: 2px; border-radius: 6px; }
 .arm .g1 { stop-color: var(--navy); }
 @media (max-width: 760px) { .intro { grid-template-columns: minmax(0, 1fr); padding: 26px 20px; gap: 12px; } }
 
