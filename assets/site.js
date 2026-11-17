@@ -179,7 +179,12 @@
   document.querySelectorAll('.news-btn').forEach(function (b) {
     b.addEventListener('click', function () {
       var t = b.closest('section').querySelector('.news-track'), card = t && t.querySelector('.news-card');
-      if (card) t.scrollBy({ left: (card.getBoundingClientRect().width + 20) * Number(b.dataset.dir), behavior: 'smooth' });
+      if (!card) return;
+      var dir = Number(b.dataset.dir), end = t.scrollWidth - t.clientWidth;
+      // Loop: past the last feature goes back to the first, and before the first goes to the last.
+      if (dir > 0 && t.scrollLeft >= end - 4) t.scrollTo({ left: 0, behavior: 'smooth' });
+      else if (dir < 0 && t.scrollLeft <= 4) t.scrollTo({ left: end, behavior: 'smooth' });
+      else t.scrollBy({ left: (card.getBoundingClientRect().width + 20) * dir, behavior: 'smooth' });
     });
   });
 
