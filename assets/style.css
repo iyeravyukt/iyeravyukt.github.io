@@ -292,9 +292,6 @@ section[id] { scroll-margin-top: 76px; }
 .heat-progress b.passed { background: var(--navy); opacity: 1; }
 
 /* Section chips under the intro */
-.intro-chips { grid-column: 1 / -1; display: flex; flex-wrap: wrap; gap: 8px 10px; }
-.intro-chips a { font: 600 .88rem var(--body); color: var(--navy); background: var(--surface); border: 1px solid var(--line); border-radius: 999px; padding: 7px 16px; transition: border-color .15s, background-color .15s, color .15s; }
-.intro-chips a:hover { border-color: var(--navy); background: var(--navy); color: var(--on-navy); text-decoration: none; }
 
 @media (max-width: 860px) {
   .navbar-inner { padding: 8px 20px; }
