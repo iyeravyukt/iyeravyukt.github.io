@@ -71,8 +71,8 @@ h1, h2, h3, h4, p, ul { margin: 0; }
 .hero-credentials b { color: var(--h-ink); font-weight: 600; }
 .hero-credentials span { color: var(--h-ink-2); }
 .hero-photo { width: 190px; height: 190px; border-radius: 50%; object-fit: cover; flex: none; border: 3px solid var(--ring); background: var(--photo-bg); }
-.heat-legend { position: absolute; z-index: 1; right: 22px; bottom: 14px; display: flex; align-items: center; gap: 8px; font: 600 .7rem var(--body); letter-spacing: .04em; color: var(--h-ink-2); pointer-events: none; opacity: .85; }
-.heat-legend i { width: 100px; height: 9px; border-radius: 2px; background: linear-gradient(90deg, var(--heat-0), var(--heat-1), var(--heat-2), var(--heat-3)); }
+.heat-legend { position: absolute; z-index: 1; right: 24px; bottom: 16px; display: flex; align-items: center; gap: 10px; font: 800 .95rem var(--head); letter-spacing: .02em; color: var(--navy); pointer-events: none; }
+.heat-legend i { width: 160px; height: 13px; border-radius: 3px; background: linear-gradient(90deg, var(--heat-0), var(--heat-1), var(--heat-2), var(--heat-3)); }
 
 /* Sections */
 .home-main { max-width: 1180px; margin: auto; padding: 0 40px; }
