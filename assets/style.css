@@ -66,7 +66,10 @@ h1, h2, h3, h4, p, ul { margin: 0; }
 .hero-text { display: grid; gap: 14px; min-width: 0; }
 .hero h1 { font: 800 clamp(2.9rem, 7.4vw, 5.4rem)/1 var(--head); letter-spacing: -.03em; color: var(--h-ink); }
 .hero-credentials { font-size: clamp(1.02rem, 1.7vw, 1.2rem); color: var(--h-ink-2); font-family: var(--body); }
+.hero-credentials { color: var(--h-ink); }
+.hero-credentials i { font-weight: 400; }
 .hero-credentials b { color: var(--h-ink); font-weight: 600; }
+.hero-credentials span { color: var(--h-ink-2); }
 .hero-photo { width: 190px; height: 190px; border-radius: 50%; object-fit: cover; flex: none; border: 3px solid var(--ring); background: var(--photo-bg); }
 .heat-legend { position: absolute; z-index: 1; right: 22px; bottom: 14px; display: flex; align-items: center; gap: 8px; font: 600 .7rem var(--body); letter-spacing: .04em; color: var(--h-ink-2); pointer-events: none; opacity: .85; }
 .heat-legend i { width: 100px; height: 9px; border-radius: 2px; background: linear-gradient(90deg, var(--heat-0), var(--heat-1), var(--heat-2), var(--heat-3)); }
