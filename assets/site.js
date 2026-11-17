@@ -48,14 +48,14 @@
      A jittered triangular mesh (like an FEA mesh). Each node has a temperature; the cursor heats
      nearby nodes and every node cools a little each frame, so the trail fades out behind the cursor.
      Colors come from the --heat-0..3 tokens, so the scale always matches the current theme. */
-  function heat(band, pre, glowSel) {
+  function heat(band, pre, glowSel, sigma) {
   var cv = band && band.querySelector('canvas.heat');
   if (!cv || !cv.getContext) return;
   var ctx = cv.getContext('2d');
   var reduce = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
   var W = 0, H = 0, nodes = [], tris = [], stops, lineRGB, cap;
   var px = -1e4, py = -1e4, inside = false, lastMove = 0, raf = 0, pulses = [];
-  var SIGMA = 85, COOL = 0.972;
+  var SIGMA = sigma || 85, COOL = 0.972;
 
   function hex(h) {
     h = h.trim().replace('#', '');
@@ -184,5 +184,5 @@
     });
   });
   heat(document.querySelector('.hero-band'), '--heat-', '.hero-photo');
-  heat(document.querySelector('.site-footer'), '--fheat-', '.to-top');
+  heat(document.querySelector('.site-footer'), '--fheat-', '.to-top', 64); // footer cursor heat ~3/4 the header's size
 })();
