@@ -175,6 +175,14 @@
   });
   if (document.fonts && document.fonts.ready) document.fonts.ready.then(function () { build(); draw(); });
   }
+  // Features carousel arrows: scroll one card at a time.
+  document.querySelectorAll('.news-btn').forEach(function (b) {
+    b.addEventListener('click', function () {
+      var t = b.closest('section').querySelector('.news-track'), card = t && t.querySelector('.news-card');
+      if (card) t.scrollBy({ left: (card.getBoundingClientRect().width + 20) * Number(b.dataset.dir), behavior: 'smooth' });
+    });
+  });
+
   // Back to top: let the click's heat burst show for a moment, then scroll up.
   document.querySelectorAll('.to-top').forEach(function (a) {
     a.addEventListener('click', function (e) {
