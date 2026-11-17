@@ -10,10 +10,21 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@500;600;700;800&family=Inter:wght@400;500;600&display=swap">
-<link rel="stylesheet" href="assets/style.css?v=16">
+<link rel="stylesheet" href="assets/style.css?v=17">
 </head>
 <body>
 <a class="skip" href="#main-content">Skip to content</a>
+<header class="navbar" aria-label="Site navigation">
+  <div class="navbar-inner">
+    <a class="navbar-name" href="#">Avyukt P. Iyer</a>
+    <nav class="navbar-links" aria-label="Sections"><a href="#research" data-sec="research">Research</a><a href="#engineering" data-sec="engineering">Projects</a><a href="#leadership" data-sec="leadership">Leadership</a><a href="#recognition" data-sec="recognition">Recognition</a><a href="#interests" data-sec="interests">Interests</a></nav>
+    <div class="navbar-right">
+      <button class="nav-menu" type="button" aria-label="Open section menu" aria-expanded="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+      <button class="theme-toggle" type="button" aria-label="Toggle light and dark mode"><svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4.5"/><path d="M12 1.5v2.5M12 20v2.5M1.5 12H4M20 12h2.5M4.6 4.6l1.8 1.8M17.6 17.6l1.8 1.8M4.6 19.4l1.8-1.8M17.6 6.4l1.8-1.8"/></svg><svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" aria-hidden="true"><path d="M20.5 14.5A8.5 8.5 0 0 1 9.5 3.5a8.5 8.5 0 1 0 11 11z"/></svg></button>
+    </div>
+  </div>
+  <div class="heat-progress" aria-hidden="true"><i class="fill"></i><b data-sec="research"></b><b data-sec="engineering"></b><b data-sec="leadership"></b><b data-sec="recognition"></b><b data-sec="interests"></b></div>
+</header>
 
 <div class="hero-band">
   <canvas class="heat" aria-hidden="true"></canvas>
@@ -44,6 +55,7 @@
   <section class="intro" aria-label="Introduction">
   <p class="intro-words" aria-label="Maker, Roboticist, Technophile, Engineer, Tinkerer, Autodidact, Mentor, Trailblazer, Leader, Violinist"><span class="tw" aria-hidden="true" data-words="Maker.|Roboticist.|Technophile.|Engineer.|Tinkerer.|Autodidact.|Mentor.|Trailblazer.|Leader.|Violinist.">Maker.</span><span class="caret" aria-hidden="true"></span></p>
   <p class="intro-text">Hi, I’m Avyukt, a Mechanical Engineering student at Georgia Tech. After 8+ years of competitive robotics success, I’m exploring automation, intelligent humanoids, and assistive robotics through research and entrepreneurship.</p>
+  <nav class="intro-chips" aria-label="Jump to a section"><a href="#research">Research</a><a href="#engineering">Projects</a><a href="#leadership">Leadership</a><a href="#recognition">Recognition</a><a href="#interests">Interests</a></nav>
 </section>
 </div>
 
@@ -409,6 +421,6 @@ document.querySelectorAll('.btn.toggle').forEach(function (b) {
   });
 });
 </script>
-<script src="assets/site.js?v=17" defer></script>
+<script src="assets/site.js?v=18" defer></script>
 </body>
 </html>

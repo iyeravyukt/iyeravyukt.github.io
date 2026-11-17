@@ -183,6 +183,36 @@
     });
   });
 
+  // Sticky section bar: show after the hero, underline the current section, fill the ΔT progress bar.
+  var bar = document.querySelector('.navbar');
+  if (bar) {
+    var hero = document.querySelector('.hero-band'), fill = bar.querySelector('.heat-progress .fill');
+    var secs = Array.prototype.map.call(bar.querySelectorAll('.navbar-links a'), function (a) {
+      return { a: a, el: document.getElementById(a.dataset.sec), tick: bar.querySelector('.heat-progress b[data-sec="' + a.dataset.sec + '"]') };
+    }).filter(function (x) { return x.el; });
+    var ticking = false;
+    function maxScroll() { return Math.max(1, document.documentElement.scrollHeight - innerHeight); }
+    function placeTicks() {
+      secs.forEach(function (x) { x.top = x.el.getBoundingClientRect().top + scrollY - 80; x.tick.style.left = Math.min(99.5, x.top / maxScroll() * 100) + '%'; });
+    }
+    function update() {
+      ticking = false;
+      var y = scrollY, p = Math.min(1, y / maxScroll());
+      bar.classList.toggle('show', y > hero.offsetHeight - 40);
+      fill.style.width = (p * 100) + '%';
+      var cur = null;
+      secs.forEach(function (x) { if (y >= x.top - 4) cur = x; x.tick.classList.toggle('passed', y >= x.top - 4); });
+      secs.forEach(function (x) { x.a.classList.toggle('active', x === cur); });
+    }
+    addEventListener('scroll', function () { if (!ticking) { ticking = true; requestAnimationFrame(update); } }, { passive: true });
+    addEventListener('resize', function () { placeTicks(); update(); });
+    addEventListener('load', function () { placeTicks(); update(); });
+    placeTicks(); update();
+    var menu = bar.querySelector('.nav-menu');
+    menu.addEventListener('click', function () { var o = bar.classList.toggle('open'); menu.setAttribute('aria-expanded', o); });
+    bar.querySelectorAll('.navbar-links a').forEach(function (a) { a.addEventListener('click', function () { bar.classList.remove('open'); menu.setAttribute('aria-expanded', false); }); });
+  }
+
   // Back to top: let the click's heat burst show for a moment, then scroll up.
   document.querySelectorAll('.to-top').forEach(function (a) {
     a.addEventListener('click', function (e) {
