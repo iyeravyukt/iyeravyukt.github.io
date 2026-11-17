@@ -24,24 +24,109 @@
   });
   syncToggle();
 
-  /* ---------- Typing words in the intro ---------- */
+  /* ---------- Typing words in the intro, written by a ceiling-mounted robot arm ----------
+     A carriage slides along a rail at the top of the intro strip and a 2-link arm (solved with
+     2-link inverse kinematics) holds a pointer-claw tool. Per word: write each letter, hold,
+     wipe the word away right to left with the claw open, reset at the left edge, write the next. */
   var tw = document.querySelector('.intro-words .tw');
   if (tw) {
-    var list = (tw.dataset.words || '').split('|'), wi = 0, ci = list[0].length, del = true;
+    var list = (tw.dataset.words || '').split('|'), wi = 0;
     var still = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
-    (function tick() {
-      var w = list[wi], wait;
-      if (still) { wi = (wi + 1) % list.length; setTimeout(function () { tw.textContent = list[wi]; tick(); }, 2200); return; }
-      if (del) {
-        ci--; wait = 45;
-        if (ci <= 0) { ci = 0; del = false; wi = (wi + 1) % list.length; wait = 350; }
-      } else {
-        ci++; wait = 95;
-        if (ci >= list[wi].length) { del = true; wait = 1600; }
-      }
-      tw.textContent = list[wi].slice(0, ci) || '\u200b';
-      setTimeout(tick, wait);
-    })();
+    var band = tw.closest('.intro-band'), wordsEl = tw.parentNode;
+    if (still || !band || !document.createElementNS) {
+      (function cycle() { setTimeout(function () { wi = (wi + 1) % list.length; tw.textContent = list[wi]; cycle(); }, 2200); })();
+    } else {
+      wordsEl.classList.add('has-arm'); band.classList.add('arm-on');
+      var NS = 'http://www.w3.org/2000/svg', svg = document.createElementNS(NS, 'svg');
+      svg.setAttribute('class', 'arm'); svg.setAttribute('aria-hidden', 'true'); band.appendChild(svg);
+      var meas = document.createElement('span'); meas.className = 'tw-measure'; meas.setAttribute('aria-hidden', 'true'); wordsEl.appendChild(meas);
+      var caretEl = wordsEl.querySelector('.caret');
+      var OFF = 78, BY = 34, L1 = 54, L2 = 50, TOOL = 58, CH = 95;
+      var x0 = 0, base = 0, railR = 0, bandW = 0, cx = [], word = '';
+      var f2 = function (v) { return Math.round(v * 10) / 10; };
+      var measure = function () {
+        var R = band.getBoundingClientRect(), keep = tw.textContent;
+        tw.textContent = '​';
+        var t = tw.getBoundingClientRect(), c = caretEl.getBoundingClientRect();
+        x0 = t.left - R.left; base = c.top - R.top + c.height * 0.92; bandW = R.width;
+        tw.textContent = keep;
+        var maxW = 0;
+        list.forEach(function (w) { meas.textContent = w; maxW = Math.max(maxW, meas.getBoundingClientRect().width); });
+        railR = Math.min(bandW - 6, x0 + maxW + OFF + 40);
+        setWord(word || list[wi]);
+      };
+      var setWord = function (w) {
+        word = w; cx = [];
+        for (var i = 0; i <= w.length; i++) { meas.textContent = w.slice(0, i); cx.push(x0 + (i ? meas.getBoundingClientRect().width : 0) + 1); }
+      };
+      var line = function (c, a, b, d, e, wd) { return '<line class="' + c + '" x1="' + f2(a) + '" y1="' + f2(b) + '" x2="' + f2(d) + '" y2="' + f2(e) + '"' + (wd ? ' stroke-width="' + wd + '"' : '') + '/>'; };
+      var slot = function (a, b, d, e, wd) { return line('slot-o', a, b, d, e, wd) + line('slot-i', a, b, d, e, wd - 7); };
+      var joint = function (x, y, r) { return '<circle class="jt" cx="' + f2(x) + '" cy="' + f2(y) + '" r="' + r + '"/><circle class="jd" cx="' + f2(x) + '" cy="' + f2(y) + '" r="' + f2(r * 0.32) + '"/>'; };
+      var draw = function (tx, ty, open) {
+        var bx = Math.min(tx + OFF, railR - 26);
+        var ux = -0.34, uy = 0.94, nx = -uy, ny = ux;
+        var P = function (s, n) { return [tx - ux * s + nx * n, ty - uy * s + ny * n]; };
+        var pt = function (s, n) { var p = P(s, n); return f2(p[0]) + ',' + f2(p[1]); };
+        var W = P(TOOL, 0), dx = W[0] - bx, dy = W[1] - BY;
+        var d = Math.max(Math.abs(L1 - L2) + 1, Math.min(L1 + L2 - 1, Math.hypot(dx, dy)));
+        var a = Math.atan2(dy, dx), b = Math.acos((L1 * L1 + d * d - L2 * L2) / (2 * L1 * d));
+        var e1 = [bx + L1 * Math.cos(a + b), BY + L1 * Math.sin(a + b)], e2 = [bx + L1 * Math.cos(a - b), BY + L1 * Math.sin(a - b)];
+        var E = e1[1] > e2[1] ? e1 : e2, C = P(48, 0);
+        var talon = function (k) {
+          var o = 10 + 7 * open, h = 4 + 9 * open;
+          return '<path class="talon" d="M' + pt(43, 7 * k) + ' Q' + pt(30, (o + 3) * k) + ' ' + pt(19, o * k) + ' Q' + pt(13, (h + 2) * k) + ' ' + pt(11, h * k) + '"/>';
+        };
+        var hex = [0, 1, 2, 3, 4, 5].map(function (i) { var t = i * Math.PI / 3; return pt(44 + 5 * Math.sin(t), 8.5 * Math.cos(t)); }).join(' ');
+        svg.innerHTML =
+          '<rect class="rail" x="' + f2(x0 - 20) + '" y="0" width="' + f2(railR - x0 + 20) + '" height="11" rx="2"/>' +
+          line('railslot', x0 - 12, 5.5, railR - 8, 5.5) +
+          '<rect class="cart" x="' + f2(bx - 24) + '" y="9" width="48" height="16" rx="4"/>' +
+          '<circle class="jd" cx="' + f2(bx - 14) + '" cy="11" r="3"/><circle class="jd" cx="' + f2(bx + 14) + '" cy="11" r="3"/>' +
+          slot(bx, BY, E[0], E[1], 18) + slot(E[0], E[1], W[0], W[1], 15) +
+          line('slot-o', W[0], W[1], C[0], C[1], 8) +
+          talon(1) + talon(-1) +
+          '<polygon class="stylus" points="' + pt(41, 3.6) + ' ' + pt(41, -3.6) + ' ' + pt(5, -1.3) + ' ' + pt(1.5, 0) + ' ' + pt(5, 1.3) + '"/>' +
+          '<polygon class="collar" points="' + hex + '"/>' +
+          joint(bx, BY, 11) + joint(E[0], E[1], 10) + joint(W[0], W[1], 7);
+      };
+      var ease = function (f) { return f < 0.5 ? 2 * f * f : 1 - Math.pow(-2 * f + 2, 2) / 2; };
+      var HOLD = 1300, ERASE = 560, RESET = 380;
+      var phase = 'write', t = 0, last = 0, visible = true;
+      var frame = function (now) {
+        var dt = last ? Math.min(50, now - last) : 16; last = now; t += dt;
+        var N = word.length, x, y = base, open = 0.35, n, f;
+        if (phase === 'write') {
+          n = Math.min(N, Math.floor(t / CH)); f = Math.min(1, (t - n * CH) / CH);
+          tw.textContent = word.slice(0, n) || '​';
+          if (n < N) { x = cx[n] + (cx[n + 1] - cx[n]) * ease(f); y = base - Math.sin(f * Math.PI) * 8; }
+          else { phase = 'hold'; t = 0; x = cx[N]; }
+        }
+        if (phase === 'hold') {
+          f = ease(Math.min(1, t / 300)); x = cx[N] + 10 * f; y = base - 14 * f; open = 0.35 * (1 - f);
+          if (t >= HOLD) { phase = 'erase'; t = 0; }
+        }
+        if (phase === 'erase') {
+          f = Math.min(1, t / ERASE); var g = ease(f);
+          x = cx[N] + 10 - (cx[N] + 16 - cx[0]) * g; y = base - 4 - 10 * Math.max(0, 1 - f * 5);
+          open = Math.min(1, f * 4);
+          var k = 0; while (k < N && cx[k + 1] < x - 2) k++;
+          tw.textContent = word.slice(0, k) || '​';
+          if (f >= 1) { phase = 'reset'; t = 0; wi = (wi + 1) % list.length; setWord(list[wi]); }
+        }
+        if (phase === 'reset') {
+          f = Math.min(1, t / RESET);
+          x = cx[0] - 6 + 6 * ease(f); y = base - 4 - Math.sin(f * Math.PI) * 14; open = 1 - 0.65 * f;
+          tw.textContent = '​';
+          if (f >= 1) { phase = 'write'; t = 0; }
+        }
+        if (visible) draw(x, y, open);
+        requestAnimationFrame(frame);
+      };
+      if ('IntersectionObserver' in window) new IntersectionObserver(function (es) { visible = es[0].isIntersecting; }).observe(band);
+      var start = function () { measure(); requestAnimationFrame(frame); };
+      var rz; window.addEventListener('resize', function () { clearTimeout(rz); rz = setTimeout(measure, 120); });
+      if (document.fonts && document.fonts.ready) document.fonts.ready.then(start); else start();
+    }
   }
 
   /* ---------- Heat mesh: the cursor is a heat source ----------
