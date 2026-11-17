@@ -24,6 +24,26 @@
   });
   syncToggle();
 
+  /* ---------- Typing words in the intro ---------- */
+  var tw = document.querySelector('.intro-words .tw');
+  if (tw) {
+    var list = (tw.dataset.words || '').split('|'), wi = 0, ci = list[0].length, del = true;
+    var still = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+    (function tick() {
+      var w = list[wi], wait;
+      if (still) { wi = (wi + 1) % list.length; setTimeout(function () { tw.textContent = list[wi]; tick(); }, 2200); return; }
+      if (del) {
+        ci--; wait = 45;
+        if (ci <= 0) { ci = 0; del = false; wi = (wi + 1) % list.length; wait = 350; }
+      } else {
+        ci++; wait = 95;
+        if (ci >= list[wi].length) { del = true; wait = 1600; }
+      }
+      tw.textContent = list[wi].slice(0, ci) || '\u200b';
+      setTimeout(tick, wait);
+    })();
+  }
+
   /* ---------- Heat mesh: the cursor is a heat source ----------
      A jittered triangular mesh (like an FEA mesh). Each node has a temperature; the cursor heats
      nearby nodes and every node cools a little each frame, so the trail fades out behind the cursor.
@@ -34,7 +54,7 @@
   var ctx = cv.getContext('2d');
   var reduce = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
   var W = 0, H = 0, nodes = [], tris = [], stops, lineRGB, cap;
-  var px = -1e4, py = -1e4, inside = false, lastMove = 0, raf = 0;
+  var px = -1e4, py = -1e4, inside = false, lastMove = 0, raf = 0, pulses = [];
   var SIGMA = 85, COOL = 0.972;
 
   function hex(h) {
@@ -98,11 +118,26 @@
 
   function step(now) {
     var hot = 0, k = 1 / (2 * SIGMA * SIGMA);
+    // Click bursts: a heat ring expands from the click point and fades.
+    pulses = pulses.filter(function (P) {
+      var age = (now - P.t0) / 1000;
+      P.r = 520 * age; P.amp = Math.max(0, 1 - age / 1.1); P.core = Math.max(0, 1 - age / 0.45);
+      return age < 1.1;
+    });
     for (var i = 0; i < nodes.length; i++) {
       var n = nodes[i], v = n.d * COOL;
       if (inside) {
         var dx = n.x - px, dy = n.y - py, g = Math.exp(-(dx * dx + dy * dy) * k);
         if (g > v) v = g;
+      }
+      for (var j = 0; j < pulses.length; j++) {
+        var P = pulses[j], ex = n.x - P.x, ey = n.y - P.y, dist = Math.sqrt(ex * ex + ey * ey);
+        var ring = P.amp * Math.exp(-((dist - P.r) * (dist - P.r)) / (2 * 30 * 30));
+        var r2 = P.r * 0.55, ring2 = 0.6 * P.amp * Math.exp(-((dist - r2) * (dist - r2)) / (2 * 22 * 22));
+        var core = P.core * Math.exp(-(dist * dist) / (2 * 55 * 55));
+        if (ring2 > v) v = ring2;
+        if (ring > v) v = ring;
+        if (core > v) v = core;
       }
       n.d = v < 0.004 ? 0 : v;
       if (n.d > hot) hot = n.d;
@@ -110,7 +145,7 @@
     draw();
     // Keep animating while the trail is cooling; stop once the cursor has rested for a moment.
     var resting = inside && now - lastMove > 1500;
-    raf = (!inside && hot > 0) || (inside && !resting) ? requestAnimationFrame(step) : 0;
+    raf = pulses.length || (!inside && hot > 0) || (inside && !resting) ? requestAnimationFrame(step) : 0;
   }
   function kick() { if (!raf) raf = requestAnimationFrame(step); }
 
@@ -124,6 +159,12 @@
       inside = true; lastMove = performance.now(); kick();
     });
     band.addEventListener('pointerleave', function () { inside = false; kick(); });
+    band.addEventListener('pointerdown', function (e) {
+      var r = band.getBoundingClientRect();
+      pulses.push({ x: e.clientX - r.left, y: e.clientY - r.top, t0: performance.now(), r: 0, amp: 1, core: 1 });
+      if (pulses.length > 6) pulses.shift();
+      kick();
+    });
   }
   document.addEventListener('themechange', function () { readColors(); draw(); });
   var lastW = W, timer;

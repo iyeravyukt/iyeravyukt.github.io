@@ -12,7 +12,7 @@
   --paper: #f7f6f3; --hero-bg: #ffffff; --h-ink: #1f2328; --h-ink-2: #5f656e; --rule: #e3e1dc;
   --ph: #e4e9ee; --ph-ink: #7c8d9d; --soft: #f4f6f8; --chip: #e9eef3; --hilite: #fff6d6;
   --footer-bg: #002952; --footer-rule: #d7dfe6; --footer-ink: #dfe7ef; --footer-strong: #ffffff; --footer-sub: #a9b9c9;
-  --ring: #002952; --photo-bg: #ffffff;
+  --ring: #002952; --photo-bg: #ffffff; --intro-bg: #edf1f5;
   --heat-0: #d7dfe6; --heat-1: #9fbbd8; --heat-2: #4a78a8; --heat-3: #002952; --heat-line: #002952; --heat-alpha: .40;
   --head: "Hanken Grotesk", "Helvetica Neue", Arial, sans-serif;
   --body: Inter, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
@@ -25,7 +25,7 @@
   --paper: #0a121b; --hero-bg: #0e1823; --h-ink: #eef2f6; --h-ink-2: #9aabbb; --rule: #1d2c3d;
   --ph: #172636; --ph-ink: #6f859b; --soft: #13202e; --chip: #18293b; --hilite: #22344a;
   --footer-bg: #060d14; --footer-rule: #23354a; --footer-ink: #c9d6e3; --footer-strong: #eef2f6; --footer-sub: #6f859b;
-  --ring: #9cc0e6; --photo-bg: #ffffff;
+  --ring: #9cc0e6; --photo-bg: #ffffff; --intro-bg: #111e2b;
   --heat-0: #1d3048; --heat-1: #2f5a86; --heat-2: #6d9fd2; --heat-3: #cfe3f7; --heat-line: #9cc0e6; --heat-alpha: .36;
 }
 * { box-sizing: border-box; }
@@ -179,3 +179,13 @@ section { padding: 52px 0 12px; }
 .wip-note + section { padding-top: 36px; }
 
 @media print { .hero-band canvas.heat, .heat-legend, .theme-toggle { display: none; } }
+
+/* Intro band (typing words left, plain text right), tinted strip between the hero and Research */
+.intro-band { background: var(--intro-bg); border-bottom: 1px solid var(--line); }
+.intro { max-width: 1180px; margin: auto; padding: 30px 40px; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.5fr); gap: 24px 64px; align-items: center; }
+.intro-text { font-size: clamp(1.05rem, 1.5vw, 1.2rem); line-height: 1.55; color: var(--ink); }
+.intro-words { font: 800 clamp(2.1rem, 4.4vw, 3.2rem)/1.1 var(--head); letter-spacing: -.02em; color: var(--navy); white-space: nowrap; min-height: 1.1em; }
+.intro-words .caret { display: inline-block; width: .08em; height: .9em; margin-left: .06em; vertical-align: -.08em; background: var(--navy); animation: caret 1s steps(1) infinite; }
+@keyframes caret { 50% { opacity: 0; } }
+@media (prefers-reduced-motion: reduce) { .intro-words .caret { animation: none; } }
+@media (max-width: 760px) { .intro { grid-template-columns: minmax(0, 1fr); padding: 26px 20px; gap: 12px; } }
