@@ -72,9 +72,12 @@
         var a = Math.atan2(dy, dx), b = Math.acos((L1 * L1 + d * d - L2 * L2) / (2 * L1 * d));
         var e1 = [bx + L1 * Math.cos(a + b), BY + L1 * Math.sin(a + b)], e2 = [bx + L1 * Math.cos(a - b), BY + L1 * Math.sin(a - b)];
         var E = e1[1] > e2[1] ? e1 : e2, C = P(48, 0);
-        var talon = function (k) {
-          var o = 10 + 7 * open, h = 4 + 9 * open;
-          return '<path class="talon" d="M' + pt(43, 7 * k) + ' Q' + pt(30, (o + 3) * k) + ' ' + pt(19, o * k) + ' Q' + pt(13, (h + 2) * k) + ' ' + pt(11, h * k) + '"/>';
+        /* Two jaws hinged at the collar. Closed, they meet in one pointed tip (a pointer);
+           open, they swing apart into a claw for wiping. */
+        var jaw = function (k) {
+          var th = k * open * 0.55, c = Math.cos(th), sn = Math.sin(th);
+          var R = function (s, n) { var ds = s - 40, nn = n * k; return pt(40 + ds * c - nn * sn, ds * sn + nn * c); };
+          return '<polygon class="jaw" points="' + [R(40, 0), R(40, 6.5), R(26, 6), R(12, 3.6), R(0, 0)].join(' ') + '"/>';
         };
         var hex = [0, 1, 2, 3, 4, 5].map(function (i) { var t = i * Math.PI / 3; return pt(44 + 5 * Math.sin(t), 8.5 * Math.cos(t)); }).join(' ');
         svg.innerHTML =
@@ -84,8 +87,7 @@
           '<circle class="jd" cx="' + f2(bx - 14) + '" cy="11" r="3"/><circle class="jd" cx="' + f2(bx + 14) + '" cy="11" r="3"/>' +
           slot(bx, BY, E[0], E[1], 18) + slot(E[0], E[1], W[0], W[1], 15) +
           line('slot-o', W[0], W[1], C[0], C[1], 8) +
-          talon(1) + talon(-1) +
-          '<polygon class="stylus" points="' + pt(41, 3.6) + ' ' + pt(41, -3.6) + ' ' + pt(5, -1.3) + ' ' + pt(1.5, 0) + ' ' + pt(5, 1.3) + '"/>' +
+          jaw(1) + jaw(-1) +
           '<polygon class="collar" points="' + hex + '"/>' +
           joint(bx, BY, 11) + joint(E[0], E[1], 10) + joint(W[0], W[1], 7);
       };
@@ -94,7 +96,7 @@
       var phase = 'write', t = 0, last = 0, visible = true;
       var frame = function (now) {
         var dt = last ? Math.min(50, now - last) : 16; last = now; t += dt;
-        var N = word.length, x, y = base, open = 0.35, n, f;
+        var N = word.length, x, y = base, open = 0, n, f;
         if (phase === 'write') {
           n = Math.min(N, Math.floor(t / CH)); f = Math.min(1, (t - n * CH) / CH);
           tw.textContent = word.slice(0, n) || '​';
@@ -102,7 +104,7 @@
           else { phase = 'hold'; t = 0; x = cx[N]; }
         }
         if (phase === 'hold') {
-          f = ease(Math.min(1, t / 300)); x = cx[N] + 10 * f; y = base - 14 * f; open = 0.35 * (1 - f);
+          f = ease(Math.min(1, t / 300)); x = cx[N] + 10 * f; y = base - 14 * f;
           if (t >= HOLD) { phase = 'erase'; t = 0; }
         }
         if (phase === 'erase') {
@@ -115,7 +117,7 @@
         }
         if (phase === 'reset') {
           f = Math.min(1, t / RESET);
-          x = cx[0] - 6 + 6 * ease(f); y = base - 4 - Math.sin(f * Math.PI) * 14; open = 1 - 0.65 * f;
+          x = cx[0] - 6 + 6 * ease(f); y = base - 4 - Math.sin(f * Math.PI) * 14; open = 1 - ease(f);
           tw.textContent = '​';
           if (f >= 1) { phase = 'write'; t = 0; }
         }
