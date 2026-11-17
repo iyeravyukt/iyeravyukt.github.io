@@ -182,7 +182,7 @@ section { padding: 52px 0 12px; }
 
 /* Intro band (typing words left, plain text right), tinted strip between the hero and Research */
 .intro-band { background: var(--intro-bg); border-bottom: 1px solid var(--line); }
-.intro { max-width: 1180px; margin: auto; padding: 30px 40px; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.5fr); gap: 24px 64px; align-items: center; }
+.intro { max-width: 1180px; margin: auto; padding: 30px 40px; display: grid; grid-template-columns: 22rem minmax(0, 1fr); gap: 24px 40px; align-items: center; }
 .intro-text { font-size: clamp(1.05rem, 1.5vw, 1.2rem); line-height: 1.55; color: var(--ink); }
 .intro-words { font: 800 clamp(2.1rem, 4.4vw, 3.2rem)/1.1 var(--head); letter-spacing: -.02em; color: var(--navy); white-space: nowrap; min-height: 1.1em; }
 .intro-words .caret { display: inline-block; width: .08em; height: .9em; margin-left: .06em; vertical-align: -.08em; background: var(--navy); animation: caret 1s steps(1) infinite; }
