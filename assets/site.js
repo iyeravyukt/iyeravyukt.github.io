@@ -175,6 +175,14 @@
   });
   if (document.fonts && document.fonts.ready) document.fonts.ready.then(function () { build(); draw(); });
   }
+  // Back to top: let the click's heat burst show for a moment, then scroll up.
+  document.querySelectorAll('.to-top').forEach(function (a) {
+    a.addEventListener('click', function (e) {
+      e.preventDefault();
+      var still = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+      setTimeout(function () { window.scrollTo({ top: 0, behavior: still ? 'auto' : 'smooth' }); }, still ? 0 : 350);
+    });
+  });
   heat(document.querySelector('.hero-band'), '--heat-', '.hero-photo');
   heat(document.querySelector('.site-footer'), '--fheat-', '.to-top');
 })();
