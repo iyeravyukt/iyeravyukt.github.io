@@ -81,10 +81,11 @@
         };
         var hex = [0, 1, 2, 3, 4, 5].map(function (i) { var t = i * Math.PI / 3; return pt(44 + 5 * Math.sin(t), 8.5 * Math.cos(t)); }).join(' ');
         svg.innerHTML =
-          '<rect class="rail" x="' + f2(x0 - 20) + '" y="0" width="' + f2(railR - x0 + 20) + '" height="11" rx="2"/>' +
-          line('railslot', x0 - 12, 5.5, railR - 8, 5.5) +
-          '<rect class="cart" x="' + f2(bx - 24) + '" y="9" width="48" height="16" rx="4"/>' +
-          '<circle class="jd" cx="' + f2(bx - 14) + '" cy="11" r="3"/><circle class="jd" cx="' + f2(bx + 14) + '" cy="11" r="3"/>' +
+          '<defs><linearGradient id="armg" gradientUnits="userSpaceOnUse" x1="' + f2(bx) + '" y1="' + BY + '" x2="' + f2(tx) + '" y2="' + f2(ty) + '"><stop class="g0" offset=".12"/><stop class="g1" offset=".8"/></linearGradient></defs>' +
+          '<rect class="rail" x="' + f2(x0 - 20) + '" y="1" width="' + f2(railR - x0 + 20) + '" height="4" rx="2"/>' +
+          '<rect class="rail" x="' + f2(x0 - 22) + '" y="0" width="5" height="11" rx="1.5"/><rect class="rail" x="' + f2(railR - 3) + '" y="0" width="5" height="11" rx="1.5"/>' +
+          '<rect class="cart" x="' + f2(bx - 22) + '" y="9" width="44" height="14" rx="4"/>' +
+          '<circle class="whl" cx="' + f2(bx - 12) + '" cy="5" r="3.5"/><circle class="whl" cx="' + f2(bx + 12) + '" cy="5" r="3.5"/>' +
           slot(bx, BY, E[0], E[1], 18) + slot(E[0], E[1], W[0], W[1], 15) +
           line('slot-o', W[0], W[1], C[0], C[1], 8) +
           jaw(1) + jaw(-1) +
