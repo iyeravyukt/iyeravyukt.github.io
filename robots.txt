@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://avyuktiyer.com/sitemap.xml
