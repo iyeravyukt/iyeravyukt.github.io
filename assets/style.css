@@ -340,3 +340,11 @@ section[id] { scroll-margin-top: 76px; }
 .project-media.logo-media > img { object-fit: contain; padding: 14px; }
 #leadership .project-media-strip.n1 .project-media { aspect-ratio: 16 / 9; }
 @media (max-width: 760px) { .skill-rows { grid-template-columns: 1fr 1fr; } .skill-fill { display: contents; } .skill-fill li { font-size: .74rem; padding: 7px 6px; } }
+
+/* Research + Projects cards: centered actions and links */
+#research .card-actions, #engineering .card-actions { justify-content: center; gap: 10px 14px; }
+#research .card-actions .btn, #engineering .card-actions .btn { flex: 0 1 200px; text-align: center; }
+#research .project-links, #engineering .project-links { justify-content: center; gap: 6px 10px; }
+#research .project-links a, #engineering .project-links a { flex: 0 1 110px; text-align: center; padding: 3px 0; }
+#research .section-heading, #engineering .section-heading { margin-bottom: 18px; }
+#research .placeholder span, #engineering .placeholder span { font-size: .9rem; font-weight: 600; }
