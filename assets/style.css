@@ -324,3 +324,15 @@ section[id] { scroll-margin-top: 76px; }
 @media (max-width: 760px) { .interest { grid-template-columns: minmax(0, 1fr); } }
 
 #recognition .section-heading { margin-bottom: 12px; }
+
+/* Résumé-style entries (Leadership) */
+.work-body.res { gap: 10px; }
+.res-title { font: 700 1.15rem/1.3 var(--head); color: var(--navy); }
+.res-title .sc { font-variant: small-caps; }
+.res-line { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: baseline; gap: 0 16px; margin-top: -4px; color: var(--ink); }
+.res-line > :first-child { flex: 1 1 14rem; }
+.res-date { font-weight: 600; white-space: nowrap; }
+.res-bullets { margin: 2px 0 0; padding-left: 1.1em; display: grid; gap: 6px; color: var(--ink); line-height: 1.5; }
+.skill-rows { display: grid; gap: 8px; margin-top: 6px; }
+.skill-fill { list-style: none; padding: 0; margin: 0; display: flex; flex-wrap: wrap; gap: 8px; }
+.skill-fill li { flex: 1 1 auto; text-align: center; white-space: nowrap; font: 600 .82rem var(--body); color: var(--navy); background: var(--intro-bg); border: 1px solid var(--line); border-radius: 999px; padding: 7px 14px; }
