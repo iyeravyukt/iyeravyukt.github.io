@@ -338,3 +338,5 @@ section[id] { scroll-margin-top: 76px; }
 .skill-fill li { flex: 1 1 auto; text-align: center; white-space: nowrap; font: 600 .82rem var(--body); color: var(--navy); background: var(--intro-bg); border: 1px solid var(--line); border-radius: 999px; padding: 7px 14px; }
 .project-media.logo-media { background: #ffffff; }
 .project-media.logo-media > img { object-fit: contain; padding: 14px; }
+#leadership .project-media-strip.n1 .project-media { aspect-ratio: 16 / 9; }
+@media (max-width: 760px) { .skill-rows { grid-template-columns: 1fr 1fr; } .skill-fill { display: contents; } .skill-fill li { font-size: .74rem; padding: 7px 6px; } }
