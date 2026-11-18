@@ -349,6 +349,8 @@ section[id] { scroll-margin-top: 76px; }
 #research .section-heading, #engineering .section-heading { margin-bottom: 18px; }
 #research .placeholder span, #engineering .placeholder span { font-size: .9rem; font-weight: 600; }
 
-/* TEMPORARY in-progress section */
-.wip-section .section-heading { margin-bottom: 10px; }
-.wip-text { max-width: 760px; font-size: 1rem; line-height: 1.6; color: var(--ink); }
+/* TEMPORARY in-progress band (full page width) */
+body { overflow-x: clip; }
+.wip-band { background: var(--chip); margin: 40px calc(50% - 50vw) 0; padding: 18px calc(50vw - 50%); color: var(--ink); font-size: 1rem; line-height: 1.6; }
+.wip-band b { color: var(--navy); }
+.wip-band + section { padding-top: 40px; }
