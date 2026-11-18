@@ -348,3 +348,7 @@ section[id] { scroll-margin-top: 76px; }
 #research .project-links a, #engineering .project-links a { flex: 0 1 110px; text-align: center; padding: 3px 0; }
 #research .section-heading, #engineering .section-heading { margin-bottom: 18px; }
 #research .placeholder span, #engineering .placeholder span { font-size: .9rem; font-weight: 600; }
+
+/* TEMPORARY in-progress section */
+.wip-section .section-heading { margin-bottom: 10px; }
+.wip-text { max-width: 760px; font-size: 1rem; line-height: 1.6; color: var(--ink); }
