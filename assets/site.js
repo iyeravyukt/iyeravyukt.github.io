@@ -244,7 +244,7 @@
     // Click bursts: a heat ring expands from the click point and fades.
     pulses = pulses.filter(function (P) {
       var age = (now - P.t0) / 1000;
-      var f = Math.min(1, age / 0.9); P.r = 0.26 * H * (1 - (1 - f) * (1 - f)); // ring incl. its glow stays within ~3/4 of the band height across
+      var f = Math.min(1, age / 0.9); P.r = 0.31 * H * (1 - (1 - f) * (1 - f)); // ring incl. its glow stays within ~3/4 of the band height across
       P.amp = Math.max(0, 1 - Math.pow(age / 1.1, 3)); P.core = Math.max(0, 1 - age / 0.45); // ring stays strong while expanding, fades at the end
       return age < 1.1;
     });
@@ -256,7 +256,7 @@
       }
       for (var j = 0; j < pulses.length; j++) {
         var P = pulses[j], ex = n.x - P.x, ey = n.y - P.y, dist = Math.sqrt(ex * ex + ey * ey);
-        var ring = P.amp * Math.exp(-((dist - P.r) * (dist - P.r)) / (2 * 20 * 20));
+        var ring = P.amp * Math.exp(-((dist - P.r) * (dist - P.r)) / (2 * 22 * 22));
         var r2 = P.r * 0.55, ring2 = 0.6 * P.amp * Math.exp(-((dist - r2) * (dist - r2)) / (2 * 15 * 15));
         var core = P.core * Math.exp(-(dist * dist) / (2 * 38 * 38));
         if (ring2 > v) v = ring2;
