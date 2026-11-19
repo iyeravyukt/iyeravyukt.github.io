@@ -396,3 +396,4 @@ body { overflow-x: clip; }
 .res-title .t-sub { font-weight: 400; font-size: .9rem; }
 .aw-list li b { font-weight: 600; color: var(--ink); }
 .aw-list .aw-yr { font-weight: 400; color: var(--muted); }
+.res-title .t-sub { font-weight: 600; font-size: .92rem; letter-spacing: .04em; word-spacing: .08em; color: var(--ink); opacity: .85; }
