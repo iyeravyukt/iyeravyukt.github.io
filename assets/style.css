@@ -393,3 +393,6 @@ body { overflow-x: clip; }
 .aw-list li { display: grid; grid-template-columns: minmax(0, 1fr) 3.2rem; column-gap: 20px; line-height: 1.4; }
 .aw-yr { font-weight: 600; white-space: nowrap; text-align: right; font-variant-numeric: tabular-nums; }
 .res-title .t-sub { display: block; font-size: .95rem; font-weight: 600; color: var(--muted); margin-top: 2px; }
+.res-title .t-sub { font-weight: 400; font-size: .9rem; }
+.aw-list li b { font-weight: 600; color: var(--ink); }
+.aw-list .aw-yr { font-weight: 400; color: var(--muted); }
