@@ -157,7 +157,7 @@
   var reduce = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
   var W = 0, H = 0, nodes = [], tris = [], stops, lineRGB, cap;
   var px = -1e4, py = -1e4, inside = false, lastMove = 0, raf = 0, pulses = [];
-  var SIGMA = sigma || 65, COOL = 0.972, iso = pre === '--heat-'; // isotherms on the header only
+  var SIGMA = sigma || 50, COOL = 0.972, iso = true; // isotherms on header and footer
 
   function hex(h) {
     h = h.trim().replace('#', '');
@@ -244,7 +244,7 @@
     // Click bursts: a heat ring expands from the click point and fades.
     pulses = pulses.filter(function (P) {
       var age = (now - P.t0) / 1000;
-      var f = Math.min(1, age / 0.9); P.r = 0.42 * H * (1 - (1 - f) * (1 - f)); // ring stops at ~7/8 of the header height across
+      var f = Math.min(1, age / 0.9); P.r = 0.26 * H * (1 - (1 - f) * (1 - f)); // ring incl. its glow stays within ~3/4 of the band height across
       P.amp = Math.max(0, 1 - Math.pow(age / 1.1, 3)); P.core = Math.max(0, 1 - age / 0.45); // ring stays strong while expanding, fades at the end
       return age < 1.1;
     });
@@ -256,9 +256,9 @@
       }
       for (var j = 0; j < pulses.length; j++) {
         var P = pulses[j], ex = n.x - P.x, ey = n.y - P.y, dist = Math.sqrt(ex * ex + ey * ey);
-        var ring = P.amp * Math.exp(-((dist - P.r) * (dist - P.r)) / (2 * 30 * 30));
-        var r2 = P.r * 0.55, ring2 = 0.6 * P.amp * Math.exp(-((dist - r2) * (dist - r2)) / (2 * 22 * 22));
-        var core = P.core * Math.exp(-(dist * dist) / (2 * 55 * 55));
+        var ring = P.amp * Math.exp(-((dist - P.r) * (dist - P.r)) / (2 * 20 * 20));
+        var r2 = P.r * 0.55, ring2 = 0.6 * P.amp * Math.exp(-((dist - r2) * (dist - r2)) / (2 * 15 * 15));
+        var core = P.core * Math.exp(-(dist * dist) / (2 * 38 * 38));
         if (ring2 > v) v = ring2;
         if (ring > v) v = ring;
         if (core > v) v = core;
@@ -350,5 +350,5 @@
     });
   });
   heat(document.querySelector('.hero-band'), '--heat-', '.hero-photo');
-  heat(document.querySelector('.site-footer'), '--fheat-', '.to-top', 49); // footer cursor heat ~3/4 the header's size
+  heat(document.querySelector('.site-footer'), '--fheat-', '.to-top', 38); // footer cursor heat ~3/4 the header's size
 })();
