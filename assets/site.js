@@ -147,7 +147,7 @@
   }
 
   /* ---------- Heat mesh: the cursor is a heat source ----------
-     A jittered triangular mesh (like an FEA mesh). Each node has a temperature; the cursor heats
+     A jittered triangular mesh for a 2D heat-conduction look. Each node has a temperature; the cursor heats
      nearby nodes and every node cools a little each frame, so the trail fades out behind the cursor.
      Colors come from the --heat-0..3 tokens, so the scale always matches the current theme. */
   function heat(band, pre, glowSel, sigma) {
@@ -157,7 +157,7 @@
   var reduce = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
   var W = 0, H = 0, nodes = [], tris = [], stops, lineRGB, cap;
   var px = -1e4, py = -1e4, inside = false, lastMove = 0, raf = 0, pulses = [];
-  var SIGMA = sigma || 85, COOL = 0.972;
+  var SIGMA = sigma || 85, COOL = 0.972, iso = pre === '--heat-'; // isotherms on the header only
 
   function hex(h) {
     h = h.trim().replace('#', '');
@@ -214,6 +214,27 @@
         ctx.fill();
       }
       ctx.strokeStyle = 'rgba(' + lineRGB + ',' + (0.07 + 0.2 * t).toFixed(3) + ')';
+      ctx.stroke();
+    }    if (iso) isotherms();
+  }
+  // Isotherms: contour lines at 10, 20 and 30 °C (t = .25, .5, .75 on the 0–40 °C ΔT scale), by marching triangles.
+  function isotherms() {
+    var levels = [0.25, 0.5, 0.75];
+    ctx.lineWidth = 1.1;
+    for (var L = 0; L < levels.length; L++) {
+      var lv = levels[L];
+      ctx.strokeStyle = 'rgba(' + lineRGB + ',' + (0.28 + 0.18 * L).toFixed(2) + ')';
+      ctx.beginPath();
+      for (var i = 0; i < tris.length; i++) {
+        var tr = tris[i], hit = 0, x0 = 0, y0 = 0;
+        for (var e = 0; e < 3; e++) {
+          var A = nodes[tr[e]], B = nodes[tr[(e + 1) % 3]], va = A.base + A.d, vb = B.base + B.d;
+          if ((va - lv) * (vb - lv) < 0) {
+            var f = (lv - va) / (vb - va), x = A.x + (B.x - A.x) * f, y = A.y + (B.y - A.y) * f;
+            if (hit) { ctx.moveTo(x0, y0); ctx.lineTo(x, y); } else { x0 = x; y0 = y; hit = 1; }
+          }
+        }
+      }
       ctx.stroke();
     }
   }
