@@ -157,7 +157,7 @@
   var reduce = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
   var W = 0, H = 0, nodes = [], tris = [], stops, lineRGB, cap;
   var px = -1e4, py = -1e4, inside = false, lastMove = 0, raf = 0, pulses = [];
-  var SIGMA = sigma || 85, COOL = 0.972, iso = pre === '--heat-'; // isotherms on the header only
+  var SIGMA = sigma || 65, COOL = 0.972, iso = pre === '--heat-'; // isotherms on the header only
 
   function hex(h) {
     h = h.trim().replace('#', '');
@@ -350,5 +350,5 @@
     });
   });
   heat(document.querySelector('.hero-band'), '--heat-', '.hero-photo');
-  heat(document.querySelector('.site-footer'), '--fheat-', '.to-top', 64); // footer cursor heat ~3/4 the header's size
+  heat(document.querySelector('.site-footer'), '--fheat-', '.to-top', 49); // footer cursor heat ~3/4 the header's size
 })();
