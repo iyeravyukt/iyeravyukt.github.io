@@ -73,7 +73,13 @@ h1, h2, h3, h4, p, ul { margin: 0; }
 .hero-credentials b { color: var(--h-ink); font-weight: 600; }
 .hero-credentials span { color: var(--h-ink-2); }
 .hero-photo { width: 190px; height: 190px; border-radius: 50%; object-fit: cover; flex: none; border: 3px solid var(--ring); background: var(--photo-bg); }
-.heat-legend { position: absolute; z-index: 1; right: 24px; bottom: 16px; display: flex; align-items: center; gap: 10px; font: 800 .95rem var(--head); letter-spacing: .02em; color: var(--navy); pointer-events: none; }
+.heat-legend { position: absolute; z-index: 1; right: 24px; bottom: 8px; display: flex; align-items: flex-start; gap: 10px; font: 800 .95rem var(--head); letter-spacing: .02em; color: var(--navy); pointer-events: none; }
+.heat-legend .scale { display: grid; gap: 3px; }
+.heat-legend .ticks { display: flex; justify-content: space-between; width: 160px; font: 600 .66rem/1 ui-monospace, SFMono-Regular, Menlo, monospace; letter-spacing: 0; opacity: .85; }
+.heat-hud { position: absolute; z-index: 1; left: 24px; bottom: 16px; display: flex; align-items: center; gap: 8px; font: 600 .72rem/1 ui-monospace, SFMono-Regular, Menlo, monospace; letter-spacing: .06em; text-transform: uppercase; color: var(--navy); opacity: .85; pointer-events: none; }
+.hud-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--heat-2); box-shadow: 0 0 0 3px color-mix(in srgb, var(--heat-1) 50%, transparent); }
+.hud-touch { display: none; }
+@media (hover: none) { .hud-fine { display: none; } .hud-touch { display: inline; } }
 .heat-legend i { width: 160px; height: 13px; border-radius: 3px; background: linear-gradient(90deg, var(--heat-0), var(--heat-1), var(--heat-2), var(--heat-3)); }
 
 /* Sections */
@@ -161,6 +167,7 @@ section { padding: 52px 0 12px; }
   .hero-id { flex-direction: column-reverse; align-items: flex-start; }
   .hero-photo { width: 132px; height: 132px; }
   .heat-legend { display: none; }
+  .heat-hud { left: 20px; bottom: 12px; font-size: .64rem; }
 }
 @media (max-width: 460px) { .seasons { grid-template-columns: minmax(0, 1fr); } }
 
@@ -184,7 +191,7 @@ section { padding: 52px 0 12px; }
 .wip-note b { color: var(--navy); }
 .wip-note + section { padding-top: 36px; }
 
-@media print { .site-footer canvas.heat, .hero-band canvas.heat, .heat-legend, .theme-toggle { display: none; } }
+@media print { .site-footer canvas.heat, .hero-band canvas.heat, .heat-legend, .heat-hud, .theme-toggle { display: none; } }
 
 /* Intro band (typing words left, plain text right), tinted strip between the hero and Research */
 .intro-band { background: var(--intro-bg); border-bottom: 1px solid var(--line); }

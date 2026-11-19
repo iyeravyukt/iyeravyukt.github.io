@@ -13,7 +13,7 @@
 <link rel="icon" href="favicon-32.png" sizes="32x32" type="image/png">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@500;600;700;800&family=Inter:wght@400;500;600&display=swap">
-<link rel="stylesheet" href="assets/style.css?v=37">
+<link rel="stylesheet" href="assets/style.css?v=38">
 </head>
 <body>
 <a class="skip" href="#main-content">Skip to content</a>
@@ -51,7 +51,8 @@
       <img class="hero-photo" src="images/headshot.jpg?v=6" alt="Avyukt P. Iyer" width="190" height="190">
     </div>
   </div>
-  <div class="heat-legend" aria-hidden="true"><span>ΔT</span><i></i></div>
+  <div class="heat-hud" aria-hidden="true"><span class="hud-dot"></span>Live · 2D heat conduction · <span class="hud-fine">move cursor to heat</span><span class="hud-touch">tap to heat</span></div>
+  <div class="heat-legend" aria-hidden="true"><span>ΔT</span><div class="scale"><i></i><div class="ticks"><span>0</span><span>10</span><span>20</span><span>30</span><span>40 °C</span></div></div></div>
 </div>
 
 <div class="intro-band">
@@ -391,6 +392,6 @@ document.querySelectorAll('.btn.toggle').forEach(function (b) {
   });
 });
 </script>
-<script src="assets/site.js?v=37" defer></script>
+<script src="assets/site.js?v=38" defer></script>
 </body>
 </html>
