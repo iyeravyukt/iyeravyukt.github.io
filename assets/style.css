@@ -369,3 +369,14 @@ body { overflow-x: clip; }
 .wip-copy i { color: var(--wip-ink); }
 .wip-copy a { color: var(--wip-ink); text-decoration: underline; text-underline-offset: 3px; font-weight: 600; }
 .wip-band + section { padding-top: 44px; }
+
+/* Header "How it works" button and the strip it opens below the header */
+.heat-hud .hud-sep{opacity:.8}
+.hud-how{pointer-events:auto;font:inherit;letter-spacing:inherit;text-transform:inherit;color:var(--navy);background:none;border:0;padding:0;cursor:pointer;text-decoration:underline;text-underline-offset:3px}
+.hud-how::after{content:" ▸"}
+.hud-how[aria-expanded="true"]::after{content:" ▾"}
+.heat-how{background:var(--surface,#fff);border-bottom:1px solid var(--line)}
+.how-inner{position:relative;max-width:1180px;margin:auto;padding:18px 40px 20px}
+.how-label{font:600 .72rem/1 ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:.06em;text-transform:uppercase;color:var(--navy);margin-bottom:8px}
+.heat-how p:not(.how-label){font:400 1rem/1.65 Georgia,"Times New Roman",serif;color:var(--ink)}
+@media (max-width:760px){.how-inner{padding:14px 20px 16px}.heat-how p{font-size:.88rem}}
