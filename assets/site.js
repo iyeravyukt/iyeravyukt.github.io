@@ -155,9 +155,9 @@
   if (!cv || !cv.getContext) return;
   var ctx = cv.getContext('2d');
   var reduce = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
-  var W = 0, H = 0, nodes = [], tris = [], stops, lineRGB, cap;
+  var W = 0, H = 0, nodes = [], tris = [], nbrs = [], next = [], stops, lineRGB, cap;
   var px = -1e4, py = -1e4, inside = false, lastMove = 0, raf = 0, pulses = [];
-  var SIGMA = sigma || 50, COOL = 0.972, iso = true; // isotherms on header and footer
+  var SIGMA = sigma || 50, COOL = 0.972, ALPHA = 0.22, iso = true; // isotherms on header and footer
 
   function hex(h) {
     h = h.trim().replace('#', '');
@@ -188,7 +188,7 @@
     // Resting heat: a soft glow around the headshot, so the mesh reads as a thermal plot before any interaction.
     var photo = band.querySelector(glowSel), gx = W * 0.75, gy = H * 0.55;
     if (photo) { var q = photo.getBoundingClientRect(); gx = q.left - r.left + q.width / 2; gy = q.top - r.top + q.height / 2; }
-    nodes = []; tris = [];
+    nodes = []; tris = []; nbrs = [];
     for (var y = 0; y < rows; y++) for (var x = 0; x < cols; x++) {
       var nx = (x - 0.5 + (y % 2) * 0.5) * s + rnd() * s * 0.35, ny = (y - 0.5) * h + rnd() * s * 0.35;
       var d2 = (nx - gx) * (nx - gx) + (ny - gy) * (ny - gy);
@@ -199,6 +199,11 @@
       if (y % 2 === 0) { tris.push([id(y, x), id(y, x + 1), id(y + 1, x)], [id(y, x + 1), id(y + 1, x + 1), id(y + 1, x)]); }
       else { tris.push([id(y, x), id(y + 1, x + 1), id(y + 1, x)], [id(y, x), id(y, x + 1), id(y + 1, x + 1)]); }
     }
+    // Mesh neighbors (shared triangle edges) for the conduction step.
+    var sets = nodes.map(function () { return {}; });
+    tris.forEach(function (t) { for (var e = 0; e < 3; e++) { var a = t[e], b = t[(e + 1) % 3]; sets[a][b] = 1; sets[b][a] = 1; } });
+    nbrs = sets.map(function (o) { return Object.keys(o).map(Number); });
+    next = new Float32Array(nodes.length);
   }
 
   function draw() {
@@ -248,8 +253,14 @@
       P.amp = Math.max(0, 1 - Math.pow(age / 1.1, 3)); P.core = Math.max(0, 1 - age / 0.45); // ring stays strong while expanding, fades at the end
       return age < 1.1;
     });
+    // Conduction: explicit step of dT/dt = alpha * laplacian(T) - h * T on the mesh graph.
     for (var i = 0; i < nodes.length; i++) {
-      var n = nodes[i], v = n.d * COOL;
+      var nb = nbrs[i], sum = 0;
+      for (var m = 0; m < nb.length; m++) sum += nodes[nb[m]].d;
+      next[i] = (nodes[i].d + ALPHA * (sum / nb.length - nodes[i].d)) * COOL;
+    }
+    for (i = 0; i < nodes.length; i++) {
+      var n = nodes[i], v = next[i];
       if (inside) {
         var dx = n.x - px, dy = n.y - py, g = Math.exp(-(dx * dx + dy * dy) * k);
         if (g > v) v = g;
@@ -349,6 +360,14 @@
       setTimeout(function () { window.scrollTo({ top: 0, behavior: still ? 'auto' : 'smooth' }); }, still ? 0 : 350);
     });
   });
+  // "How it works" panel inside the header.
+  var howBtn = document.querySelector('.hud-how'), how = document.getElementById('heat-how');
+  if (howBtn && how) {
+    var setHow = function (o) { how.hidden = !o; howBtn.setAttribute('aria-expanded', String(o)); };
+    howBtn.addEventListener('click', function () { setHow(how.hidden); });
+    document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && !how.hidden) setHow(false); });
+    [howBtn, how].forEach(function (el) { el.addEventListener('pointerdown', function (e) { e.stopPropagation(); }); });
+  }
   heat(document.querySelector('.hero-band'), '--heat-', '.hero-photo');
   heat(document.querySelector('.site-footer'), '--fheat-', '.to-top', 38); // footer cursor heat ~3/4 the header's size
 })();
