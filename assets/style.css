@@ -380,3 +380,15 @@ body { overflow-x: clip; }
 .how-label{font:600 .72rem/1 ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:.06em;text-transform:uppercase;color:var(--navy);margin-bottom:8px}
 .heat-how p:not(.how-label){font:400 1rem/1.65 Georgia,"Times New Roman",serif;color:var(--ink)}
 @media (max-width:760px){.how-inner{padding:14px 20px 16px}.heat-how p{font-size:.88rem}}
+
+/* Research/Projects cards (résumé style, Overview + Awards dropdowns) */
+.proj .project-media-strip.n1 .project-media { aspect-ratio: 16 / 9; }
+.proj .proj-result { color: var(--ink); line-height: 1.5; margin: 0; }
+.proj .proj-actions { display: flex; flex-direction: column; align-items: center; gap: 12px; margin-top: 2px; }
+.proj .proj-btns { display: flex; justify-content: center; gap: 24px; width: 100%; }
+.proj .proj-btns .ptog { flex: 0 1 160px; text-align: center; }
+.proj .proj-links { display: flex; flex-wrap: wrap; justify-content: center; gap: 6px 28px; width: 100%; font-size: .9rem; margin: 0; }
+.proj .proj-links a { font-weight: 600; }
+.aw-list { list-style: none; margin: 6px 0 0; padding: 0; display: grid; gap: 7px; }
+.aw-list li { display: flex; justify-content: space-between; gap: 16px; line-height: 1.4; }
+.aw-yr { font-weight: 600; white-space: nowrap; }
