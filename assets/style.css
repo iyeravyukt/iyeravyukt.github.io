@@ -407,3 +407,18 @@ a.t-sub:hover { text-decoration: underline; text-underline-offset: 3px; }
 /* Links on Research/Projects cards look like links: blue + underlined */
 a.t-sub, .proj .proj-links a { color: var(--link); text-decoration: underline; text-underline-offset: 3px; text-decoration-thickness: 1px; }
 a.t-sub:hover, .proj .proj-links a:hover { text-decoration-thickness: 2px; }
+.proj .proj-skills { margin-top: 2px; }
+.proj .proj-skills .skill-fill { justify-content: center; }
+/* Keep research skills at exactly 3 rows on tablets/laptops: scale bubbles with card width */
+@media (min-width: 761px) {
+  .proj .proj-skills { container-type: inline-size; }
+  .proj .proj-skills .skill-fill { gap: .6em; font-size: clamp(.72rem, calc(100cqw / 37.6), .82rem); }
+  .proj .proj-skills { gap: .6em; }
+  .proj .proj-skills .skill-fill li { font-size: 1em; padding: .53em 1.07em; }
+}
+@media (max-width: 760px) {
+  .proj .proj-skills { display: grid; grid-template-columns: 1fr; gap: 6px; }
+  .proj .proj-skills .skill-fill { display: flex; justify-content: center; gap: 6px; }
+  .proj .proj-skills .skill-fill li { flex: 0 1 auto; font-size: .72rem; padding: 6px 10px; }
+}
+@container (max-width: 440px) { .proj .proj-skills .skill-fill li { flex: 0 1 auto; } }
