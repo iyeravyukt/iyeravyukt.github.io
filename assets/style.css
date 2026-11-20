@@ -422,3 +422,6 @@ a.t-sub:hover, .proj .proj-links a:hover { text-decoration-thickness: 2px; }
   .proj .proj-skills .skill-fill li { flex: 0 1 auto; font-size: .72rem; padding: 6px 10px; }
 }
 @container (max-width: 440px) { .proj .proj-skills .skill-fill li { flex: 0 1 auto; } }
+/* Project pages: band sits outside a container, so line its text up with the .detail column */
+body > .wip-band { margin: 0; padding: 26px max(40px, calc(50vw - 410px)) 28px; }
+@media (max-width: 760px) { body > .wip-band { padding: 22px 20px 24px; } }
