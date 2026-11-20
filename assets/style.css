@@ -397,3 +397,8 @@ body { overflow-x: clip; }
 .aw-list li b { font-weight: 600; color: var(--ink); }
 .aw-list .aw-yr { font-weight: 400; color: var(--muted); }
 .res-title .t-sub { font-weight: 600; font-size: .92rem; letter-spacing: .04em; word-spacing: .08em; color: var(--ink); opacity: .85; }
+/* 3D model thumbnails (Research): taller 4:3 box so full models fit */
+#research .proj .project-media-strip.n1 .project-media { aspect-ratio: 4 / 3; }
+.model-media { background: linear-gradient(180deg, var(--surface), var(--ph)); }
+.model-media model-viewer { width: 100%; height: 100%; --poster-color: transparent; }
+.model-hint { position: absolute; right: 10px; bottom: 8px; font-size: .75rem; color: var(--muted); pointer-events: none; }
