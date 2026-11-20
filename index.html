@@ -407,13 +407,21 @@ document.querySelectorAll('.btn.ptog').forEach(function (b) {
   var SPEED = 18, IDLE = 2000, t0 = performance.now();
   var mvs = [].slice.call(document.querySelectorAll('model-viewer[data-yaw]'));
   mvs.forEach(function (m) {
-    m.lastUser = -1e9;
+    m.lastUser = -1e9; m.held = false;
+    function down() { m.held = true; m.lastUser = performance.now(); }
+    function up() { if (m.held) { m.held = false; m.lastUser = performance.now(); } }
+    m.addEventListener('pointerdown', down);
+    m.addEventListener('touchstart', down, { passive: true });
+    m.addEventListener('wheel', function () { m.lastUser = performance.now(); }, { passive: true });
+    window.addEventListener('pointerup', up);
+    window.addEventListener('pointercancel', up);
+    window.addEventListener('touchend', up);
     m.addEventListener('camera-change', function (e) { if (e.detail && e.detail.source === 'user-interaction') m.lastUser = performance.now(); });
   });
   function tick(now) {
     var ang = ((now - t0) / 1000) * SPEED;
     mvs.forEach(function (m) {
-      if (!m.loaded || now - m.lastUser < IDLE) return;
+      if (!m.loaded || m.held || now - m.lastUser < IDLE) return;
       var o = m.getCameraOrbit();
       m.cameraOrbit = (parseFloat(m.dataset.yaw) + ang) + 'deg ' + (o.phi * 180 / Math.PI) + 'deg ' + o.radius + 'm';
     });
