@@ -1,0 +1,205 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>TEND Slides · Avyukt P. Iyer</title>
+<meta name="description" content="TEND pitch deck from MakeCU 2026: a Cartesian gripper with tactile and vision assistance.">
+<link rel="icon" href="../../favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400..800;1,400..800&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%;background:#11161c;color:#e9edf1;font-family:Inter,system-ui,sans-serif;overflow:hidden}
+.bar{position:fixed;left:0;right:0;top:0;height:52px;display:flex;align-items:center;justify-content:space-between;padding:0 16px;z-index:5;font-size:14px}
+.bar a{color:#cfe0f2;text-decoration:underline;text-underline-offset:3px}
+.bar .t{font-weight:600;opacity:.85}
+.viewport{position:fixed;top:52px;bottom:64px;left:0;right:0;display:flex;align-items:center;justify-content:center}
+.stage{position:relative;width:1920px;height:1080px;flex:none;transform-origin:center center;box-shadow:0 10px 40px rgba(0,0,0,.45);border-radius:6px;overflow:hidden}
+.slide{position:absolute;inset:0;width:1920px;height:1080px;opacity:0;visibility:hidden;transition:opacity .35s ease,visibility .35s;overflow:hidden;color:#161616}
+.slide.on{opacity:1;visibility:visible}
+.slide h1,.slide h2,.slide h3,.slide p{margin:0}
+.slide u{text-decoration-thickness:3px;text-underline-offset:8px}
+.slide video{display:block;object-fit:contain}
+.xs-line{display:block}
+.xs-arrow{display:block;clip-path:polygon(0 35%,62% 35%,62% 0,100% 50%,62% 100%,62% 65%,0 65%)}
+.nav{position:fixed;left:0;right:0;bottom:0;height:64px;display:flex;align-items:center;justify-content:center;gap:18px;z-index:5}
+.nav button{background:#1f2832;color:#e9edf1;border:1px solid #33414f;border-radius:999px;height:40px;min-width:44px;padding:0 16px;font:600 14px Inter,sans-serif;cursor:pointer}
+.nav button:hover{background:#2a3644}
+.nav button:disabled{opacity:.35;cursor:default}
+.count{font-variant-numeric:tabular-nums;font-size:14px;min-width:60px;text-align:center;opacity:.85}
+.hint{position:fixed;right:16px;bottom:22px;font-size:12px;opacity:.5}
+@media (max-width:640px){.hint{display:none}.bar .t{display:none}}
+</style>
+</head>
+<body>
+<div class="bar"><a href="../tend.html">← TEND project page</a><span class="t">TEND · MakeCU 2026 pitch deck</span><a href="../../index.html#project-tend">Home</a></div>
+<div class="viewport" id="vp"><div class="stage" id="stage">
+<section class="slide" id="cover" data-transition="fade" style="background:#fbfbf8">
+  <p id="p7c19fafff561r0-ab951409" style="position:absolute; top:53.17px; left:50%; width:740px; font-family:'EB Garamond', Georgia, serif; font-size:60px; letter-spacing:8px; text-align:center; text-transform:uppercase; color:#2f5a44; transform:translateX(-50%)"><span style="color:#161616"><b>MakeCU 2026 </b></span><u>Healthcare</u></p>
+  <h1 id="p7c19fafff561r1-ab951409" style="position:absolute; top:322.5px; left:50%; width:687px; font-family:'EB Garamond', Georgia, serif; font-size:240px; font-weight:800; line-height:1; text-align:center; color:#161616; transform:translateX(-50%)">TEND</h1>
+  <div class="xs-line" id="p7c19fafff561r2-ab951409" style="position:absolute; top:594.5px; left:509.51px; width:900px; height:3px; background:#161616"></div>
+  <p id="p7c19fafff561r3-ab951409" style="position:absolute; top:629.5px; left:504.51px; width:911px; font-family:'EB Garamond', Georgia, serif; font-size:56px; font-style:italic; text-align:center; color:#2f5a44">A dexterous hand for the hands that need it.</p>
+  <p id="p7c19fafff561r4-ab951409" style="position:absolute; top:834.22px; left:50%; width:776px; font-family:'EB Garamond', Georgia, serif; font-size:60px; text-align:center; color:#262624; transform:translateX(-50%)"><b>Cartesian Gripper with Tactile &amp; Vision Assistance</b></p>
+  
+</section>
+
+<section class="slide" id="hook" data-transition="fade" style="display:flex; flex-direction:column; gap:48px; align-items:center; justify-content:center; padding:128px; background:#161616">
+  <h1 style="font-family:serif; font-size:140px; font-weight:500; font-style:italic; line-height:1.5; text-align:center; color:#fbfbf8">If your hands stop working,<br>what happens to your everyday life?</h1>
+  
+</section>
+
+<section class="slide" id="why" data-transition="fade" style="background:#fbfbf8">
+  <p id="p25a458f26ec5r0-56e13065" style="position:absolute; top:128px; left:50%; width:798.87px; font-family:'EB Garamond', Georgia, serif; font-size:70px; letter-spacing:8px; text-align:center; text-transform:uppercase; color:#2f5a44; transform:translateX(-50%)"><b>Why we built it</b></p>
+  <h2 id="p25a458f26ec5r1-56e13065" style="position:absolute; top:343.79px; left:50%; width:1665px; font-family:'EB Garamond', Georgia, serif; font-size:96px; font-weight:400; line-height:1.15; text-align:center; color:#161616; transform:translateX(-50%)">As Avyukt’s grandparents grew older, their <u>hands grew less steady</u> and their <u>grip weaker</u>.</h2>
+  <p id="p25a458f26ec5r2-56e13065" style="position:absolute; top:789.95px; left:50%; width:1318px; font-family:'EB Garamond', Georgia, serif; font-size:70px; font-style:normal; text-align:center; color:#262624; transform:translateX(-50%)">Opening a pill bottle often meant <u>waiting for someone else to help</u>.</p>
+  
+</section>
+
+<section class="slide" id="stats" data-transition="fade" style="background:#f2efe9">
+  <p id="e1-tgpy3w" style="position:absolute; right:128px; bottom:64px; left:128px; font-family:'EB Garamond', Georgia, serif; font-size:32px; text-align:center; color:#3a3a38">Sources: CDC; Swedish Rheumatism Association survey</p>
+  <h2 id="p2afdd9772d88r0-71ac9fe1" style="position:absolute; top:128px; left:489px; width:943px; font-family:'EB Garamond', Georgia, serif; font-size:96px; font-weight:700; text-align:center; color:#161616">They are far from alone</h2>
+  <div id="p2afdd9772d88r1_0-71ac9fe1" style="position:absolute; top:320.89px; left:128px; width:392px; height:438px; display:flex; flex-direction:column; gap:12px; align-items:center; padding:40px 24px; background:#fbfbf8; border:1px solid #dcd7ce; border-radius:16px">
+    <p style="font-family:'EB Garamond', Georgia, serif; font-size:120px; font-weight:800; line-height:1; text-align:center; color:#161616">50M+</p>
+    <p style="font-family:'EB Garamond', Georgia, serif; font-size:40px; font-style:normal; text-align:center; color:#262624">US adults have arthritis</p>
+  </div>
+  <div id="p2afdd9772d88r1_1-71ac9fe1" style="position:absolute; top:320.89px; left:552px; width:392px; height:438px; display:flex; flex-direction:column; gap:12px; align-items:center; padding:40px 24px; background:#fbfbf8; border:1px solid #dcd7ce; border-radius:16px">
+    <p style="font-family:'EB Garamond', Georgia, serif; font-size:120px; font-weight:800; line-height:1; text-align:center; color:#161616">23M</p>
+    <p style="font-family:'EB Garamond', Georgia, serif; font-size:40px; font-style:normal; text-align:center; color:#262624">are limited in everyday activities</p>
+  </div>
+  <div id="p2afdd9772d88r1_2-71ac9fe1" style="position:absolute; top:320.89px; left:976px; width:392px; height:438px; display:flex; flex-direction:column; gap:12px; align-items:center; padding:40px 24px; background:#fbfbf8; border:1px solid #dcd7ce; border-radius:16px">
+    <p style="font-family:'EB Garamond', Georgia, serif; font-size:120px; font-weight:800; line-height:1; text-align:center; color:#2f5a44">92%</p>
+    <p style="font-family:'EB Garamond', Georgia, serif; font-size:40px; font-style:normal; text-align:center; color:#262624">with rheumatic conditions struggle to open medicine packaging</p>
+  </div>
+  <div id="p2afdd9772d88r1_3-71ac9fe1" style="position:absolute; top:50%; right:128px; width:392px; height:438px; display:flex; flex-direction:column; gap:12px; align-items:center; padding:40px 24px; background:#fbfbf8; border:1px solid #dcd7ce; border-radius:16px; transform:translateY(-50%)">
+    <p style="font-family:'EB Garamond', Georgia, serif; font-size:120px; font-weight:800; line-height:1; text-align:center; color:#161616">22%</p>
+    <p style="font-family:'EB Garamond', Georgia, serif; font-size:40px; font-style:normal; text-align:center; color:#262624">struggle every single day</p>
+  </div>
+  
+</section>
+
+<section class="slide" id="gap" data-transition="fade" style="background:#fbfbf8">
+  <h2 id="peed13366fecdr0-dc54dbff" style="position:absolute; top:264px; left:147px; width:1626px; font-family:'EB Garamond', Georgia, serif; font-size:96px; font-weight:700; text-align:center; color:#161616">Robotic help exists, but few can <u>afford</u> it</h2>
+  <p id="peed13366fecdr1-dc54dbff" style="position:absolute; top:406px; left:677px; width:567px; font-family:'EB Garamond', Georgia, serif; font-size:52px; font-style:normal; text-align:center; color:#262624">Assistive robot arms can cost</p>
+  <p id="peed13366fecdr2-dc54dbff" style="position:absolute; top:511px; left:618px; width:684px; font-family:'EB Garamond', Georgia, serif; font-size:200px; font-weight:800; line-height:1; text-align:center; color:#2f5a44">$35,000</p>
+  <p id="peed13366fecdr3-dc54dbff" style="position:absolute; top:879.04px; left:457px; width:1006px; font-family:'EB Garamond', Georgia, serif; font-size:52px; font-style:normal; text-align:center; color:#262624"><b>Even the cheapest commercial arm is about </b><span style="color:#3d6b52"><b>$5,000.</b></span></p>
+  
+</section>
+
+<section class="slide" id="solution" data-transition="fade" style="background:#fbfbf8">
+  <video class="v" muted loop playsinline preload="none" aria-label="TEND full assembly render: four sliding fingers on a laser-cut backplate with a webcam above" style="position:absolute; top:50%; left:57.65px; width:968.36px; height:712.59px; background:#ffffff; border:1px solid #dcd7ce; border-radius:16px; object-fit:contain; transform:translateY(-50%)" src="assembly.mp4"></video>
+  <p id="p9ccb10f57f01r1_0-3824d4f2" style="position:absolute; top:113.71px; left:1233.7px; width:510.58px; font-family:'EB Garamond', Georgia, serif; font-size:50px; letter-spacing:8px; text-align:center; text-transform:uppercase; color:#2f5a44"><b>So we built...</b></p>
+  <h1 id="94c36357" style="position:absolute; top:323px; left:1211.99px; width:554px; font-family:'EB Garamond', Georgia, serif; font-size:160px; font-weight:800; line-height:1; letter-spacing:24px; text-align:center; color:#161616">TEND</h1>
+  <p id="4acc54ce" style="position:absolute; top:511px; left:1108.99px; width:760px; font-family:'EB Garamond', Georgia, serif; font-size:40px; line-height:1.4; text-align:center; color:#161616">A Cartesian gripper whose four fingers each slide independently, so it can <b>push, pull, twist, squeeze, and hold</b>, guided by touch and vision.</p>
+  
+</section>
+
+<section class="slide" id="inside" data-transition="fade" style="background:#fbfbf8">
+  <p id="37dbd5ef" style="position:absolute; top:977.45px; left:50%; width:1225.2px; font-family:'EB Garamond', Georgia, serif; font-size:44px; line-height:1.35; text-align:center; color:#161616; transform:translateX(-50%)">Designed in Fusion 360, with <b>17 printed parts</b> and a laser-cut stand.</p>
+  <video class="v" muted loop playsinline preload="none" aria-label="Labelled exploded view of TEND: backplate, rails, finger carriages, sliding tips, servos and herringbone pinions" style="position:absolute; bottom:128px; left:50%; width:1833.61px; height:925.4px; background:#ffffff; border:1px solid #dcd7ce; border-radius:16px; object-fit:contain; transform:translateX(-50%)" src="exploded.mp4"></video>
+  
+</section>
+
+<section class="slide" id="how" data-transition="fade" style="background:#f2efe9">
+  <h2 id="p2667d96b2404r0-b972fce1" style="position:absolute; top:60.32px; left:50%; width:838.05px; font-family:'EB Garamond', Georgia, serif; font-size:96px; font-weight:700; text-align:center; color:#161616; transform:translateX(-50%)">How Does It Work?</h2>
+  <video class="v" muted loop playsinline preload="none" aria-label="Simulation of TEND gripping a pill bottle, active fingers highlighted" style="position:absolute; top:calc(50% + 49.78px); left:37.28px; width:1050.71px; height:712.44px; background:#eef0f3; border:1px solid #dcd7ce; border-radius:16px; object-fit:contain; transform:translateY(-50%)" src="twist-sim.mp4"></video>
+  <div id="5836d4ca" style="position:absolute; top:235.4px; left:1155.43px; width:700px; height:171px; display:flex; flex-direction:column; padding:28px 32px; background:#fbfbf8; border:1px solid #dcd7ce; border-radius:16px">
+    <h3 style="font-family:'EB Garamond', Georgia, serif; font-size:52px; font-weight:700; text-align:center; color:#161616">1 · Hold</h3>
+    <p style="font-family:'EB Garamond', Georgia, serif; font-size:36px; text-align:center; color:#262624">The bottom two fingers grip the bottle steady.</p>
+  </div>
+  <div id="35961136" style="position:absolute; top:50%; left:1155.43px; width:700px; height:221px; display:flex; flex-direction:column; padding:28px 32px; background:#fbfbf8; border:1px solid #dcd7ce; border-radius:16px; transform:translateY(-50%)">
+    <h3 style="font-family:'EB Garamond', Georgia, serif; font-size:52px; font-weight:700; text-align:center; color:#2f5a44">2 · Twist</h3>
+    <p style="font-family:'EB Garamond', Georgia, serif; font-size:36px; text-align:center; color:#262624">The top two slide in opposite directions to turn the cap.</p>
+  </div>
+  <div id="8566ea58" style="position:absolute; top:674.4px; left:1155.43px; width:700px; height:221px; display:flex; flex-direction:column; padding:28px 32px; background:#fbfbf8; border:1px solid #dcd7ce; border-radius:16px">
+    <h3 style="font-family:'EB Garamond', Georgia, serif; font-size:52px; font-weight:700; text-align:center; color:#161616">3 · Reset and repeat</h3>
+    <p style="font-family:'EB Garamond', Georgia, serif; font-size:36px; text-align:center; color:#262624">Release, recenter, and twist again until the cap is off.</p>
+  </div>
+  
+</section>
+
+<section class="slide" id="electronics" data-transition="fade" style="background:#f2efe9">
+  <h2 id="pb07393c8a4d9r0-e7b7ed86" style="position:absolute; bottom:952px; left:50%; width:440px; font-family:'EB Garamond', Georgia, serif; font-size:96px; font-weight:700; text-align:center; color:#161616; transform:translateX(-50%)">Electronics</h2>
+  <img loading="lazy" src="wiring.jpg" alt="Wiring diagram: laptop to ESP32-C6, PCA9685 driving seven servos, two INA219 current sensors, Arduino Nano reading the FlexiTac tactile sensor, Logitech webcam" id="pb07393c8a4d9r1-e7b7ed86" data-crop="1 50% 100%" style="position:absolute; top:128px; left:50%; width:1856.13px; height:932.17px; background:#ffffff; border:1px solid #dcd7ce; border-radius:16px; transform:translateX(-50%)">
+  
+</section>
+
+<section class="slide" id="sensing" data-transition="fade" style="background:#fbfbf8">
+  <h2 id="p25c93c06b39er0-697ce771" style="position:absolute; top:38.65px; left:50%; width:877px; font-family:'EB Garamond', Georgia, serif; font-size:96px; font-weight:700; text-align:center; color:#161616; transform:translateX(-50%)">Feel · Measure · Verify</h2>
+  <video class="v" muted loop playsinline preload="none" aria-label="Live tactile pressure map from the 16 by 32 sensor, showing a red contact patch" style="position:absolute; top:210px; left:128px; width:520px; height:520px; background:#ffffff; border:1px solid #dcd7ce; border-radius:12px; object-fit:contain" src="tactile.mp4"></video>
+  <h3 id="18b7c666" style="position:absolute; top:752px; left:128px; width:520px; font-family:'EB Garamond', Georgia, serif; font-size:48px; font-weight:700; text-align:center; color:#2f5a44">Tactile map</h3>
+  <p id="882b02ce" style="position:absolute; top:822px; left:128px; width:520px; font-family:'EB Garamond', Georgia, serif; font-size:34px; text-align:center; color:#262624">16 × 32 array on the gripping finger, about 18 fps: where and how hard it presses</p>
+  <video class="v" muted loop playsinline preload="none" aria-label="Live servo angles and squeeze-current graph for the bottom and top squeeze servos" style="position:absolute; top:210px; left:700px; width:520px; height:520px; background:#ffffff; border:1px solid #dcd7ce; border-radius:12px; object-fit:contain" src="current.mp4"></video>
+  <h3 id="33b3e51f" style="position:absolute; top:752px; left:700px; width:520px; font-family:'EB Garamond', Georgia, serif; font-size:48px; font-weight:700; text-align:center; color:#2f5a44">Current sensing</h3>
+  <p id="28367616" style="position:absolute; top:822px; left:700px; width:520px; font-family:'EB Garamond', Georgia, serif; font-size:34px; text-align:center; color:#262624">Servo current estimates loading, with an automatic cutoff</p>
+  <img loading="lazy" src="gemini.jpg" alt="Gemini panel identifying a pill bottle with cap on at 99% confidence and planning the unscrew motions" id="6c4a9b3c" style="position:absolute; top:210px; left:1272px; width:520px; height:520px; background:#ffffff; border:1px solid #dcd7ce; border-radius:12px; object-fit:contain">
+  <h3 id="1d5703ce" style="position:absolute; top:752px; left:1272px; width:520px; font-family:'EB Garamond', Georgia, serif; font-size:48px; font-weight:700; text-align:center; color:#2f5a44">Gemini vision</h3>
+  <p id="cb787624" style="position:absolute; top:822px; left:1272px; width:520px; font-family:'EB Garamond', Georgia, serif; font-size:34px; text-align:center; color:#262624">Identifies the object and picks each motion</p>
+  
+</section>
+
+<section class="slide" id="result" data-transition="fade" style="background:#F2EFE9;color:#161616;font-family:'EB Garamond', Georgia, serif;padding:128px;display:flex;flex-direction:column;align-items:center;gap:40px">
+<h2 style="font-size:96px;font-weight:700;text-align:center">From sketch to prototype in one weekend</h2>
+<div style="display:flex;flex-direction:row;gap:48px;justify-content:center">
+<div style="display:flex;flex-direction:column;gap:16px;align-items:center"><video class="v" muted loop playsinline preload="none" aria-label="Simulation of TEND twisting an eye-drop bottle" style="width:760px;height:440px;object-fit:contain;border:1px solid #DCD7CE;border-radius:16px;background:#EEF0F3" src="eyedrop-sim.mp4"></video><p style="font-size:40px;text-align:center"><b>Simulation:</b> full routine, about 6 s per cycle</p></div>
+<div style="display:flex;flex-direction:column;gap:16px;align-items:center"><video class="v" muted loop playsinline preload="none" aria-label="TEND prototype holding a bottle while the top fingers twist its cap by hand" style="width:760px;height:440px;object-fit:cover;border:1px solid #DCD7CE;border-radius:16px" src="prototype.mp4"></video><p style="font-size:40px;text-align:center"><b>Prototype:</b> hand-actuated, every sensor streaming live</p></div>
+</div>
+
+</section>
+
+<section class="slide" id="cost" data-transition="fade" style="background:#fbfbf8">
+  <h2 id="p65cebe3d66dar0-23dd8d01" style="position:absolute; top:42.18px; left:50%; width:809px; font-family:'EB Garamond', Georgia, serif; font-size:96px; font-weight:700; text-align:center; color:#161616; transform:translateX(-50%)">TEND &lt;$200!</h2>
+  <img loading="lazy" src="cost.png" alt="Bill of materials chart: parts total under $200, about 25 times cheaper than a $5,000 entry-level commercial robot arm" id="p65cebe3d66dar1-23dd8d01" style="position:absolute; top:201.46px; left:50%; width:1741.67px; height:809.54px; background:#ffffff; border:1px solid #dcd7ce; border-radius:16px; object-fit:contain; transform:translateX(-50%)">
+  
+</section>
+
+<section class="slide" id="next" data-transition="fade" style="background:#f2efe9">
+  <h2 id="pbb74029176d5r0-0c5874cb" style="position:absolute; top:96px; left:503px; width:915px; font-family:'EB Garamond', Georgia, serif; font-size:104px; font-weight:800; letter-spacing:12px; text-align:center; text-transform:uppercase; color:#161616">What’s next?</h2>
+  <div class="xs-line" id="pbb74029176d5r1-0c5874cb" style="position:absolute; top:244px; left:850px; width:220px; height:6px; background:#3d6b52"></div>
+  <div id="pbb74029176d5r2_0-0c5874cb" style="position:absolute; top:367.49px; left:128.01px; width:1664px; height:156px; display:flex; flex-direction:row; gap:40px; align-items:center; padding:32px 48px; background:#fbfbf8; border:1px solid #dcd7ce; border-radius:16px">
+    <p style="min-width:max-content; font-family:'EB Garamond', Georgia, serif; font-size:64px; font-weight:800; color:#2f5a44">01</p>
+  </div>
+  <div id="pbb74029176d5r2_1-0c5874cb" style="position:absolute; top:546.49px; left:128.01px; width:1664px; height:156px; display:flex; flex-direction:row; gap:40px; align-items:center; padding:32px 48px; background:#fbfbf8; border:1px solid #dcd7ce; border-radius:16px">
+    <p style="min-width:max-content; font-family:'EB Garamond', Georgia, serif; font-size:64px; font-weight:800; color:#2f5a44">02</p>
+  </div>
+  <div id="pbb74029176d5r2_2-0c5874cb" style="position:absolute; top:725.49px; left:50%; width:1664px; height:156px; display:flex; flex-direction:row; gap:40px; align-items:center; padding:32px 48px; background:#fbfbf8; border:1px solid #dcd7ce; border-radius:16px; transform:translateX(-50%)">
+    <p style="min-width:max-content; font-family:'EB Garamond', Georgia, serif; font-size:64px; font-weight:800; color:#2f5a44">03</p>
+  </div>
+  <div class="xs-arrow" id="06ee4857" style="position:absolute; top:421.29px; left:367px; width:96px; height:48px; background:#3d6b52"></div>
+  <h3 id="f4f43480" style="position:absolute; top:414.11px; left:577.72px; width:1322px; font-family:'EB Garamond', Georgia, serif; font-size:52px; font-weight:700; color:#161616">Stronger &amp; Reliable Servos</h3>
+  <div class="xs-arrow" id="78d47670" style="position:absolute; top:600.29px; left:367px; width:96px; height:48px; background:#3d6b52"></div>
+  <h3 id="9a29cde8" style="position:absolute; top:593.11px; left:577.72px; width:1322px; font-family:'EB Garamond', Georgia, serif; font-size:52px; font-weight:700; color:#161616">Real-World Testing</h3>
+  <div class="xs-arrow" id="6f23ca45" style="position:absolute; top:779.29px; left:367px; width:96px; height:48px; background:#3d6b52"></div>
+  <h3 id="53838532" style="position:absolute; top:772.11px; left:577.72px; width:1322px; font-family:'EB Garamond', Georgia, serif; font-size:52px; font-weight:700; color:#161616">Increase Product Scope</h3>
+  
+</section>
+
+<section class="slide" id="close" data-transition="fade" style="background:#161616">
+  <h1 id="pc2c104e842a3r1_1-0648eccb" style="position:absolute; top:40px; left:50%; width:700px; font-family:'EB Garamond', Georgia, serif; font-size:110px; font-weight:800; line-height:1; letter-spacing:20px; text-align:center; color:#fbfbf8; transform:translateX(-50%)">TEND</h1>
+  <p id="bdeb2751" style="position:absolute; top:160px; left:50%; width:1000px; font-family:'EB Garamond', Georgia, serif; font-size:44px; font-style:normal; text-align:center; color:#9ccbb0; transform:translateX(-50%)">A dexterous hand for the hands that need it.</p>
+  <img loading="lazy" src="team.jpg" alt="The TEND team at their workbench at MakeCU 2026" id="pc2c104e842a3r0-0648eccb" style="position:absolute; top:250px; left:50%; width:1100px; height:600px; border-radius:16px; object-fit:cover; transform:translateX(-50%)">
+  <p id="c5b4d39c" style="position:absolute; top:885px; left:50%; width:1610px; font-family:'EB Garamond', Georgia, serif; font-size:52px; font-style:normal; line-height:1.3; text-align:center; color:#fbfbf8; transform:translateX(-50%)">“One bottle cap can decide whether someone takes their medication on their own, or waits for help.”</p>
+  
+</section>
+
+</div></div>
+<div class="nav"><button id="prev" aria-label="Previous slide">←</button><span class="count" id="count">1 / 14</span><button id="next" aria-label="Next slide">→</button><button id="fs" aria-label="Full screen">Full screen</button></div>
+<span class="hint">Arrow keys or swipe</span>
+<script>
+(function(){
+var slides=[].slice.call(document.querySelectorAll('.slide')),i=0,st=document.getElementById('stage'),vp=document.getElementById('vp');
+function fit(){var s=Math.min(vp.clientWidth/1920,vp.clientHeight/1080)*0.98;st.style.transform='scale('+s+')';st.style.margin=((1080*s-1080)/2)+'px '+((1920*s-1920)/2)+'px'}
+function show(n){i=Math.max(0,Math.min(slides.length-1,n));slides.forEach(function(s,k){s.classList.toggle('on',k===i);s.querySelectorAll('video').forEach(function(v){if(k===i){v.preload='auto';v.currentTime=0;var p=v.play();if(p)p.catch(function(){})}else v.pause()})});
+ var nx=slides[i+1];if(nx)nx.querySelectorAll('video').forEach(function(v){v.preload='auto'});
+ document.getElementById('count').textContent=(i+1)+' / '+slides.length;document.getElementById('prev').disabled=i===0;document.getElementById('next').disabled=i===slides.length-1;
+ try{history.replaceState(null,'','#'+(i+1))}catch(e){}}
+document.getElementById('prev').onclick=function(){show(i-1)};document.getElementById('next').onclick=function(){show(i+1)};
+document.getElementById('fs').onclick=function(){var d=document.documentElement;if(!document.fullscreenElement){if(d.requestFullscreen)d.requestFullscreen()}else document.exitFullscreen()};
+document.addEventListener('keydown',function(e){if(e.key==='ArrowRight'||e.key==='PageDown'||e.key===' '){e.preventDefault();show(i+1)}else if(e.key==='ArrowLeft'||e.key==='PageUp'){e.preventDefault();show(i-1)}else if(e.key==='Home')show(0);else if(e.key==='End')show(slides.length-1)});
+var x0=null;vp.addEventListener('touchstart',function(e){x0=e.touches[0].clientX},{passive:true});vp.addEventListener('touchend',function(e){if(x0===null)return;var dx=e.changedTouches[0].clientX-x0;if(Math.abs(dx)>40)show(i+(dx<0?1:-1));x0=null});
+vp.addEventListener('click',function(e){if(e.target.closest('a'))return;var r=vp.getBoundingClientRect();show(i+(e.clientX>r.left+r.width/2?1:-1))});
+window.addEventListener('resize',fit);fit();var h=parseInt(location.hash.slice(1),10);show(h>0?h-1:0);
+})();
+</script>
+</body>
+</html>
