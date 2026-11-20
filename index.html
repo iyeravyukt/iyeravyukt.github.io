@@ -230,7 +230,7 @@
       </div>
     </article>
     <article class="work-card proj" id="project-extension">
-      <div class="project-media-strip n1"><div class="project-media model-media"><model-viewer data-yaw="135" src="models/extension.glb?v=2" data-full="models/extension.glb?v=2" data-section="models/extension-section.glb?v=2" alt="Rotatable 3D model of the cascading telescoping extension" orientation="90deg 0deg -90deg" camera-controls interaction-prompt="none" shadow-intensity="0.6" exposure="1.05" environment-image="neutral" camera-orbit="135deg 78deg auto" loading="lazy" touch-action="pan-y"></model-viewer><div class="view-toggle" role="group" aria-label="Model view"><button type="button" class="on" aria-pressed="true" data-view="full">Full</button><button type="button" aria-pressed="false" data-view="section">Section</button></div><span class="model-hint">Drag to Rotate!</span></div></div>
+      <div class="project-media-strip n1"><div class="project-media model-media"><model-viewer data-yaw="135" data-section-yaw="315" src="models/extension.glb?v=2" data-full="models/extension.glb?v=2" data-section="models/extension-section.glb?v=2" alt="Rotatable 3D model of the cascading telescoping extension" orientation="90deg 0deg -90deg" camera-controls interaction-prompt="none" shadow-intensity="0.6" exposure="1.05" environment-image="neutral" camera-orbit="135deg 78deg auto" loading="lazy" touch-action="pan-y"></model-viewer><div class="view-toggle" role="group" aria-label="Model view"><button type="button" class="on" aria-pressed="true" data-view="full">Full</button><button type="button" aria-pressed="false" data-view="section">Section</button></div><span class="model-hint">Drag to Rotate!</span></div></div>
       <div class="work-body res">
         <h3 class="res-title">Cascading Telescoping Extension</h3>
         <div class="res-line"><i>Mechanism Designer</i><span class="res-date">2024</span></div>
@@ -453,6 +453,8 @@ document.querySelectorAll('.view-toggle').forEach(function (g) {
     var b = e.target.closest('button'); if (!b || b.classList.contains('on')) return;
     g.querySelectorAll('button').forEach(function (x) { var on = x === b; x.classList.toggle('on', on); x.setAttribute('aria-pressed', on); });
     var phi = mv.getCameraOrbit().phi * 180 / Math.PI;
+    if (!mv.dataset.fullYaw) mv.dataset.fullYaw = mv.dataset.yaw;
+    mv.dataset.yaw = b.dataset.view === 'section' && mv.dataset.sectionYaw ? mv.dataset.sectionYaw : mv.dataset.fullYaw;
     mv.addEventListener('load', function () { mv.cameraTarget = 'auto auto auto'; mv.cameraOrbit = mv.dataset.yaw + 'deg ' + phi + 'deg auto'; mv.jumpCameraToGoal(); }, { once: true });
     mv.src = mv.dataset[b.dataset.view];
   });
