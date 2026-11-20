@@ -13,7 +13,7 @@
 <link rel="icon" href="favicon-32.png" sizes="32x32" type="image/png">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@500;600;700;800&family=Inter:wght@400;500;600&display=swap">
-<link rel="stylesheet" href="assets/style.css?v=56">
+<link rel="stylesheet" href="assets/style.css?v=57">
 <script>self.ModelViewerElement={meshoptDecoderLocation:"assets/vendor/meshopt_decoder.js"};</script>
 <script type="module" src="assets/vendor/model-viewer.min.js"></script>
 </head>
@@ -200,7 +200,7 @@
       </div>
     </article>
     <article class="work-card proj" id="project-vigil">
-      <div class="project-media-strip n1"><div class="project-media placeholder" role="img" aria-label="3D model coming soon"><span>Coming Soon!</span></div></div>
+      <div class="project-media-strip n1"><div class="project-media model-media"><model-viewer data-yaw="20" src="models/vigil.glb" alt="Rotatable 3D model of the VIGIL smart glasses on a head" camera-controls interaction-prompt="none" shadow-intensity="0.6" exposure="1.05" environment-image="neutral" camera-orbit="20deg 75deg auto" loading="lazy" touch-action="pan-y"></model-viewer><span class="model-hint">Drag to Rotate!</span></div></div>
       <div class="work-body res">
         <h3 class="res-title">VIGIL: Drone-Guided Smart Glasses</h3>
         <div class="res-line"><i>Product Designer and Co-Inventor</i><span class="res-date">Sep 2026</span></div>
@@ -210,14 +210,14 @@
       </div>
     </article>
     <article class="work-card proj" id="project-tend">
-      <div class="project-media-strip n1"><div class="project-media placeholder" role="img" aria-label="3D model coming soon"><span>Coming Soon!</span></div></div>
+      <div class="project-media-strip n1"><div class="project-media model-media"><model-viewer data-yaw="35" src="models/tend.glb" alt="Rotatable 3D model of the TEND device" camera-controls interaction-prompt="none" shadow-intensity="0.6" exposure="1.05" environment-image="neutral" camera-orbit="35deg 75deg auto" loading="lazy" touch-action="pan-y"></model-viewer><span class="model-hint">Drag to Rotate!</span></div></div>
       <div class="work-body res">
         <h3 class="res-title">TEND: Cartesian Gripper with Tactile &amp; Vision Assistance</h3>
         <p class="proj-result">Details coming soon.</p>
       </div>
     </article>
     <article class="work-card proj" id="project-gearbox">
-      <div class="project-media-strip n1"><div class="project-media placeholder" role="img" aria-label="3D model coming soon"><span>Coming Soon!</span></div></div>
+      <div class="project-media-strip n1"><div class="project-media model-media"><model-viewer data-yaw="35" src="models/gearbox.glb" data-full="models/gearbox.glb" data-section="models/gearbox-section.glb" data-cut-yaw="90" alt="Rotatable 3D model of the bevel gear differential" camera-controls interaction-prompt="none" shadow-intensity="0.6" exposure="1.05" environment-image="neutral" camera-orbit="35deg 75deg auto" loading="lazy" touch-action="pan-y"></model-viewer><div class="view-toggle" role="group" aria-label="Model view"><button type="button" class="on" aria-pressed="true" data-view="full">Full</button><button type="button" aria-pressed="false" data-view="section">Section</button></div><span class="model-hint">Drag to Rotate!</span></div></div>
       <div class="work-body res">
         <h3 class="res-title">Compact Bevel Differential Gearbox</h3>
         <div class="res-line"><i>Mechanism Designer, FTC Team 8393</i><span class="res-date">2024 – 2025</span></div>
@@ -227,7 +227,7 @@
       </div>
     </article>
     <article class="work-card proj" id="project-extension">
-      <div class="project-media-strip n1"><div class="project-media model-media"><model-viewer data-yaw="20" src="models/extension.glb" data-full="models/extension.glb" data-section="models/extension-section.glb" alt="Rotatable 3D model of the cascading telescoping extension" orientation="0deg 90deg 0deg" camera-controls interaction-prompt="none" shadow-intensity="0.6" exposure="1.05" environment-image="neutral" camera-orbit="20deg 80deg auto" loading="lazy" touch-action="pan-y"></model-viewer><div class="view-toggle" role="group" aria-label="Model view"><button type="button" class="on" aria-pressed="true" data-view="full">Full</button><button type="button" aria-pressed="false" data-view="section">Section</button></div><span class="model-hint">Drag to Rotate!</span></div></div>
+      <div class="project-media-strip n1"><div class="project-media model-media"><model-viewer data-yaw="0" src="models/extension.glb" data-full="models/extension.glb" data-section="models/extension-section.glb" alt="Rotatable 3D model of the cascading telescoping extension" orientation="-90deg 0deg -90deg" camera-controls interaction-prompt="none" shadow-intensity="0.6" exposure="1.05" environment-image="neutral" camera-orbit="0deg 78deg auto" loading="lazy" touch-action="pan-y"></model-viewer><div class="view-toggle" role="group" aria-label="Model view"><button type="button" class="on" aria-pressed="true" data-view="full">Full</button><button type="button" aria-pressed="false" data-view="section">Section</button></div><span class="model-hint">Drag to Rotate!</span></div></div>
       <div class="work-body res">
         <h3 class="res-title">Cascading Telescoping Extension</h3>
         <div class="res-line"><i>Mechanism Designer, FTC Team 8393</i></div>
@@ -402,7 +402,7 @@ document.querySelectorAll('.btn.ptog').forEach(function (b) {
   });
 });
 </script>
-<script src="assets/site.js?v=56" defer></script>
+<script src="assets/site.js?v=57" defer></script>
 <script>
 /* Keep every 3D model spinning in sync (same speed, same phase); pause 2 s after someone drags one. */
 (function () {
@@ -441,8 +441,8 @@ document.querySelectorAll('.view-toggle').forEach(function (g) {
     g.querySelectorAll('button').forEach(function (x) { var on = x === b; x.classList.toggle('on', on); x.setAttribute('aria-pressed', on); });
     var th = mv.getCameraOrbit().theta * 180 / Math.PI, sec = b.dataset.view === 'section';
     /* Section: face the cut, hold 2 s, then keep spinning from there. */
-    if (sec) { mv.dataset.yaw = parseFloat(mv.dataset.yaw) - th; th = 0; }
-    mv.addEventListener('load', function () { mv.cameraTarget = 'auto auto auto'; mv.cameraOrbit = th + 'deg 80deg auto'; mv.jumpCameraToGoal(); mv.lastUser = performance.now(); }, { once: true });
+    if (sec) { var cy = parseFloat(mv.dataset.cutYaw || 0); mv.dataset.yaw = parseFloat(mv.dataset.yaw) - th + cy; th = cy; }
+    mv.addEventListener('load', function () { mv.cameraTarget = 'auto auto auto'; mv.cameraOrbit = th + 'deg ' + (mv.getCameraOrbit().phi * 180 / Math.PI) + 'deg auto'; mv.jumpCameraToGoal(); mv.lastUser = performance.now(); }, { once: true });
     mv.src = mv.dataset[b.dataset.view];
   });
 });
