@@ -404,3 +404,6 @@ body { overflow-x: clip; }
 .model-hint { position: absolute; right: 10px; bottom: 8px; font-size: .75rem; color: var(--muted); pointer-events: none; }
 a.t-sub { text-decoration: none; }
 a.t-sub:hover { text-decoration: underline; text-underline-offset: 3px; }
+/* Links on Research/Projects cards look like links: blue + underlined */
+a.t-sub, .proj .proj-links a { color: var(--link); text-decoration: underline; text-underline-offset: 3px; text-decoration-thickness: 1px; }
+a.t-sub:hover, .proj .proj-links a:hover { text-decoration-thickness: 2px; }
