@@ -425,3 +425,5 @@ a.t-sub:hover, .proj .proj-links a:hover { text-decoration-thickness: 2px; }
 /* Project pages: band sits outside a container, so line its text up with the .detail column */
 body > .wip-band { margin: 0; padding: 26px max(40px, calc(50vw - 410px)) 28px; }
 @media (max-width: 760px) { body > .wip-band { padding: 22px 20px 24px; } }
+#engineering .proj .project-media-strip.n1 .project-media { aspect-ratio: 4 / 3; }
+.proj .proj-btns .btn { flex: 0 1 160px; text-align: center; }
