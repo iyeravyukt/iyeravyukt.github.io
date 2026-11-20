@@ -220,7 +220,7 @@
       </div>
     </article>
     <article class="work-card proj" id="project-gearbox">
-      <div class="project-media-strip n1"><div class="project-media model-media"><model-viewer data-yaw="215" orientation="0deg 180deg 0deg" src="models/gearbox.glb" data-full="models/gearbox.glb" data-section="models/gearbox-section.glb" data-cut-yaw="90" alt="Rotatable 3D model of the bevel gear differential" camera-controls interaction-prompt="none" shadow-intensity="0.6" exposure="1.05" environment-image="neutral" camera-orbit="215deg 75deg auto" loading="lazy" touch-action="pan-y"></model-viewer><div class="view-toggle" role="group" aria-label="Model view"><button type="button" class="on" aria-pressed="true" data-view="full">Full</button><button type="button" aria-pressed="false" data-view="section">Section</button></div><span class="model-hint">Drag to Rotate!</span></div></div>
+      <div class="project-media-strip n1"><div class="project-media model-media"><model-viewer data-yaw="215" orientation="0deg 180deg 0deg" src="models/gearbox.glb?v=2" data-full="models/gearbox.glb?v=2" data-section="models/gearbox-section.glb?v=2" alt="Rotatable 3D model of the bevel gear differential" camera-controls interaction-prompt="none" shadow-intensity="0.6" exposure="1.05" environment-image="neutral" camera-orbit="215deg 75deg auto" loading="lazy" touch-action="pan-y"></model-viewer><div class="view-toggle" role="group" aria-label="Model view"><button type="button" class="on" aria-pressed="true" data-view="full">Full</button><button type="button" aria-pressed="false" data-view="section">Section</button></div><span class="model-hint">Drag to Rotate!</span></div></div>
       <div class="work-body res">
         <h3 class="res-title">Compact Bevel Differential Gearbox</h3>
         <div class="res-line"><i>Mechanism Designer, FTC Team 8393</i><span class="res-date">2024 – 2025</span></div>
@@ -407,28 +407,38 @@ document.querySelectorAll('.btn.ptog').forEach(function (b) {
 </script>
 <script src="assets/site.js?v=57" defer></script>
 <script>
-/* Keep every 3D model spinning in sync (same speed, same phase); pause 2 s after someone drags one. */
+/* Spin every 3D model at the same speed, starting from its own starting angle (data-yaw) when it loads.
+   Dragging pauses that model; 2 s after release it keeps spinning from wherever it was left. */
 (function () {
-  var SPEED = 18, IDLE = 2000, t0 = performance.now();
+  var SPEED = 18, IDLE = 2000;
   var mvs = [].slice.call(document.querySelectorAll('model-viewer[data-yaw]'));
   mvs.forEach(function (m) {
-    m.lastUser = -1e9; m.held = false;
-    function down() { m.held = true; m.lastUser = performance.now(); }
-    function up() { if (m.held) { m.held = false; m.lastUser = performance.now(); } }
+    m.lastUser = -1e9; m.held = false; m.t0 = null; m.dirty = false;
+    function touch() { m.lastUser = performance.now(); m.dirty = true; }
+    function down() { m.held = true; touch(); }
+    function up() { if (m.held) { m.held = false; touch(); } }
+    m.addEventListener('load', function () { m.t0 = m.seen ? performance.now() : null; m.base = parseFloat(m.dataset.yaw); m.dirty = false; m.lastUser = -1e9; });
     m.addEventListener('pointerdown', down);
     m.addEventListener('touchstart', down, { passive: true });
-    m.addEventListener('wheel', function () { m.lastUser = performance.now(); }, { passive: true });
+    m.addEventListener('wheel', touch, { passive: true });
     window.addEventListener('pointerup', up);
     window.addEventListener('pointercancel', up);
     window.addEventListener('touchend', up);
-    m.addEventListener('camera-change', function (e) { if (e.detail && e.detail.source === 'user-interaction') m.lastUser = performance.now(); });
+    m.addEventListener('camera-change', function (e) { if (e.detail && e.detail.source === 'user-interaction') touch(); });
   });
+  /* Start each model's spin only once it is actually on screen. */
+  var io = 'IntersectionObserver' in window ? new IntersectionObserver(function (es) {
+    es.forEach(function (e) { if (e.isIntersecting && !e.target.seen) { e.target.seen = true; e.target.t0 = null; io.unobserve(e.target); } });
+  }, { threshold: 0.5 }) : null;
+  mvs.forEach(function (m) { if (io) io.observe(m); else m.seen = true; });
   function tick(now) {
-    var ang = ((now - t0) / 1000) * SPEED;
     mvs.forEach(function (m) {
+      if (!m.seen) return;
+      if (m.loaded && m.t0 === null) { m.t0 = now; m.base = parseFloat(m.dataset.yaw); }
       if (!m.loaded || m.held || now - m.lastUser < IDLE) return;
       var o = m.getCameraOrbit();
-      m.cameraOrbit = (parseFloat(m.dataset.yaw) + ang) + 'deg ' + (o.phi * 180 / Math.PI) + 'deg ' + o.radius + 'm';
+      if (m.dirty) { m.dirty = false; m.base = o.theta * 180 / Math.PI; m.t0 = now; }
+      m.cameraOrbit = (m.base + (now - m.t0) / 1000 * SPEED) + 'deg ' + (o.phi * 180 / Math.PI) + 'deg ' + o.radius + 'm';
     });
     requestAnimationFrame(tick);
   }
@@ -436,16 +446,14 @@ document.querySelectorAll('.btn.ptog').forEach(function (b) {
 })();
 </script>
 <script>
-/* Full | Section switch: swaps the model, keeps the camera angle. Section file loads only on first click. */
+/* Full | Section switch: swaps the model and restarts it at its starting angle. Section file loads only on first click. */
 document.querySelectorAll('.view-toggle').forEach(function (g) {
   var mv = g.parentNode.querySelector('model-viewer');
   g.addEventListener('click', function (e) {
     var b = e.target.closest('button'); if (!b || b.classList.contains('on')) return;
     g.querySelectorAll('button').forEach(function (x) { var on = x === b; x.classList.toggle('on', on); x.setAttribute('aria-pressed', on); });
-    var th = mv.getCameraOrbit().theta * 180 / Math.PI, sec = b.dataset.view === 'section';
-    /* Section: face the cut, hold 2 s, then keep spinning from there. */
-    if (sec) { var cy = parseFloat(mv.dataset.cutYaw || 0); mv.dataset.yaw = parseFloat(mv.dataset.yaw) - th + cy; th = cy; }
-    mv.addEventListener('load', function () { mv.cameraTarget = 'auto auto auto'; mv.cameraOrbit = th + 'deg ' + (mv.getCameraOrbit().phi * 180 / Math.PI) + 'deg auto'; mv.jumpCameraToGoal(); mv.lastUser = performance.now(); }, { once: true });
+    var phi = mv.getCameraOrbit().phi * 180 / Math.PI;
+    mv.addEventListener('load', function () { mv.cameraTarget = 'auto auto auto'; mv.cameraOrbit = mv.dataset.yaw + 'deg ' + phi + 'deg auto'; mv.jumpCameraToGoal(); }, { once: true });
     mv.src = mv.dataset[b.dataset.view];
   });
 });
