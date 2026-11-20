@@ -13,7 +13,9 @@
 <link rel="icon" href="favicon-32.png" sizes="32x32" type="image/png">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@500;600;700;800&family=Inter:wght@400;500;600&display=swap">
-<link rel="stylesheet" href="assets/style.css?v=49">
+<link rel="stylesheet" href="assets/style.css?v=50">
+<script>self.ModelViewerElement={meshoptDecoderLocation:"assets/vendor/meshopt_decoder.js"};</script>
+<script type="module" src="assets/vendor/model-viewer.min.js"></script>
 </head>
 <body>
 <a class="skip" href="#main-content">Skip to content</a>
@@ -77,7 +79,7 @@
   </div>
   <div class="work-row">
     <article class="work-card proj" id="project-arise">
-      <div class="project-media-strip n1"><div class="project-media placeholder" role="img" aria-label="Photo coming soon"><span>Coming Soon!</span></div></div>
+      <div class="project-media-strip n1"><div class="project-media model-media"><model-viewer src="models/arise.glb" alt="Rotatable 3D model of the ARISE exoskeleton" camera-controls auto-rotate auto-rotate-delay="2000" rotation-per-second="18deg" interaction-prompt="none" shadow-intensity="0.6" exposure="1.05" environment-image="neutral" camera-orbit="35deg 75deg auto" loading="lazy" touch-action="pan-y"></model-viewer><span class="model-hint">Drag to rotate</span></div></div>
       <div class="work-body res">
         <h3 class="res-title">ARISE: Adaptive Robotic Exoskeleton</h3>
         <div class="res-line"><i>Independent Researcher and Inventor</i><span class="res-date">Aug 2024 – Present</span></div>
@@ -398,6 +400,6 @@ document.querySelectorAll('.btn.ptog').forEach(function (b) {
   });
 });
 </script>
-<script src="assets/site.js?v=49" defer></script>
+<script src="assets/site.js?v=50" defer></script>
 </body>
 </html>
