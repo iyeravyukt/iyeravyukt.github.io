@@ -7,7 +7,7 @@
 :root {
   color-scheme: light;
   --navy: #002952; --on-navy: #ffffff; --btn-hover: #0b3c70;
-  --gold: #d7dfe6; --gold-ink: #47617d;
+  --gold: #d7dfe6; --gold-ink: #47617d; --accent: #8c7a3a;
   --ink: #172b3e; --muted: #56697b; --line: #d7dfe6; --canvas: #f7f6f3; --surface: #ffffff; --link: #0b4a8f;
   --paper: #f7f6f3; --hero-bg: #ffffff; --h-ink: #1f2328; --h-ink-2: #5f656e; --rule: #e3e1dc;
   --ph: #e4e9ee; --ph-ink: #7c8d9d; --soft: #f4f6f8; --chip: #e9eef3; --hilite: #fff6d6;
@@ -21,7 +21,7 @@
 [data-theme="dark"] {
   color-scheme: dark;
   --navy: #9cc0e6; --on-navy: #08111a; --btn-hover: #c2daf2;
-  --gold: #1b2c40; --gold-ink: #8fa9c4;
+  --gold: #1b2c40; --gold-ink: #8fa9c4; --accent: #d4c089;
   --ink: #e2e8ee; --muted: #9aabbb; --line: #23354a; --canvas: #0a121b; --surface: #0f1a26; --link: #9cc0e6;
   --paper: #0a121b; --hero-bg: #0e1823; --h-ink: #eef2f6; --h-ink-2: #9aabbb; --rule: #1d2c3d;
   --ph: #172636; --ph-ink: #6f859b; --soft: #13202e; --chip: #18293b; --hilite: #22344a;
@@ -442,3 +442,10 @@ body > .wip-band { margin: 0; padding: 26px max(40px, calc(50vw - 410px)) 28px; 
 .season-link { text-align: center; margin: 2px 0 0; }
 .season-link a { color: var(--link); text-decoration: underline; text-underline-offset: 3px; }
 .season h4, .season .team { text-align: center; }
+.season-link .btn.primary { display: inline-block; color: var(--on-navy); text-decoration: none; font-size: .84rem; min-width: 140px; }
+.frc-seasons { display: flex; flex-wrap: wrap; justify-content: center; }
+.frc-seasons .season { flex: 0 1 calc((100% - 66px) / 4); }
+@media (max-width: 1000px) { .frc-seasons .season { flex-basis: calc((100% - 22px) / 2); } }
+@media (max-width: 460px) { .frc-seasons .season { flex-basis: 100%; } }
+#project-first .galore { font-family: var(--head); font-weight: 800; color: var(--accent); font-size: 1.12em; }
+#project-first .stat { font-weight: 700; color: var(--navy); }
