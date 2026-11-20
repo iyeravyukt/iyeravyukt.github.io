@@ -13,7 +13,7 @@
 <link rel="icon" href="favicon-32.png" sizes="32x32" type="image/png">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@500;600;700;800&family=Inter:wght@400;500;600&display=swap">
-<link rel="stylesheet" href="assets/style.css?v=55">
+<link rel="stylesheet" href="assets/style.css?v=56">
 <script>self.ModelViewerElement={meshoptDecoderLocation:"assets/vendor/meshopt_decoder.js"};</script>
 <script type="module" src="assets/vendor/model-viewer.min.js"></script>
 </head>
@@ -227,7 +227,7 @@
       </div>
     </article>
     <article class="work-card proj" id="project-extension">
-      <div class="project-media-strip n1"><div class="project-media placeholder" role="img" aria-label="3D model coming soon"><span>Coming Soon!</span></div></div>
+      <div class="project-media-strip n1"><div class="project-media model-media"><model-viewer data-yaw="20" src="models/extension.glb" data-full="models/extension.glb" data-section="models/extension-section.glb" alt="Rotatable 3D model of the cascading telescoping extension" orientation="0deg 90deg 0deg" camera-controls interaction-prompt="none" shadow-intensity="0.6" exposure="1.05" environment-image="neutral" camera-orbit="20deg 80deg auto" loading="lazy" touch-action="pan-y"></model-viewer><div class="view-toggle" role="group" aria-label="Model view"><button type="button" class="on" aria-pressed="true" data-view="full">Full</button><button type="button" aria-pressed="false" data-view="section">Section</button></div><span class="model-hint">Drag to Rotate!</span></div></div>
       <div class="work-body res">
         <h3 class="res-title">Cascading Telescoping Extension</h3>
         <div class="res-line"><i>Mechanism Designer, FTC Team 8393</i></div>
@@ -402,7 +402,7 @@ document.querySelectorAll('.btn.ptog').forEach(function (b) {
   });
 });
 </script>
-<script src="assets/site.js?v=55" defer></script>
+<script src="assets/site.js?v=56" defer></script>
 <script>
 /* Keep every 3D model spinning in sync (same speed, same phase); pause 2 s after someone drags one. */
 (function () {
@@ -431,6 +431,21 @@ document.querySelectorAll('.btn.ptog').forEach(function (b) {
   }
   requestAnimationFrame(tick);
 })();
+</script>
+<script>
+/* Full | Section switch: swaps the model, keeps the camera angle. Section file loads only on first click. */
+document.querySelectorAll('.view-toggle').forEach(function (g) {
+  var mv = g.parentNode.querySelector('model-viewer');
+  g.addEventListener('click', function (e) {
+    var b = e.target.closest('button'); if (!b || b.classList.contains('on')) return;
+    g.querySelectorAll('button').forEach(function (x) { var on = x === b; x.classList.toggle('on', on); x.setAttribute('aria-pressed', on); });
+    var th = mv.getCameraOrbit().theta * 180 / Math.PI, sec = b.dataset.view === 'section';
+    /* Section: face the cut, hold 2 s, then keep spinning from there. */
+    if (sec) { mv.dataset.yaw = parseFloat(mv.dataset.yaw) - th; th = 0; }
+    mv.addEventListener('load', function () { mv.cameraTarget = 'auto auto auto'; mv.cameraOrbit = th + 'deg 80deg auto'; mv.jumpCameraToGoal(); mv.lastUser = performance.now(); }, { once: true });
+    mv.src = mv.dataset[b.dataset.view];
+  });
+});
 </script>
 </body>
 </html>
