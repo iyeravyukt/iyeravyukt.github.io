@@ -387,8 +387,9 @@ body { overflow-x: clip; }
 .proj .proj-actions { display: flex; flex-direction: column; align-items: center; gap: 12px; margin-top: 2px; }
 .proj .proj-btns { display: flex; justify-content: center; gap: 24px; width: 100%; }
 .proj .proj-btns .ptog { flex: 0 1 160px; text-align: center; }
-.proj .proj-links { display: flex; flex-wrap: wrap; justify-content: center; gap: 6px 28px; width: 100%; font-size: .9rem; margin: 0; }
+.proj .proj-links { display: flex; flex-wrap: wrap; justify-content: center; gap: 6px 0; width: 100%; font-size: .9rem; margin: 0; }
 .proj .proj-links a { font-weight: 600; }
+.proj .proj-links a + a::before { content: "·"; display: inline-block; margin: 0 12px; color: var(--muted, #8a8f98); font-weight: 700; text-decoration: none; pointer-events: none; }
 .aw-list { list-style: none; margin: 6px 0 0; padding: 0; display: grid; gap: 7px; }
 .aw-list li { display: grid; grid-template-columns: minmax(0, 1fr) 3.2rem; column-gap: 20px; line-height: 1.4; }
 .aw-yr { font-weight: 600; white-space: nowrap; text-align: right; font-variant-numeric: tabular-nums; }
