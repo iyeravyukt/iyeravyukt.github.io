@@ -433,3 +433,12 @@ body > .wip-band { margin: 0; padding: 26px max(40px, calc(50vw - 410px)) 28px; 
 .view-toggle button { font: inherit; font-size: .75rem; padding: 4px 11px; border: 0; background: transparent; color: var(--muted); cursor: pointer; }
 .view-toggle button.on { background: var(--navy); color: var(--on-navy); }
 .view-toggle button:focus-visible { outline: 2px solid var(--link); outline-offset: -2px; }
+
+.season-btns { display: flex; justify-content: center; margin-top: 4px; }
+.season-btns .ptog { min-width: 140px; }
+.season .aw-panel { padding: 4px 10px 10px; }
+.season .aw-list { gap: 6px; }
+.season .aw-list li { grid-template-columns: minmax(0, 1fr) 2.6rem; column-gap: 10px; font-size: .82rem; }
+.season-link { text-align: center; margin: 2px 0 0; }
+.season-link a { color: var(--link); text-decoration: underline; text-underline-offset: 3px; }
+.season h4, .season .team { text-align: center; }
