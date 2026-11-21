@@ -313,14 +313,6 @@
       introTimers.push(setTimeout(function () { window.heatIntroPending = false; document.dispatchEvent(new Event('heatintrodone')); }, 250 + 2400));
     };
     playIntro();
-    if ('IntersectionObserver' in window) {
-      var left = false;
-      new IntersectionObserver(function (es) {
-        var e = es[0];
-        if (!e.isIntersecting) left = true;                       // header fully scrolled out of view
-        else if (left && e.intersectionRatio >= 0.5) { left = false; playIntro(); } // back in view: replay
-      }, { threshold: [0, 0.5] }).observe(band);
-    }
   }
 
 
