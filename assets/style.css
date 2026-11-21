@@ -450,3 +450,6 @@ body > .wip-band { margin: 0; padding: 26px max(40px, calc(50vw - 410px)) 28px; 
 #project-first .galore { font-family: var(--head); font-weight: 800; color: var(--pop); font-size: 1.12em; }
 #project-first .stat { font-weight: 700; color: var(--navy); }
 .season .model-media, .season .project-media.placeholder { aspect-ratio: 1 / 1; }
+
+.intro-link { color: var(--navy); font-weight: 600; text-decoration: underline; text-underline-offset: 3px; text-decoration-thickness: 1.5px; }
+.intro-link:hover { color: var(--pop); }
