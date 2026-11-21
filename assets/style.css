@@ -327,7 +327,7 @@ section[id] { scroll-margin-top: 76px; }
 .interest-body h3 { font-size: 1.4rem; }
 .interest-body p { font-size: 1.08rem; line-height: 1.65; max-width: 64ch; }
 .other-interests { border-top: 1px solid var(--line); padding-top: 14px; color: var(--ink); }
-.other-interests b { display: block; font-size: .74rem; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); margin-bottom: 4px; }
+.other-interests { display: grid; gap: 8px; }
 @media (max-width: 760px) { .interest { grid-template-columns: minmax(0, 1fr); } }
 
 #recognition .section-heading { margin-bottom: 12px; }
