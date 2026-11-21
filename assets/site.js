@@ -311,12 +311,14 @@
 
   if (!reduce) {
     band.addEventListener('pointermove', function (e) {
+      if (window.heatIntroPending && intro) return; // no cursor heat while the intro pulse plays
       var r = band.getBoundingClientRect();
       px = e.clientX - r.left; py = e.clientY - r.top;
       inside = true; lastMove = performance.now(); kick();
     });
     band.addEventListener('pointerleave', function () { inside = false; kick(); });
     band.addEventListener('pointerdown', function (e) {
+      if (window.heatIntroPending && intro) return;
       var r = band.getBoundingClientRect();
       pulses.push({ x: e.clientX - r.left, y: e.clientY - r.top, t0: performance.now(), r: 0, amp: 1, core: 1 });
       if (pulses.length > 6) pulses.shift();
