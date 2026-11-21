@@ -371,7 +371,9 @@
       bar.classList.toggle('show', y > hero.offsetHeight - 90);
       fill.style.width = (p * 100) + '%';
       var cur = null;
-      secs.forEach(function (x) { if (y >= x.top - 4) cur = x; x.tick.classList.toggle('passed', y >= x.top - 4); });
+      // A section is current once its top is about 200px from the top of the screen; at the very bottom, the last section wins.
+      var line = y + 120, atEnd = y >= maxScroll() - 4;
+      secs.forEach(function (x) { if (line >= x.top || atEnd) cur = x; x.tick.classList.toggle('passed', y >= x.top - 4); });
       secs.forEach(function (x) { x.a.classList.toggle('active', x === cur); });
     }
     addEventListener('scroll', function () { if (!ticking) { ticking = true; requestAnimationFrame(update); } }, { passive: true });
