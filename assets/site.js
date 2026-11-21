@@ -150,13 +150,13 @@
      A jittered triangular mesh for a 2D heat-conduction look. Each node has a temperature; the cursor heats
      nearby nodes and every node cools a little each frame, so the trail fades out behind the cursor.
      Colors come from the --heat-0..3 tokens, so the scale always matches the current theme. */
-  function heat(band, pre, glowSel, sigma) {
+  function heat(band, pre, glowSel, sigma, intro) {
   var cv = band && band.querySelector('canvas.heat');
   if (!cv || !cv.getContext) return;
   var ctx = cv.getContext('2d');
   var reduce = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
   var W = 0, H = 0, nodes = [], tris = [], nbrs = [], next = [], stops, lineRGB, cap;
-  var px = -1e4, py = -1e4, inside = false, lastMove = 0, raf = 0, pulses = [];
+  var px = -1e4, py = -1e4, inside = false, lastMove = 0, raf = 0, pulses = [], glowX = 0, glowY = 0;
   var SIGMA = sigma || 50, COOL = 0.972, ALPHA = 0.22, iso = true; // isotherms on header and footer
 
   function hex(h) {
@@ -188,6 +188,7 @@
     // Resting heat: a soft glow around the headshot, so the mesh reads as a thermal plot before any interaction.
     var photo = band.querySelector(glowSel), gx = W * 0.75, gy = H * 0.55;
     if (photo) { var q = photo.getBoundingClientRect(); gx = q.left - r.left + q.width / 2; gy = q.top - r.top + q.height / 2; }
+    glowX = gx; glowY = gy;
     nodes = []; tris = []; nbrs = [];
     for (var y = 0; y < rows; y++) for (var x = 0; x < cols; x++) {
       var nx = (x - 0.5 + (y % 2) * 0.5) * s + rnd() * s * 0.35, ny = (y - 0.5) * h + rnd() * s * 0.35;
@@ -249,6 +250,11 @@
     // Click bursts: a heat ring expands from the click point and fades.
     pulses = pulses.filter(function (P) {
       var age = (now - P.t0) / 1000;
+      if (P.big) { // first-visit intro: one hot spot at the photo spreads across the whole header, then cools
+        var g = Math.min(1, age / 2.1); P.r = P.R * (1 - Math.pow(1 - g, 2)); P.w = 34 + 40 * g;
+        P.amp = age < 0.3 ? age / 0.3 : Math.max(0, 1 - Math.pow((age - 0.3) / 2.1, 2)); P.core = Math.max(0, 1 - age / 1.1);
+        return age < 2.4;
+      }
       var f = Math.min(1, age / 0.9); P.r = 0.31 * H * (1 - (1 - f) * (1 - f)); // ring incl. its glow stays within ~3/4 of the band height across
       P.amp = Math.max(0, 1 - Math.pow(age / 1.1, 3)); P.core = Math.max(0, 1 - age / 0.45); // ring stays strong while expanding, fades at the end
       return age < 1.1;
@@ -266,8 +272,8 @@
         if (g > v) v = g;
       }
       for (var j = 0; j < pulses.length; j++) {
-        var P = pulses[j], ex = n.x - P.x, ey = n.y - P.y, dist = Math.sqrt(ex * ex + ey * ey);
-        var ring = P.amp * Math.exp(-((dist - P.r) * (dist - P.r)) / (2 * 22 * 22));
+        var P = pulses[j], ex = (n.x - P.x) / (P.sx || 1), ey = n.y - P.y, dist = Math.sqrt(ex * ex + ey * ey);
+        var pw = P.w || 22, ring = P.amp * Math.exp(-((dist - P.r) * (dist - P.r)) / (2 * pw * pw));
         var r2 = P.r * 0.55, ring2 = 0.6 * P.amp * Math.exp(-((dist - r2) * (dist - r2)) / (2 * 15 * 15));
         var core = P.core * Math.exp(-(dist * dist) / (2 * 38 * 38));
         if (ring2 > v) v = ring2;
@@ -286,6 +292,15 @@
 
   function setup() { readColors(); build(); draw(); }
   setup();
+  // Intro on the first visit only: a single heat pulse from the photo sweeps the header once. The page is usable throughout.
+  if (intro && !reduce) {
+    var seen = false; try { seen = localStorage.getItem('heatIntro') === '1'; localStorage.setItem('heatIntro', '1'); } catch (e) {}
+    if (!seen || /[?&]intro\b/.test(location.search)) {
+      var SX = 2.4; // wide ellipse: spreads farther sideways than up and down
+      var R = Math.max(Math.hypot(glowX / SX, glowY), Math.hypot((W - glowX) / SX, glowY), Math.hypot(glowX / SX, H - glowY), Math.hypot((W - glowX) / SX, H - glowY));
+      setTimeout(function () { pulses.push({ x: glowX, y: glowY, t0: performance.now(), r: 0, amp: 0, core: 1, big: 1, R: R, sx: SX }); kick(); }, 250);
+    }
+  }
 
   if (!reduce) {
     band.addEventListener('pointermove', function (e) {
@@ -368,6 +383,6 @@
     document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && !how.hidden) setHow(false); });
     [howBtn, how].forEach(function (el) { el.addEventListener('pointerdown', function (e) { e.stopPropagation(); }); });
   }
-  heat(document.querySelector('.hero-band'), '--heat-', '.hero-photo');
+  heat(document.querySelector('.hero-band'), '--heat-', '.hero-photo', 0, true);
   heat(document.querySelector('.site-footer'), '--fheat-', '.to-top', 38); // footer cursor heat ~3/4 the header's size
 })();
