@@ -108,8 +108,12 @@
         try { localStorage.setItem('arm', on ? 'on' : 'off'); } catch (e) {}
         if (on) { phase = 'hold'; t = 300; last = 0; requestAnimationFrame(frame); } else park();
       });
+      document.addEventListener('heatintrostart', function () { phase = 'write'; t = 0; last = 0; wi = 0; setWord(list[0]); });
       var frame = function (now) {
         if (!on) return;
+        if (window.heatIntroPending) { // header intro playing: no word yet, arm waits at the start of the line
+          tw.textContent = '\u200b'; if (visible) draw(cx[0], base - 4, 0); last = 0; requestAnimationFrame(frame); return;
+        }
         var dt = last ? Math.min(50, now - last) : 16; last = now; t += dt;
         var N = word.length, x, y = base, open = 0, n, f;
         if (phase === 'write') {
@@ -143,8 +147,7 @@
       var start = function () {
         measure(); if (!on) return;
         // Wait for the header's first-visit heat intro to finish before the arm starts writing.
-        if (window.heatIntroPending) { tw.textContent = '\u200b'; draw(cx[0], base - 4, 0); document.addEventListener('heatintrodone', function () { requestAnimationFrame(frame); }, { once: true }); }
-        else requestAnimationFrame(frame);
+        requestAnimationFrame(frame);
       };
       var rz; window.addEventListener('resize', function () { clearTimeout(rz); rz = setTimeout(measure, 120); });
       if (document.fonts && document.fonts.ready) document.fonts.ready.then(start); else start();
@@ -297,17 +300,29 @@
 
   function setup() { readColors(); build(); draw(); }
   setup();
-  // Intro on the first visit only: a single heat pulse from the photo sweeps the header once. The page is usable throughout.
+  // Intro on every visit, and again whenever the header scrolls back into view: one heat pulse from the photo sweeps the header.
   if (intro && !reduce) {
-    var seen = false; try { seen = localStorage.getItem('heatIntro') === '1'; localStorage.setItem('heatIntro', '1'); } catch (e) {}
-    if (!seen || /[?&]intro\b/.test(location.search)) {
+    var introTimers = [];
+    var playIntro = function () {
+      introTimers.forEach(clearTimeout); introTimers = [];
+      inside = false; pulses = pulses.filter(function (P) { return !P.big; });
       var SX = 2.4; // wide ellipse: spreads farther sideways than up and down
       var R = Math.max(Math.hypot(glowX / SX, glowY), Math.hypot((W - glowX) / SX, glowY), Math.hypot(glowX / SX, H - glowY), Math.hypot((W - glowX) / SX, H - glowY));
-      window.heatIntroPending = true;
-      setTimeout(function () { pulses.push({ x: glowX, y: glowY, t0: performance.now(), r: 0, amp: 0, core: 1, big: 1, R: R, sx: SX }); kick(); }, 250);
-      setTimeout(function () { window.heatIntroPending = false; document.dispatchEvent(new Event('heatintrodone')); }, 250 + 2400);
+      window.heatIntroPending = true; document.dispatchEvent(new Event('heatintrostart'));
+      introTimers.push(setTimeout(function () { pulses.push({ x: glowX, y: glowY, t0: performance.now(), r: 0, amp: 0, core: 1, big: 1, R: R, sx: SX }); kick(); }, 250));
+      introTimers.push(setTimeout(function () { window.heatIntroPending = false; document.dispatchEvent(new Event('heatintrodone')); }, 250 + 2400));
+    };
+    playIntro();
+    if ('IntersectionObserver' in window) {
+      var left = false;
+      new IntersectionObserver(function (es) {
+        var e = es[0];
+        if (!e.isIntersecting) left = true;                       // header fully scrolled out of view
+        else if (left && e.intersectionRatio >= 0.5) { left = false; playIntro(); } // back in view: replay
+      }, { threshold: [0, 0.5] }).observe(band);
     }
   }
+
 
   if (!reduce) {
     band.addEventListener('pointermove', function (e) {
