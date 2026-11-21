@@ -368,7 +368,7 @@
     function update() {
       ticking = false;
       var y = scrollY, p = Math.min(1, y / maxScroll());
-      bar.classList.toggle('show', y > hero.offsetHeight - 40);
+      bar.classList.toggle('show', y > hero.offsetHeight - 90);
       fill.style.width = (p * 100) + '%';
       var cur = null;
       secs.forEach(function (x) { if (y >= x.top - 4) cur = x; x.tick.classList.toggle('passed', y >= x.top - 4); });

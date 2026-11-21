@@ -282,7 +282,7 @@ section { padding: 52px 0 12px; }
 }
 
 /* Sticky section bar: slides in after the hero; bottom edge is a ΔT progress bar with section ticks */
-section[id] { scroll-margin-top: 76px; }
+section[id], #about { scroll-margin-top: 76px; }
 .navbar { position: fixed; top: 0; left: 0; right: 0; z-index: 20; background: color-mix(in srgb, var(--hero-bg) 92%, transparent); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); border-bottom: 1px solid var(--rule); transform: translateY(-110%); transition: transform .28s ease; }
 .navbar.show { transform: none; }
 .navbar-inner { max-width: 1180px; margin: auto; padding: 10px 40px; display: flex; align-items: center; justify-content: space-between; gap: 20px; }

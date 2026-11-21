@@ -13,7 +13,7 @@
 <link rel="icon" href="favicon-32.png" sizes="32x32" type="image/png">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@500;600;700;800&family=Inter:wght@400;500;600&display=swap">
-<link rel="stylesheet" href="assets/style.css?v=64">
+<link rel="stylesheet" href="assets/style.css?v=65">
 <script>self.ModelViewerElement={meshoptDecoderLocation:"assets/vendor/meshopt_decoder.js"};</script>
 <script type="module" src="assets/vendor/model-viewer.min.js"></script>
 </head>
@@ -22,13 +22,13 @@
 <header class="navbar" aria-label="Site navigation">
   <div class="navbar-inner">
     <a class="navbar-name" href="#">Avyukt P. Iyer</a>
-    <nav class="navbar-links" aria-label="Sections"><a href="#research" data-sec="research">Research</a><a href="#engineering" data-sec="engineering">Projects</a><a href="#leadership" data-sec="leadership">Leadership</a><a href="#recognition" data-sec="recognition">Recognition</a><a href="#interests" data-sec="interests">Interests</a></nav>
+    <nav class="navbar-links" aria-label="Sections"><a href="#about" data-sec="about">About Me</a><a href="#research" data-sec="research">Research</a><a href="#engineering" data-sec="engineering">Projects</a><a href="#leadership" data-sec="leadership">Leadership</a><a href="#recognition" data-sec="recognition">Recognition</a><a href="#interests" data-sec="interests">Interests</a></nav>
     <div class="navbar-right">
       <button class="nav-menu" type="button" aria-label="Open section menu" aria-expanded="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
       <button class="theme-toggle" type="button" aria-label="Toggle light and dark mode"><svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4.5"/><path d="M12 1.5v2.5M12 20v2.5M1.5 12H4M20 12h2.5M4.6 4.6l1.8 1.8M17.6 17.6l1.8 1.8M4.6 19.4l1.8-1.8M17.6 6.4l1.8-1.8"/></svg><svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" aria-hidden="true"><path d="M20.5 14.5A8.5 8.5 0 0 1 9.5 3.5a8.5 8.5 0 1 0 11 11z"/></svg></button>
     </div>
   </div>
-  <div class="heat-progress" aria-hidden="true"><i class="fill"></i><b data-sec="research"></b><b data-sec="engineering"></b><b data-sec="leadership"></b><b data-sec="recognition"></b><b data-sec="interests"></b></div>
+  <div class="heat-progress" aria-hidden="true"><i class="fill"></i><b data-sec="about"></b><b data-sec="research"></b><b data-sec="engineering"></b><b data-sec="leadership"></b><b data-sec="recognition"></b><b data-sec="interests"></b></div>
 </header>
 
 <div class="hero-band">
@@ -58,7 +58,7 @@
 </div>
 
 <div class="heat-how" id="heat-how" hidden><div class="how-inner"><p class="how-label">How the header works</p><p>The header is a 2D transient heat-conduction model on a jittered triangular mesh: <i>∂T/∂t</i> = <i>α</i>∇²<i>T</i> − <i>h</i>(<i>T</i> − <i>T</i><sub>∞</sub>). Each frame takes an explicit finite-difference step, using each node’s mesh neighbors for the Laplacian. From this, heat spreads outward while the −<i>h</i> term (convection to ambient) cools it. The cursor acts as a heated probe that holds the nodes beneath it at a Gaussian profile, <i>T</i><sub>probe</sub> = <i>T</i><sub>max</sub>·exp(−|<b>x</b> − <b>x</b><sub>c</sub>|²/2<i>σ</i>²), and a click launches an expanding ring of heat. The glow around the photo acts as a steady source. Colors map Δ<i>T</i> from 0 to 40 °C, and the isotherms at 10, 20, and 30 °C are traced every frame by marching triangles.</p></div></div>
-<div class="intro-band">
+<div class="intro-band" id="about">
   <section class="intro" aria-label="Introduction">
   <p class="intro-words" aria-label="Maker, Roboticist, Technophile, Engineer, Tinkerer, Autodidact, Mentor, Trailblazer, Leader, Violinist"><span class="tw" aria-hidden="true" data-words="Maker.|Roboticist.|Technophile.|Engineer.|Tinkerer.|Autodidact.|Mentor.|Trailblazer.|Leader.|Violinist.">Maker.</span><span class="caret" aria-hidden="true"></span></p>
   <p class="intro-text">Hi, I’m Avyukt, a Mechanical Engineering student at Georgia Tech. After 8+ years of competitive robotics success, I’m exploring <b>automation</b>, <b>intelligent humanoids</b>, and <b>assistive robotics</b> through research and entrepreneurship.</p>
@@ -400,7 +400,7 @@ document.querySelectorAll('.btn.ptog').forEach(function (b) {
   });
 });
 </script>
-<script src="assets/site.js?v=64" defer></script>
+<script src="assets/site.js?v=65" defer></script>
 <script>
 /* Spin every 3D model at the same speed, starting from its own starting angle (data-yaw) when it loads.
    Dragging pauses that model; 2 s after release it keeps spinning from wherever it was left. */
