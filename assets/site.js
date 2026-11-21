@@ -140,7 +140,12 @@
         requestAnimationFrame(frame);
       };
       if ('IntersectionObserver' in window) new IntersectionObserver(function (es) { visible = es[0].isIntersecting; }).observe(band);
-      var start = function () { measure(); if (on) requestAnimationFrame(frame); };
+      var start = function () {
+        measure(); if (!on) return;
+        // Wait for the header's first-visit heat intro to finish before the arm starts writing.
+        if (window.heatIntroPending) { park(); document.addEventListener('heatintrodone', function () { requestAnimationFrame(frame); }, { once: true }); }
+        else requestAnimationFrame(frame);
+      };
       var rz; window.addEventListener('resize', function () { clearTimeout(rz); rz = setTimeout(measure, 120); });
       if (document.fonts && document.fonts.ready) document.fonts.ready.then(start); else start();
     }
@@ -298,7 +303,9 @@
     if (!seen || /[?&]intro\b/.test(location.search)) {
       var SX = 2.4; // wide ellipse: spreads farther sideways than up and down
       var R = Math.max(Math.hypot(glowX / SX, glowY), Math.hypot((W - glowX) / SX, glowY), Math.hypot(glowX / SX, H - glowY), Math.hypot((W - glowX) / SX, H - glowY));
+      window.heatIntroPending = true;
       setTimeout(function () { pulses.push({ x: glowX, y: glowY, t0: performance.now(), r: 0, amp: 0, core: 1, big: 1, R: R, sx: SX }); kick(); }, 250);
+      setTimeout(function () { window.heatIntroPending = false; document.dispatchEvent(new Event('heatintrodone')); }, 250 + 2400);
     }
   }
 
