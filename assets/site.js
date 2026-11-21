@@ -143,7 +143,7 @@
       var start = function () {
         measure(); if (!on) return;
         // Wait for the header's first-visit heat intro to finish before the arm starts writing.
-        if (window.heatIntroPending) { park(); document.addEventListener('heatintrodone', function () { requestAnimationFrame(frame); }, { once: true }); }
+        if (window.heatIntroPending) { tw.textContent = '\u200b'; draw(cx[0], base - 4, 0); document.addEventListener('heatintrodone', function () { requestAnimationFrame(frame); }, { once: true }); }
         else requestAnimationFrame(frame);
       };
       var rz; window.addEventListener('resize', function () { clearTimeout(rz); rz = setTimeout(measure, 120); });
