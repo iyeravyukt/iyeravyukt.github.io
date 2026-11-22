@@ -58,6 +58,9 @@
         var maxW = 0;
         list.forEach(function (w) { meas.textContent = w; maxW = Math.max(maxW, meas.getBoundingClientRect().width); });
         railR = Math.min(bandW - 6, x0 + maxW + OFF + 40);
+        // Keep the rail clear of the paragraph when it sits beside the word (desktop layout).
+        var txt = band.querySelector('.intro-text');
+        if (txt) { var tr = txt.getBoundingClientRect(); if (tr.left - R.left > x0 + 120) railR = Math.min(railR, tr.left - R.left - 28); }
         sw.style.transform = 'translate(' + f2(Math.max(2, x0 - 24)) + 'px, 3px)';
         setWord(word || list[wi]);
         if (!on) park();
