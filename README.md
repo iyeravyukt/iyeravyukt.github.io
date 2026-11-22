@@ -1,3 +1,5 @@
 # iyeravyukt.github.io
 
-Personal engineering portfolio. The whole site is `index.html`.
+Personal portfolio site: https://avyuktiyer.com
+
+The whole site is `index.html`.
