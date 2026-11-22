@@ -22,7 +22,7 @@
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="preload" href="assets/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="assets/fonts/hanken-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="assets/style.css?v=71">
+<link rel="stylesheet" href="assets/style.css?v=72">
 <script>self.ModelViewerElement={meshoptDecoderLocation:"assets/vendor/meshopt_decoder.js"};</script>
 <script type="module">
 // Load the 3D viewer only when a model is near the screen (or shortly after the page finishes loading), so it doesn't slow the first paint.
@@ -65,7 +65,7 @@ if (document.readyState === 'complete') watch(); else addEventListener('load', w
         <h1>Avyukt P. Iyer</h1>
         <p class="hero-credentials"><i>B.S. in Mechanical Engineering</i>, <b>Georgia Institute of Technology</b></p>
       </div>
-      <img class="hero-photo" src="images/headshot.jpg?v=6" alt="Avyukt P. Iyer" width="190" height="190">
+      <img class="hero-photo" src="images/headshot-480.jpg?v=7" srcset="images/headshot-480.jpg?v=7 480w, images/headshot.jpg?v=6 640w" sizes="(min-width: 761px) 190px, 221px" alt="Avyukt P. Iyer" width="190" height="190">
     </div>
   </div>
   <div class="heat-hud"><span class="hud-dot"></span><b>Live</b> ·<span class="hud-long"> 2D heat conduction ·</span> <span class="hud-fine">move cursor to heat</span><span class="hud-touch">tap to heat</span><span class="hud-sep">·</span><button class="hud-how" type="button" aria-expanded="false" aria-controls="heat-how">How it works</button></div>
@@ -75,7 +75,7 @@ if (document.readyState === 'complete') watch(); else addEventListener('load', w
 <div class="heat-how" id="heat-how" hidden><div class="how-inner"><p class="how-label">How the header works</p><p>The header is a 2D transient heat-conduction model on a jittered triangular mesh: <i>∂T/∂t</i> = <i>α</i>∇²<i>T</i> − <i>h</i>(<i>T</i> − <i>T</i><sub>∞</sub>). Each frame takes an explicit finite-difference step, using each node’s mesh neighbors for the Laplacian. From this, heat spreads outward while the −<i>h</i> term (convection to ambient) cools it. The cursor acts as a heated probe that holds the nodes beneath it at a Gaussian profile, <i>T</i><sub>probe</sub> = <i>T</i><sub>max</sub>·exp(−|<b>x</b> − <b>x</b><sub>c</sub>|²/2<i>σ</i>²), and a click launches an expanding ring of heat. The glow around the photo acts as a steady source. Colors map Δ<i>T</i> from 0 to 40 °C, and the isotherms at 10, 20, and 30 °C are traced every frame by marching triangles.</p></div></div>
 <div class="intro-band" id="about">
   <section class="intro" aria-label="Introduction">
-  <p class="intro-words" aria-label="Maker, Roboticist, Technophile, Engineer, Tinkerer, Autodidact, Mentor, Trailblazer, Leader, Violinist"><span class="tw" aria-hidden="true" data-words="Maker.|Roboticist.|Technophile.|Engineer.|Tinkerer.|Autodidact.|Mentor.|Trailblazer.|Leader.|Violinist.">Maker.</span><span class="caret" aria-hidden="true"></span></p>
+  <p class="intro-words"><span class="sr-only">Maker, Roboticist, Technophile, Engineer, Tinkerer, Autodidact, Mentor, Trailblazer, Leader, Violinist</span><span class="tw" aria-hidden="true" data-words="Maker.|Roboticist.|Technophile.|Engineer.|Tinkerer.|Autodidact.|Mentor.|Trailblazer.|Leader.|Violinist.">Maker.</span><span class="caret" aria-hidden="true"></span></p>
   <p class="intro-text">Hi, I’m Avyukt, a Mechanical Engineering student at Georgia Tech, originally from Pittsburgh, PA. After 8+ years of competitive robotics success, I’m exploring <b>automation</b>, <b>intelligent humanoids</b>, and <b>assistive robotics</b> through research and entrepreneurship. There’s more to me than robots, so check out my <a class="intro-link" href="#interests">Interests</a> to see what I’m up to!</p>
 </section>
 </div>
@@ -415,7 +415,7 @@ document.querySelectorAll('.btn.ptog').forEach(function (b) {
   });
 });
 </script>
-<script src="assets/site.js?v=71" defer></script>
+<script src="assets/site.js?v=72" defer></script>
 <script>
 /* Spin every 3D model at the same speed, starting from its own starting angle (data-yaw) when it loads.
    Dragging pauses that model; 2 s after release it keeps spinning from wherever it was left. */

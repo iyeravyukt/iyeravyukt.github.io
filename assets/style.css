@@ -575,3 +575,4 @@ body > .wip-band { margin: 0; padding: 26px max(40px, calc(50vw - 410px)) 28px; 
   .proj .proj-btns .btn { white-space: nowrap; padding-left: 10px; padding-right: 10px; }
 }
 @media (max-width: 360px) { .hud-long { display: none; } }
+.sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
