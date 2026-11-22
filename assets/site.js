@@ -263,10 +263,10 @@
       var age = (now - P.t0) / 1000;
       if (P.big) { // page-load intro: a short pulse radiates out from the photo glow and fades (~1 s)
         // Heat-kernel style: a Gaussian that widens over time, hottest at the photo and cooler outward, so it shows a real temperature gradient.
-        var g = Math.min(1, age / 0.55); P.s = 26 + (P.R * 0.55 - 26) * (1 - Math.pow(1 - g, 2));
-        var fade = age < 0.08 ? age / 0.08 : Math.max(0, 1 - Math.pow((age - 0.08) / 0.52, 2));
-        P.amp = fade * Math.min(1, 1.15 * Math.sqrt(26 / P.s) + 0.25);
-        return age < 0.6;
+        var g = Math.min(1, age / 1.2); P.s = 26 + (P.R * 0.62 - 26) * (1 - Math.pow(1 - g, 2));
+        var fade = age < 0.12 ? age / 0.12 : age < 0.7 ? 1 : Math.max(0, 1 - Math.pow((age - 0.7) / 0.6, 2));
+        P.amp = fade * (1 - 0.4 * g);
+        return age < 1.3;
       }
       var f = Math.min(1, age / 0.9); P.r = 0.31 * H * (1 - (1 - f) * (1 - f)); // ring incl. its glow stays within ~3/4 of the band height across
       P.amp = Math.max(0, 1 - Math.pow(age / 1.1, 3)); P.core = Math.max(0, 1 - age / 0.45); // ring stays strong while expanding, fades at the end
@@ -294,7 +294,7 @@
         if (ring > v) v = ring;
         if (core > v) v = core;
       }
-      if (introSettling) v *= 0.88; // cool the leftover intro heat quickly
+      if (introSettling) v *= 0.93; // cool the leftover intro heat quickly
       n.d = v < 0.004 ? 0 : v;
       if (n.d > hot) hot = n.d;
     }
@@ -317,12 +317,12 @@
     var playIntro = function () {
       introTimers.forEach(clearTimeout); introTimers = [];
       inside = false; pulses = pulses.filter(function (P) { return !P.big; });
-      var SX = 1.6; // slightly wide ellipse around the photo
-      var R = 0.75 * H; // stays near the photo instead of sweeping the whole header
+      var SX = 2.4; // wide ellipse: spreads farther sideways than up and down
+      var R = Math.max(Math.hypot(glowX / SX, glowY), Math.hypot((W - glowX) / SX, glowY), Math.hypot(glowX / SX, H - glowY), Math.hypot((W - glowX) / SX, H - glowY));
       window.heatIntroPending = true; document.dispatchEvent(new Event('heatintrostart'));
       introTimers.push(setTimeout(function () { pulses.push({ x: glowX, y: glowY, t0: performance.now(), r: 0, amp: 0, core: 1, big: 1, R: R, sx: SX }); kick(); }, 120));
-      introTimers.push(setTimeout(function () { introSettling = true; kick(); }, 120 + 600));
-      introTimers.push(setTimeout(finishIntro, 120 + 2500)); // safety net
+      introTimers.push(setTimeout(function () { introSettling = true; kick(); }, 120 + 1300));
+      introTimers.push(setTimeout(finishIntro, 120 + 4000)); // safety net
     };
     playIntro();
   }
