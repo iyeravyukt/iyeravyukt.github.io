@@ -262,8 +262,10 @@
     pulses = pulses.filter(function (P) {
       var age = (now - P.t0) / 1000;
       if (P.big) { // page-load intro: a short pulse radiates out from the photo glow and fades (~1 s)
-        var g = Math.min(1, age / 0.55); P.r = P.R * (1 - Math.pow(1 - g, 2)); P.w = 30 + 24 * g;
-        P.amp = age < 0.1 ? age / 0.1 : Math.max(0, 1 - Math.pow((age - 0.1) / 0.5, 2)); P.core = Math.max(0, 1 - age / 0.3);
+        // Heat-kernel style: a Gaussian that widens over time, hottest at the photo and cooler outward, so it shows a real temperature gradient.
+        var g = Math.min(1, age / 0.55); P.s = 26 + (P.R * 0.55 - 26) * (1 - Math.pow(1 - g, 2));
+        var fade = age < 0.08 ? age / 0.08 : Math.max(0, 1 - Math.pow((age - 0.08) / 0.52, 2));
+        P.amp = fade * Math.min(1, 1.15 * Math.sqrt(26 / P.s) + 0.25);
         return age < 0.6;
       }
       var f = Math.min(1, age / 0.9); P.r = 0.31 * H * (1 - (1 - f) * (1 - f)); // ring incl. its glow stays within ~3/4 of the band height across
@@ -284,6 +286,7 @@
       }
       for (var j = 0; j < pulses.length; j++) {
         var P = pulses[j], ex = (n.x - P.x) / (P.sx || 1), ey = n.y - P.y, dist = Math.sqrt(ex * ex + ey * ey);
+        if (P.big) { var gk = P.amp * Math.exp(-(dist * dist) / (2 * P.s * P.s)); if (gk > v) v = gk; continue; }
         var pw = P.w || 22, ring = P.amp * Math.exp(-((dist - P.r) * (dist - P.r)) / (2 * pw * pw));
         var r2 = P.r * 0.55, ring2 = 0.6 * P.amp * Math.exp(-((dist - r2) * (dist - r2)) / (2 * 15 * 15));
         var core = P.core * Math.exp(-(dist * dist) / (2 * 38 * 38));
