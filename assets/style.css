@@ -453,3 +453,11 @@ body > .wip-band { margin: 0; padding: 26px max(40px, calc(50vw - 410px)) 28px; 
 
 .intro-link { color: var(--navy); font-weight: 600; text-decoration: underline; text-underline-offset: 3px; text-decoration-thickness: 1.5px; }
 .intro-link:hover { color: var(--pop); }
+
+/* Phone fixes: keep the heat label on one line and button labels unbroken */
+@media (max-width: 480px) {
+  .heat-hud { white-space: nowrap; letter-spacing: .02em; font-size: .6rem; gap: 6px; right: 12px; }
+  .proj .proj-btns { gap: 12px; }
+  .proj .proj-btns .btn { white-space: nowrap; padding-left: 10px; padding-right: 10px; }
+}
+@media (max-width: 360px) { .hud-long { display: none; } }
