@@ -22,9 +22,15 @@
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="preload" href="assets/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="assets/fonts/hanken-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="assets/style.css?v=70">
+<link rel="stylesheet" href="assets/style.css?v=71">
 <script>self.ModelViewerElement={meshoptDecoderLocation:"assets/vendor/meshopt_decoder.js"};</script>
-<script type="module" src="assets/vendor/model-viewer.min.js"></script>
+<script type="module">
+// Load the 3D viewer only when a model is near the screen (or shortly after the page finishes loading), so it doesn't slow the first paint.
+let done = false; const go = () => { if (!done) { done = true; import('./assets/vendor/model-viewer.min.js'); } };
+const mvs = document.querySelectorAll('model-viewer');
+const watch = () => { if ('IntersectionObserver' in window) { const io = new IntersectionObserver(es => { if (es.some(e => e.isIntersecting)) { io.disconnect(); go(); } }, { rootMargin: '600px 0px' }); mvs.forEach(m => io.observe(m)); } else go(); setTimeout(go, 2500); };
+if (document.readyState === 'complete') watch(); else addEventListener('load', watch);
+</script>
 </head>
 <body>
 <a class="skip" href="#main-content">Skip to content</a>
@@ -350,7 +356,7 @@
     <h2>Interests</h2>
   </div>
   <div class="interest">
-    <div class="interest-photo"><img src="images/violin.png" alt="Avyukt performing Carnatic violin on stage"></div>
+    <div class="interest-photo"><img loading="lazy" decoding="async" src="images/violin.png" alt="Avyukt performing Carnatic violin on stage"></div>
     <div class="interest-body">
       <div class="interest-main">
       <h3>Carnatic Violin</h3>
@@ -409,7 +415,7 @@ document.querySelectorAll('.btn.ptog').forEach(function (b) {
   });
 });
 </script>
-<script src="assets/site.js?v=70" defer></script>
+<script src="assets/site.js?v=71" defer></script>
 <script>
 /* Spin every 3D model at the same speed, starting from its own starting angle (data-yaw) when it loads.
    Dragging pauses that model; 2 s after release it keeps spinning from wherever it was left. */
