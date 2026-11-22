@@ -261,10 +261,10 @@
     // Click bursts: a heat ring expands from the click point and fades.
     pulses = pulses.filter(function (P) {
       var age = (now - P.t0) / 1000;
-      if (P.big) { // first-visit intro: one hot spot at the photo spreads across the whole header, then cools
-        var g = Math.min(1, age / 2.1); P.r = P.R * (1 - Math.pow(1 - g, 2)); P.w = 34 + 40 * g;
-        P.amp = age < 0.3 ? age / 0.3 : Math.max(0, 1 - Math.pow((age - 0.3) / 2.1, 2)); P.core = Math.max(0, 1 - age / 1.1);
-        return age < 2.4;
+      if (P.big) { // page-load intro: a short pulse radiates out from the photo glow and fades (~1 s)
+        var g = Math.min(1, age / 0.9); P.r = P.R * (1 - Math.pow(1 - g, 2)); P.w = 30 + 24 * g;
+        P.amp = age < 0.15 ? age / 0.15 : Math.max(0, 1 - Math.pow((age - 0.15) / 0.85, 2)); P.core = Math.max(0, 1 - age / 0.5);
+        return age < 1.0;
       }
       var f = Math.min(1, age / 0.9); P.r = 0.31 * H * (1 - (1 - f) * (1 - f)); // ring incl. its glow stays within ~3/4 of the band height across
       P.amp = Math.max(0, 1 - Math.pow(age / 1.1, 3)); P.core = Math.max(0, 1 - age / 0.45); // ring stays strong while expanding, fades at the end
@@ -309,11 +309,11 @@
     var playIntro = function () {
       introTimers.forEach(clearTimeout); introTimers = [];
       inside = false; pulses = pulses.filter(function (P) { return !P.big; });
-      var SX = 2.4; // wide ellipse: spreads farther sideways than up and down
-      var R = Math.max(Math.hypot(glowX / SX, glowY), Math.hypot((W - glowX) / SX, glowY), Math.hypot(glowX / SX, H - glowY), Math.hypot((W - glowX) / SX, H - glowY));
+      var SX = 1.6; // slightly wide ellipse around the photo
+      var R = 0.75 * H; // stays near the photo instead of sweeping the whole header
       window.heatIntroPending = true; document.dispatchEvent(new Event('heatintrostart'));
       introTimers.push(setTimeout(function () { pulses.push({ x: glowX, y: glowY, t0: performance.now(), r: 0, amp: 0, core: 1, big: 1, R: R, sx: SX }); kick(); }, 250));
-      introTimers.push(setTimeout(function () { window.heatIntroPending = false; document.dispatchEvent(new Event('heatintrodone')); }, 250 + 2400));
+      introTimers.push(setTimeout(function () { window.heatIntroPending = false; document.dispatchEvent(new Event('heatintrodone')); }, 250 + 1000));
     };
     playIntro();
   }
