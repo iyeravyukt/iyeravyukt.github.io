@@ -317,7 +317,7 @@ section { padding: 52px 0 12px; }
 @media (prefers-reduced-motion: reduce) { .intro-words .caret { animation: none; } }
 .intro-band { position: relative; }
 .intro-words.has-arm .caret { visibility: hidden; }
-@media (max-width: 760px) { .intro-band.arm-on .intro, html.arm .intro-band .intro { padding-top: 54px; } }
+@media (max-width: 760px) { .intro-band.arm-on .intro, html.motion-ok .intro-band .intro { padding-top: 54px; } }
 .tw-measure { position: absolute; visibility: hidden; white-space: pre; left: -9999px; top: 0; }
 .arm { --arm: var(--h-ink); position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; pointer-events: none; z-index: 2; }
 .arm .slot-o { stroke: url(#armg); stroke-linecap: round; fill: none; }
