@@ -262,9 +262,9 @@
     pulses = pulses.filter(function (P) {
       var age = (now - P.t0) / 1000;
       if (P.big) { // page-load intro: a short pulse radiates out from the photo glow and fades (~1 s)
-        var g = Math.min(1, age / 0.9); P.r = P.R * (1 - Math.pow(1 - g, 2)); P.w = 30 + 24 * g;
-        P.amp = age < 0.15 ? age / 0.15 : Math.max(0, 1 - Math.pow((age - 0.15) / 0.85, 2)); P.core = Math.max(0, 1 - age / 0.5);
-        return age < 1.0;
+        var g = Math.min(1, age / 0.55); P.r = P.R * (1 - Math.pow(1 - g, 2)); P.w = 30 + 24 * g;
+        P.amp = age < 0.1 ? age / 0.1 : Math.max(0, 1 - Math.pow((age - 0.1) / 0.5, 2)); P.core = Math.max(0, 1 - age / 0.3);
+        return age < 0.6;
       }
       var f = Math.min(1, age / 0.9); P.r = 0.31 * H * (1 - (1 - f) * (1 - f)); // ring incl. its glow stays within ~3/4 of the band height across
       P.amp = Math.max(0, 1 - Math.pow(age / 1.1, 3)); P.core = Math.max(0, 1 - age / 0.45); // ring stays strong while expanding, fades at the end
@@ -291,6 +291,7 @@
         if (ring > v) v = ring;
         if (core > v) v = core;
       }
+      if (introSettling) v *= 0.88; // cool the leftover intro heat quickly
       n.d = v < 0.004 ? 0 : v;
       if (n.d > hot) hot = n.d;
     }
@@ -316,9 +317,9 @@
       var SX = 1.6; // slightly wide ellipse around the photo
       var R = 0.75 * H; // stays near the photo instead of sweeping the whole header
       window.heatIntroPending = true; document.dispatchEvent(new Event('heatintrostart'));
-      introTimers.push(setTimeout(function () { pulses.push({ x: glowX, y: glowY, t0: performance.now(), r: 0, amp: 0, core: 1, big: 1, R: R, sx: SX }); kick(); }, 250));
-      introTimers.push(setTimeout(function () { introSettling = true; kick(); }, 250 + 1000));
-      introTimers.push(setTimeout(finishIntro, 250 + 4000)); // safety net
+      introTimers.push(setTimeout(function () { pulses.push({ x: glowX, y: glowY, t0: performance.now(), r: 0, amp: 0, core: 1, big: 1, R: R, sx: SX }); kick(); }, 120));
+      introTimers.push(setTimeout(function () { introSettling = true; kick(); }, 120 + 600));
+      introTimers.push(setTimeout(finishIntro, 120 + 2500)); // safety net
     };
     playIntro();
   }
