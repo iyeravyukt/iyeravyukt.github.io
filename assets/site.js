@@ -295,10 +295,13 @@
       if (n.d > hot) hot = n.d;
     }
     draw();
+    // Intro is "settled" once the pulse is gone and the leftover heat has cooled; only then do the arm and cursor heat start.
+    if (introSettling && !pulses.some(function (P) { return P.big; }) && hot < 0.06) finishIntro();
     // Keep animating while the trail is cooling; stop once the cursor has rested for a moment.
     var resting = inside && now - lastMove > 1500;
     raf = pulses.length || (!inside && hot > 0) || (inside && !resting) ? requestAnimationFrame(step) : 0;
   }
+  var introSettling = false, finishIntro = function () {};
   function kick() { if (!raf) raf = requestAnimationFrame(step); }
 
   function setup() { readColors(); build(); draw(); }
@@ -306,6 +309,7 @@
   // Intro on every visit, and again whenever the header scrolls back into view: one heat pulse from the photo sweeps the header.
   if (intro && !reduce) {
     var introTimers = [];
+    finishIntro = function () { if (!window.heatIntroPending) return; introSettling = false; introTimers.forEach(clearTimeout); introTimers = []; window.heatIntroPending = false; window.__introDoneAt = performance.now(); document.dispatchEvent(new Event('heatintrodone')); };
     var playIntro = function () {
       introTimers.forEach(clearTimeout); introTimers = [];
       inside = false; pulses = pulses.filter(function (P) { return !P.big; });
@@ -313,7 +317,8 @@
       var R = 0.75 * H; // stays near the photo instead of sweeping the whole header
       window.heatIntroPending = true; document.dispatchEvent(new Event('heatintrostart'));
       introTimers.push(setTimeout(function () { pulses.push({ x: glowX, y: glowY, t0: performance.now(), r: 0, amp: 0, core: 1, big: 1, R: R, sx: SX }); kick(); }, 250));
-      introTimers.push(setTimeout(function () { window.heatIntroPending = false; document.dispatchEvent(new Event('heatintrodone')); }, 250 + 1000));
+      introTimers.push(setTimeout(function () { introSettling = true; kick(); }, 250 + 1000));
+      introTimers.push(setTimeout(finishIntro, 250 + 4000)); // safety net
     };
     playIntro();
   }
